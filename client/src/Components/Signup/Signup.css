@@ -1,107 +1,71 @@
-.Login {
-    height: 100vh;
-    width: 100%;
-    position: relative;
-    padding: 20px;
-    font-family: "Poppins", sans-serif;
-    background-image: url('https://i.ibb.co/XZfQr6J/the-interior-has-a-armchair-on-empty-white-wall-background-3d-rendering-1.png');
-    width: auto;
+.loginBox input {
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-.Login-card {
-    background: rgba(238, 200, 200, 0.75);
-    height: 35rem;
-    width: 33rem;
-    float: right;
-    border-radius: 1rem;
-    margin-right: 10rem;
-    margin-top: 5rem;
-    z-index: 10;
+.loginBox input[type="text"],
+.loginBox input[type="email"],
+.loginBox input[type="password"] {
+  border: none;
+  border-bottom: 2px solid #262626;
+  outline: none;
+  height: 30px;
+  color: #fff;
+  background: transparent;
+  font-size: 16px;
+  padding-left: 20px;
+  box-sizing: border-box;
 }
 
-.Login-heading {
-    display: flex;
-    justify-content: space-between;
-    padding: 1.5rem 1.2rem 0;
+.loginBox input[type="text"]:hover,
+.loginBox input[type="password"]:hover,
+.loginBox input[type="email"]:hover {
+  color: #42f3fa;
+  border: 1px solid #42f3fa;
+  box-shadow: 0 0 5px rgba(0, 255, 0, 0.3), 0 0 10px rgba(0, 255, 0, 0.2),
+    0 0 15px rgba(0, 255, 0, 0.1), 0 2px 0 black;
 }
 
-.Login-welcome {
-    font-size: 1.5rem;
-    padding: 20px;
+.loginBox input[type="text"]:focus,
+.loginBox input[type="password"]:focus,
+.loginBox input[type="email"]:focus {
+  border-bottom: 2px solid #42f3fa;
 }
 
-.Login-welcome strong {
-    color: #173864;
+.inputBox {
+  position: relative;
 }
 
-span a {
-    padding: 20px;
-    color: #2f80ed;
-    cursor: pointer;
-    text-decoration: none;
+.inputBox span {
+  position: absolute;
+  top: 10px;
+  color: #262626;
 }
 
-.Login-input {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    border: none;
+.loginBox input[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  font-size: 16px;
+  background: #59238f;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
-.Login-input h1 {
-    padding: 2rem 4rem;
-    font-size: 3rem;
+.loginBox a {
+  color: #262626;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  display: block;
 }
 
-.Login-input .loginForm {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    padding: 0 4rem;
-    align-content: center;
+a:hover {
+  color: #00ffff;
 }
 
-.Login-input input {
-    padding: 0 1.5rem;
-    background: #ffffff;
-    border: 1px solid #adadad;
-    box-sizing: border-box;
-    border-radius: 9px;
-    height: 3rem;
-}
-
-.Login-summit {
-    display: flex;
-    align-items: flex-end;
-    padding: 3rem;
-    float: right;
-    flex-direction: column;
-}
-
-.Login-summit button {
-    margin: 1rem;
-    height: 3rem;
-    background: teal;
-    box-shadow: 0 4px 19px teal;
-    border-style: none;
-    border-radius: 10px;
-    color: white;
-    width: 12rem;
-    cursor: pointer;
-}
-
-.Login-summit button:disabled {
-    cursor: not-allowed;
-    background-color: #2f80ed;
-}
-
-.Login-summit a {
-    text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: bold;
-    padding: 0 1.2rem 0 0;
-}
-
-.inputField {
-    border: none;
+p {
+  color: #0000ff;
 }
