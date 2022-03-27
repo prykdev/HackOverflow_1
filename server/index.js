@@ -9,15 +9,14 @@ const port = parseInt(process.env.APP_PORT, 10) || 8082;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({
-    extended: true,
+  extended: true,
 }));
 
 /**
  * App Routes
  */
 app.get('/', (req, res) => {
-    res.send('Welcome to the Social Coding Experience Portal.');
-    next();
+  res.send('Welcome to the Social Coding Experience Portal.');
 });
 
 app.use('/', userRoutes);
@@ -26,5 +25,5 @@ app.use('/', userRoutes);
  * To make sure, app start only if database is found
  */
 dbConn.safeConnect().then(
-    () => app.listen(port, () => console.log(`Webservice listening on port: ${port}`)),
+  () => app.listen(port, () => console.log(`Webservice listening on port: ${port}`)),
 );

@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
     if (!decodedJWT) throw new ControllerError(401, 'Unauthorized!');
     const data = await userService.searchByEntity('_id', decodedJWT.id);
     if (data && token === data.token) {
-      req.user = data.role;
+      req.user = data;
       req.id = data._id;
       next();
     } else {

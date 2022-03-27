@@ -2,16 +2,21 @@ const router = require('express').Router();
 const { validate, ValidationError } = require('express-validation');
 const user = require('../controllers/user.controller');
 const authMiddleware = require('../middlewares/auth.middleware');
-const { signUpSchema } = require('../models/user.model.js');
+const { signUpSchema, loginSchema } = require('../models/user.model.js');
+const scrapper = require('../controllers/scrapper.controller.js');
 
 // User Routes
 router.post('/signup', validate(signUpSchema), user.createUser);
-router.post('/login', user.login);
+router.post('/login', validate(loginSchema), user.login);
 router.post('/check', user.check);
 router.get('/profile', authMiddleware, user.profile);
+router.get('/changepass', authMiddleware, user.changePassword);
+
+// GitHub data
+router.post(['/github', '/github/:username'], authMiddleware, scrapper.github);
+router.post(['/hackerrank','/hackerrank/:username'], authMiddleware);
 
 // Validation Error Handling
-// eslint-disable-next-line no-unused-vars
 router.use((err, req, res, next) => {
   const { name, details, statusCode } = err;
   if (err instanceof ValidationError) {

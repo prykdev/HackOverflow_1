@@ -6,18 +6,11 @@ const secret = process.env.SECRET;
 
 // Importing File Dependencies
 const { controllerBoilerPlate, controllerResponse } = require('../utils/controller.utils.js');
+const {removeObjectProperties} = require('../utils/common.utils.js');
 const ControllerError = require('../errors/controller.error.js');
 const userService = require('../services/user.service.js');
 
 module.exports = {
-
-  check: ('/check', controllerBoilerPlate(async (req) => {
-    data = await checkExist(req.body.entity, req.body.value);
-    if (data) {
-      return controllerResponse(400, req.params.entity + 'already registered!');
-    }
-    return controllerResponse(200, req.paramas.entity + ' available!');
-  })),
 
   // Creating User
   createUser: ('/signup', controllerBoilerPlate(async (req) => {
@@ -41,7 +34,9 @@ module.exports = {
   // Viewing User Profile
   profile: ('/profile', controllerBoilerPlate(async (req) => {
     const data = await userService.searchByEntity('_id', req.id);
-    return controllerResponse(200, 'Successful', data);
+    const {email, username, socials, name} = data;
+    let response = {email, username, name, socials};
+    return controllerResponse(200, 'Successful', response);
   })),
 
   // Logging in User
@@ -55,6 +50,15 @@ module.exports = {
     return controllerResponse(200, 'Successful', { token: data.token });
 
   })),
+
+  check: ('/check', controllerBoilerPlate(async (req) => {
+    data = await checkExist(req.body.entity, req.body.value);
+    if (data) {
+      return controllerResponse(400, req.params.entity + 'already registered!');
+    }
+    return controllerResponse(200, req.paramas.entity + ' available!');
+  })),
+
 
   // Changing User Password
   changePassword: ('/changepass', controllerBoilerPlate(async (req) => {
@@ -92,13 +96,13 @@ const validateUser = async (username, password) => {
   }
 
   // Checking if user exists in database
-  const data = await checkExist('username', req.body.username);
+  const data = await checkExist('username', username);
   if (!data) {
     throw new ControllerError(404, 'User not found!');
   }
 
   // Checking if password is valid or not
-  const passwordIsValid = bcryptjs.compareSync(req.body.password, data.password);
+  const passwordIsValid = bcryptjs.compareSync(password, data.password);
   if (!passwordIsValid) {
     throw new ControllerError(401, 'Invalid Password!');
   } else {

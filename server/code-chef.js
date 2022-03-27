@@ -10,7 +10,7 @@ async function snapScreenshot() {
     const $ = cheerio.load(page.data);
     const html = $('title');
     // console.log(html.text());
-    console.log($('div.widget-rating > div.content').html());
+    console.log($('div.widget-rating > div.content').text());
     // const browser = await puppeteer.launch()
     // const page = await browser.newPage()
 
