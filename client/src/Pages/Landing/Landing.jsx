@@ -1,22 +1,35 @@
-import React, { useState } from 'react'
-import { Login } from '../../Components/Login/Login';
-import { Signup } from '../../Components/Signup/Signup';
-import "./Landing.css";
+import React, { useState } from "react"
+import { Login } from "../../Components/Login/Login"
+import { Signup } from "../../Components/Signup/Signup"
+import "./Landing.css"
 const Landing = () => {
   const [isSignUp, setIsSignUp] = useState(true)
   return (
     <>
-      <div className="landing">
-        <div className="loginBox">
-          <img className="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px" />
-          <h3>Sign in here</h3>
+      <div className='landing'>
+        <div className='loginBoxabc'>
+          <img
+            className='userabc'
+            src='https://cdn1.iconfinder.com/data/icons/avatars-55/100/avatar_profile_user_music_headphones_shirt_cool-512.png'
+            height='100px'
+            width='100px'
+          />
+          <h3> {!isSignUp ? "LOGIN" : "SIGN-UP"}</h3>
+          {isSignUp ? <Signup /> : <Login />}
+          <div class='toggleText' onClick={() => setIsSignUp((cur) => !cur)}>
+            {isSignUp
+              ? "Already have an account? Login"
+              : "Don't have an account? Sign up"}
+          </div>
+          {/* <div className='btn'>
+            <button
+              className='btnlanding'
+              
+            >
+              {isSignUp ? "Login" : "Sign up"}
+            </button>
+          </div> */}
         </div>
-        <div className="text-center">
-          <button onClick={() => setIsSignUp((cur) => !cur)}>{isSignUp ? "Already have an account? Sign in." : "Don't have an account? Sign up."}</button>
-
-        </div>
-        {isSignUp ? <Signup /> : <Login />}
-
       </div>
     </>
   )

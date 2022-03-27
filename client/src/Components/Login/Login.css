@@ -1,4 +1,4 @@
-.loginBox {
+/* .loginBox {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -8,25 +8,12 @@
     background: #000000;
     border-radius: 10px;
     padding: 10px;
-    box-sizing: border-box
-}
-
-.user {
-    margin: 0 auto;
-    display: block;
-    margin-bottom: 20px
-}
-
-h3 {
-    margin: 0;
-    padding: 0 0 20px;
-    color: #59238F;
-    text-align: center
-}
+    box-sizing: border-box;
+} */
 
 .loginBox input {
     width: 100%;
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
 .loginBox input[type="text"],
@@ -40,30 +27,31 @@ h3 {
     background: transparent;
     font-size: 16px;
     padding-left: 20px;
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 .loginBox input[type="text"]:hover,
-.loginBox input[type="password"]:hover,.loginBox input[type="email"]:hover {
-    color: #42F3FA;
-    border: 1px solid #42F3FA;
-    box-shadow: 0 0 5px rgba(0, 255, 0, .3), 0 0 10px rgba(0, 255, 0, .2), 0 0 15px rgba(0, 255, 0, .1), 0 2px 0 black
+.loginBox input[type="password"]:hover,
+.loginBox input[type="email"]:hover {
+    color: #42f3fa;
+    border: 1px solid #42f3fa;
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.3), 0 0 10px rgba(0, 255, 0, 0.2), 0 0 15px rgba(0, 255, 0, 0.1), 0 2px 0 black;
 }
 
 .loginBox input[type="text"]:focus,
-.loginBox input[type="password"]:focus ,
-.loginBox input[type="email"]:focus{
-    border-bottom: 2px solid #42F3FA
+.loginBox input[type="password"]:focus,
+.loginBox input[type="email"]:focus {
+    border-bottom: 2px solid #42f3fa;
 }
 
 .inputBox {
-    position: relative
+    position: relative;
 }
 
 .inputBox span {
     position: absolute;
     top: 10px;
-    color: #262626
+    color: #262626;
 }
 
 .loginBox input[type="submit"] {
@@ -71,10 +59,10 @@ h3 {
     outline: none;
     height: 40px;
     font-size: 16px;
-    background: #59238F;
+    background: #59238f;
     color: #fff;
     border-radius: 20px;
-    cursor: pointer
+    cursor: pointer;
 }
 
 .loginBox a {
@@ -83,13 +71,13 @@ h3 {
     font-weight: bold;
     text-decoration: none;
     text-align: center;
-    display: block
+    display: block;
 }
 
 a:hover {
-    color: #00ffff
+    color: #00ffff;
 }
 
 p {
-    color: #0000ff
+    color: #0000ff;
 }
