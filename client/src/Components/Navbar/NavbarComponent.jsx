@@ -1,8 +1,10 @@
 import React from "react"
 import { Nav, NavDropdown, Container, Navbar } from "react-bootstrap"
 import { Link } from "react-router-dom"
+import { useAppContext } from "../../Context/appContext"
 
 const NavbarComponent = () => {
+  const { logoutUser } = useAppContext()
   return (
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
       <Container>
@@ -24,7 +26,11 @@ const NavbarComponent = () => {
               <NavDropdown.Item as={Link} to='/setting'>
                 Settings
               </NavDropdown.Item>
-              <NavDropdown.Item>Logout</NavDropdown.Item>
+              <NavDropdown.Item>
+                <button type='button' onClick={logoutUser}>
+                  Logout
+                </button>
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

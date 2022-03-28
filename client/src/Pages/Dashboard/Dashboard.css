@@ -1,46 +1,35 @@
-.home {
+.dashboardHome {
   margin: 0;
   padding: 0;
   background: url(https://bit.ly/3iBhyBi) no-repeat;
-  height: auto;
+  height: 100vh;
   font-family: sans-serif;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .dashboardCard {
   box-shadow: 0 4px 20px rgb(0 0 0 / 0.5);
   background-color: rgba(0, 0, 0, 0.5);
   width: 95%;
-  height: 150vh;
+  /* height: 150vh; */
   padding: 0px 20px 10px 20px;
   margin: 25px 40px 0px;
   color: #d2d2d2;
 }
 
-.grid-container {
+.card-container {
   display: flex;
   gap: 10px;
   background-color: rgba(73, 74, 120, 0.5);
   padding: 10px;
   justify-content: space-between;
   align-items: center;
+  row-gap: 20px;
   /* height: 70vh; */
   flex-wrap: wrap;
-  flex-direction: column-reverse;
-}
-
-.item1 {
-  height: 50%;
-}
-.item2 {
-  grid-area: menu;
-}
-.item3 {
-  grid-area: main;
-}
-.item4 {
-  grid-area: right;
+  flex-direction: column;
 }

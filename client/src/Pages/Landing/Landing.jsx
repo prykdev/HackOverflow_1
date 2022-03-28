@@ -16,7 +16,10 @@ const Landing = () => {
           />
           <h3> {!isSignUp ? "LOGIN" : "SIGN-UP"}</h3>
           {isSignUp ? <Signup /> : <Login />}
-          <div class='toggleText' onClick={() => setIsSignUp((cur) => !cur)}>
+          <div
+            className='toggleText'
+            onClick={() => setIsSignUp((cur) => !cur)}
+          >
             {isSignUp
               ? "Already have an account? Login"
               : "Don't have an account? Sign up"}
