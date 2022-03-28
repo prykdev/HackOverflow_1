@@ -12,7 +12,7 @@ import axios from "axios"
 import reducer from "./reducer"
 
 const token = localStorage.getItem("token")
-const BASE_URL = "http://localhost:8082"
+const BASE_URL = "http://20.204.153.123:8082/"
 
 const initialState = {
   token: token,
