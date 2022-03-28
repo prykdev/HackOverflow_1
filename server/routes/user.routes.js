@@ -14,7 +14,7 @@ router.get('/changepass', authMiddleware, user.changePassword);
 
 // GitHub data
 router.post(['/github', '/github/:username'], authMiddleware, scrapper.github);
-router.post(['/hackerrank','/hackerrank/:username'], authMiddleware);
+router.post(['/hackerrank','/hackerrank/:username'], authMiddleware, scrapper.hackerrank);
 
 // Validation Error Handling
 router.use((err, req, res, next) => {
