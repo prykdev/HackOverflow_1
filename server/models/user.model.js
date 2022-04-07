@@ -12,7 +12,10 @@ const user = new Schema({
     github: { type: String, default: "" },
     codeforces: { type: String, default: "" },
     hackerearth: { type: String, default: "" },
-    atcoder: { type: String, default: "" }
+    atcoder: { type: String, default: "" },
+    leetcode: { type: String, default: "" },
+    codechef: { type: String, default: "" },
+    hackerrank: { type: String, default: "" }
   },
   token: { type: String, default: "" }
 });

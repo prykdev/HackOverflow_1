@@ -54,9 +54,9 @@ module.exports = {
   check: ('/check', controllerBoilerPlate(async (req) => {
     data = await checkExist(req.body.entity, req.body.value);
     if (data) {
-      return controllerResponse(400, req.params.entity + 'already registered!');
+      return controllerResponse(400, req.body.entity + ' already registered!');
     }
-    return controllerResponse(200, req.paramas.entity + ' available!');
+    return controllerResponse(200, req.body.entity + ' available!');
   })),
 
 
