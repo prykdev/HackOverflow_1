@@ -13,8 +13,8 @@ router.get('/profile', authMiddleware, user.profile);
 router.get('/changepass', authMiddleware, user.changePassword);
 
 // GitHub data
-router.post(['/github', '/github/:username'], authMiddleware, scrapper.github);
-router.post(['/hackerrank','/hackerrank/:username'], authMiddleware, scrapper.hackerrank);
+router.get(['/github', '/github/:username'], authMiddleware, scrapper.github);
+router.get(['/hackerrank','/hackerrank/:username'], authMiddleware, scrapper.hackerrank);
 
 // Validation Error Handling
 router.use((err, req, res, next) => {
