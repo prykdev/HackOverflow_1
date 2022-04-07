@@ -26,18 +26,15 @@ export const Signup = () => {
     const currentUser = { username, name, email, password, socials }
     console.log(currentUser)
     registerUser(currentUser)
-    if (token) {
-      navigate("/dashboard")
-    }
   }
 
-  // useEffect(() => {
-  //   if (data) {
-  //     setTimeout(() => {
-  //       navigate("/")
-  //     }, 3000)
-  //   }
-  // }, [data, navigate])
+  useEffect(() => {
+    if (token) {
+      setTimeout(() => {
+        navigate("/dashboard")
+      }, 1000)
+    }
+  }, [token, navigate])
   return (
     <div className='loginBox text-center'>
       <form onSubmit={onSubmit}>

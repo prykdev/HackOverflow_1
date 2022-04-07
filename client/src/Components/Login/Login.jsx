@@ -24,10 +24,15 @@ export const Login = () => {
     console.log(currentUser)
     console.log({ token })
     loginUser(currentUser)
-    if (token) {
-      navigate("/dashboard")
-    }
   }
+
+  useEffect(() => {
+    if (token) {
+      setTimeout(() => {
+        navigate("/dashboard")
+      }, 1000)
+    }
+  }, [token, navigate])
 
   return (
     <div className='loginBox text-center'>

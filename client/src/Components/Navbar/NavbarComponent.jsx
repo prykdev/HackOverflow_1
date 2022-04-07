@@ -1,10 +1,18 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Nav, NavDropdown, Container, Navbar } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { useAppContext } from "../../Context/appContext"
+import { useNavigate } from "react-router-dom"
 
 const NavbarComponent = () => {
-  const { logoutUser } = useAppContext()
+  const { token, logoutUser } = useAppContext()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/")
+    }
+  }, [token, navigate])
   return (
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
       <Container>

@@ -12,7 +12,7 @@ import axios from "axios"
 import reducer from "./reducer"
 
 const token = localStorage.getItem("token")
-const BASE_URL = "http://20.204.153.123:8082"
+const BASE_URL = "http://localhost:8082"
 
 const initialState = {
   token: token,
@@ -55,12 +55,15 @@ const AppProvider = ({ children }) => {
   }
 
   const loginUser = async (currentUser) => {
+    console.log("Ayushhhhhhhhhhhhhhh")
     dispatch({
       type: LOGIN_USER_BEGIN,
     })
     try {
       let { data } = await axios.post(`${BASE_URL}/login`, currentUser)
+      console.log("hdffnwf")
       data = JSON.parse(JSON.stringify(data))
+      console.log("ncsdncsd")
       dispatch({
         type: LOGIN_USER_SUCCESS,
         payload: {
@@ -81,14 +84,17 @@ const AppProvider = ({ children }) => {
 
   const logoutUser = () => {
     dispatch({ type: LOGOUT_USER })
+    console.log("Ayush")
     removeUserFromLocalStorage()
   }
+
   return (
     <AppContext.Provider
       value={{
         ...state,
         registerUser,
         loginUser,
+        logoutUser,
       }}
     >
       {children}
