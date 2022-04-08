@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Login } from "../../Components/Login/Login"
 import { Signup } from "../../Components/Signup/Signup"
-import "./Landing.css"
+import "./Landing.scss"
 const Landing = () => {
   const [isSignUp, setIsSignUp] = useState(true)
   return (

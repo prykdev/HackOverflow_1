@@ -6,6 +6,8 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_ERROR,
   LOGOUT_USER,
+  GET_USER_SUCCESS,
+  GET_USER_BEGIN,
 } from "./action"
 import { initialState } from "./appContext"
 
@@ -18,7 +20,7 @@ const reducer = (state, action) => {
     return {
       ...state,
       token: action.payload.token,
-      data: action.payload.user,
+      data: action.payload.data,
     }
   }
 
@@ -36,7 +38,7 @@ const reducer = (state, action) => {
     return {
       ...state,
       token: action.payload.token,
-      data: action.payload.user,
+      data: action.payload.data,
     }
   }
 
@@ -50,6 +52,19 @@ const reducer = (state, action) => {
       ...initialState,
 
       token: null,
+    }
+  }
+
+  if (action.type === GET_USER_BEGIN) {
+    return { ...state }
+  }
+  if (action.type === GET_USER_SUCCESS) {
+    return {
+      ...state,
+      email: action.payload.email,
+      username: action.payload.username,
+      name: action.payload.name,
+      github: action.payload.github,
     }
   }
 }

@@ -1,8 +1,9 @@
 import React from "react"
-import "./Dashboard.css"
+import "./styles.scss"
 import NavbarComponent from "../../Components/Navbar/NavbarComponent"
 import { Outlet } from "react-router-dom"
 import { Container, Row, Col } from "react-bootstrap"
+
 const Dashboard = () => {
   return (
     <div className='dashboardHome'>

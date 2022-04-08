@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import "./Signup.css"
+import "./Signup.scss"
 import { useNavigate } from "react-router-dom"
 import { useAppContext } from "../../Context/appContext"
 const initialState = {
@@ -30,9 +30,7 @@ export const Signup = () => {
 
   useEffect(() => {
     if (token) {
-      setTimeout(() => {
-        navigate("/dashboard")
-      }, 1000)
+      navigate("/dashboard")
     }
   }, [token, navigate])
   return (

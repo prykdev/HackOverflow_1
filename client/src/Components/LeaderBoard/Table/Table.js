@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 import TableRow from "../TableRow/TableRow"
 import ToSortHeader from "../ToSortHeader/ToSortHeader"
-import "./Table.css"
+import "./Table.scss"
 
 const url = `https://fcctop100.herokuapp.com/api/fccusers/top/`
 
