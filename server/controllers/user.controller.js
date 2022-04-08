@@ -1,7 +1,8 @@
 // Importing File Dependencies
 const { controllerBoilerPlate, controllerResponse } = require('../utils/controller.utils.js');
 const userService = require('../services/user.service.js');
-const { checkExist, signToken, hashPassword, validateUser } = require('../utils/user.utils.js');
+const { checkExist, signToken, hashPassword, validateUser, checkPassword } = require('../utils/user.utils.js');
+const ControllerError = require('../errors/controller.error.js');
 
 module.exports = {
 
