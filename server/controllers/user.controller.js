@@ -58,6 +58,6 @@ module.exports = {
     // Creating new JWT Token for user
     token = signToken(req.user._id);
     const data = await userService.updateById(req.user._id, { password, token });
-    return controllerResponse(204, 'Successful');
+    return controllerResponse(201, 'Successful', token);
   })),
 };

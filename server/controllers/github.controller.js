@@ -64,11 +64,9 @@ const getUser = async (username) => {
     console.log(error.response.status);
     if (error.response.status === 404) {
       return 404;
-    } else {
-      console.log(error);
-      return "Something went wrong!";
     }
-    // console.log(error);
+    console.log(error);
+    return "Something went wrong!";
   }
 }
 getUser('tgoyal63');
