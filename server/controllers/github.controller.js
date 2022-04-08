@@ -44,15 +44,39 @@ const getUser = async (username) => {
   try {
     const user_URL = `https://api.github.com/users/${username}`;
     const response = await axios.get(user_URL);
-    const data = {
-      public_repos: response.data.public_repos,
-      followers: response.data.followers,
-      following: response.data.following,
-      organizations: getOrganizations(username).length,
-      created_at: response.data.created_at,
-    };
-    return data;
+    if (response.status === 200) {
+      const organizations = await getOrganizations(username);
+      const data = {
+        username: response.data.login,
+        public_repos: response.data.public_repos,
+        public_gists: response.data.public_gists,
+        followers: response.data.followers,
+        following: response.data.following,
+        organizations: organizations.length,
+        created_at: response.data.created_at,
+      };
+      console.log(data);
+      return data;
+    } else {
+      return "Something went wrong!";
+    }
   } catch (error) {
-    console.log(error);
+    console.log(error.response.status);
+    if (error.response.status === 404) {
+      return 404;
+    } else {
+      console.log(error);
+      return "Something went wrong!";
+    }
+    // console.log(error);
   }
+}
+getUser('tgoyal63');
+
+module.exports = {
+  getUser,
+  getOrganizations,
+  getFollowers,
+  getFollowing,
+  getRepositories
 }

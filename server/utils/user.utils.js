@@ -21,8 +21,8 @@ const validateUser = async (data) => {
   }
 
   // Checking if password is valid or not
-  const passwordIsValid = checkPassword(data.password, res.password);
-  if (!passwordIsValid) {
+  const isPasswordValid = checkPassword(data.password, res.password);
+  if (!isPasswordValid) {
     throw new ControllerError(401, 'Invalid Password!');
   } else {
     return res;
@@ -47,8 +47,8 @@ const hashPassword = (password) => {
 };
 
 const checkPassword = (password, hash) => {
-  const passwordIsValid = bcryptjs.compareSync(password, hash);
-  return passwordIsValid;
+  const isPasswordValid = bcryptjs.compareSync(password, hash);
+  return isPasswordValid;
 };
 
 

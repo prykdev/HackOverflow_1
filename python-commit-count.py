@@ -1,7 +1,7 @@
 import json
 import requests
 
-USER = 'tgoyal63'
+USER = "tgoyal63"
 
 
 def count_user_commits(user):
@@ -14,7 +14,6 @@ def count_user_commits(user):
         #     continue
         n = count_repo_commits(repo['url'] + '/commits')
         yield (repo['name'], n)
-
 
 
 def count_repo_commits(commits_url, _acc=0):
@@ -33,6 +32,8 @@ def count_repo_commits(commits_url, _acc=0):
     return count_repo_commits(next_url, _acc + n)
 
 # given a link header from github, find the link for the next url which they use for pagination
+
+
 def find_next(link):
     for l in link.split(','):
         a, b = l.split(';')

@@ -13,8 +13,8 @@ const signUpSchema = {
       hackerearth: Joi.string(),
       atcoder: Joi.string(),
       leetcode: Joi.string(),
-      codechef: Joi.string(),
-      hackerrank: Joi.string()
+      codechef: Joi.string().required(),
+      hackerrank: Joi.string().required()
     })
   }),
 };

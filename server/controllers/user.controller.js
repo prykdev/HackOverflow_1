@@ -48,6 +48,10 @@ module.exports = {
 
   // Changing User Password
   changePassword: ('/password', controllerBoilerPlate(async (req) => {
+    // Checking if old password is correct
+    const isPasswordValid = checkPassword(req.body.currentPassword, req.user.password);
+    if (!isPasswordValid)
+      throw new ControllerError(401, 'Invalid Password!');
     // Hashing password for securely storing in database
     password = hashPassword(req.body.newPassword);
     // Creating new JWT Token for user
