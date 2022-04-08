@@ -1,5 +1,4 @@
 const { model, Schema } = require('mongoose');
-const { Joi } = require('express-validation');
 
 const user = new Schema({
   name: { type: String, required: true },
@@ -7,7 +6,7 @@ const user = new Schema({
   // phone: { type: Number, unique: true, required: true },
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
-  friends: { type: [String], default: [] },
+  friends: [{ type: Schema.Types.ObjectId, ref: 'friends'}],
   socials: {
     github: { type: String, default: "" },
     codeforces: { type: String, default: "" },
@@ -20,48 +19,9 @@ const user = new Schema({
   token: { type: String, default: "" }
 });
 
-model('user', user);
-
-const signUpSchema = {
-  body: Joi.object({
-    name: Joi.string().required(),
-    username: Joi.string().required(),
-    // phone: Joi.number().required(),
-    email: Joi.string().email().required(),
-    password: Joi.string().required(),
-    socials: Joi.object({
-      github: Joi.string(),
-      codeforces: Joi.string(),
-      hackerearth: Joi.string(),
-      atcoder: Joi.string()
-    })
-  }),
-};
-
-const loginSchema = {
-  body: Joi.alternatives().try(
-    Joi.object().keys({
-      username: Joi.string().required(),
-      password: Joi.string().required(),
-    }),
-    Joi.object().keys({
-      email: Joi.string().email().required(),
-      password: Joi.string().required(),
-    })
-  ),
-};
-
-const checkSchema = {
-  body: Joi.alternatives().try(
-    Joi.object().keys({ username: Joi.string().required() }),
-    Joi.object().keys({ email: Joi.string().email().required() })
-  ),
-}
+model('users', user);
 
 module.exports = {
-  model: model('user'),
+  model: model('users'),
   schema: user,
-  signUpSchema,
-  loginSchema,
-  checkSchema,
 };

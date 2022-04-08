@@ -12,15 +12,7 @@ const CommonUtlis = {
     msg,
     isCustom: true,
   }),
-  removeDuplicateFromArray: (arr) => [...new Set(arr)],
-  removeObjectProperties: (obj, props) => {
-    for (let i in props) {
-      if (obj.hasOwnProperty(i)) {
-        delete obj[i];
-      }
-    }
-    return obj;
-  },
+  removeDuplicateFromArray: (arr) => [...new Set(arr)]
 };
 
 Object.freeze(CommonUtlis);

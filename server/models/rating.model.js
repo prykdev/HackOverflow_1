@@ -13,11 +13,9 @@ const rating = new Schema({
     rating: { type: String, default: "100" },
 });
 
-model('rating', rating);
+model('ratings', rating);
 
 module.exports = {
-    model: model('rating'),
+    model: model('ratings'),
     schema: rating,
-    signUpSchema,
-    loginSchema,
 };
