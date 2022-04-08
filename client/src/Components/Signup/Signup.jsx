@@ -8,6 +8,8 @@ const initialState = {
   email: "",
   password: "",
   github: "",
+  hackerrank: "",
+  codechef: "",
 }
 
 export const Signup = () => {
@@ -21,8 +23,9 @@ export const Signup = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    const { username, name, email, password, github } = values
-    const socials = { github }
+    const { username, name, email, password, github, hackerrank, codechef } =
+      values
+    const socials = { github, hackerrank, codechef }
     const currentUser = { username, name, email, password, socials }
     console.log(currentUser)
     registerUser(currentUser)
@@ -43,6 +46,7 @@ export const Signup = () => {
             placeholder='Username'
             value={values.username}
             onChange={handleChange}
+            required
           />
           <input
             type='text'
@@ -50,6 +54,7 @@ export const Signup = () => {
             placeholder='Name'
             value={values.name}
             onChange={handleChange}
+            required
           />
           <input
             type='email'
@@ -64,6 +69,7 @@ export const Signup = () => {
             placeholder='Password'
             value={values.password}
             onChange={handleChange}
+            required
           />
           <input
             type='text'
@@ -71,6 +77,23 @@ export const Signup = () => {
             placeholder='Github Username'
             value={values.github}
             onChange={handleChange}
+            required
+          />
+          <input
+            type='text'
+            name='hackerrank'
+            placeholder='Hackerrank Username'
+            value={values.hackerrank}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type='text'
+            name='codechef'
+            placeholder='CodeChef Username'
+            value={values.codechef}
+            onChange={handleChange}
+            required
           />
         </div>
         <button className=' signUpbtn' type='submit'>

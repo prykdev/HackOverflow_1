@@ -8,6 +8,12 @@ import {
   LOGOUT_USER,
   GET_USER_SUCCESS,
   GET_USER_BEGIN,
+  EDIT_SOCIALS_BEGIN,
+  EDIT_SOCIALS_SUCCESS,
+  EDIT_SOCIALS_ERROR,
+  CHANGE_PW_BEGIN,
+  CHANGE_PW_SUCCESS,
+  CHANGE_PW_ERROR,
 } from "./action"
 import { initialState } from "./appContext"
 
@@ -65,7 +71,29 @@ const reducer = (state, action) => {
       username: action.payload.username,
       name: action.payload.name,
       github: action.payload.github,
+      hackerrank: action.payload.hackerrank,
+      codechef: action.payload.codechef,
     }
+  }
+
+  if (action.type === EDIT_SOCIALS_BEGIN) {
+    return { ...state }
+  }
+  if (action.type === EDIT_SOCIALS_SUCCESS) {
+    return { ...state }
+  }
+  if (action.type === EDIT_SOCIALS_ERROR) {
+    return { ...state }
+  }
+
+  if (action.type === CHANGE_PW_BEGIN) {
+    return { ...state }
+  }
+  if (action.type === CHANGE_PW_SUCCESS) {
+    return { ...state, token: action.payload.token }
+  }
+  if (action.type === CHANGE_PW_ERROR) {
+    return { ...state, isError: true }
   }
 }
 

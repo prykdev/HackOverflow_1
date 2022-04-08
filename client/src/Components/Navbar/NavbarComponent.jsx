@@ -34,6 +34,9 @@ const NavbarComponent = () => {
               <NavDropdown.Item as={Link} to='/setting'>
                 Settings
               </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to='/changepw'>
+                Change Password
+              </NavDropdown.Item>
               <NavDropdown.Item>
                 <button type='button' onClick={logoutUser}>
                   Logout

@@ -9,6 +9,12 @@ import {
   LOGOUT_USER,
   GET_USER_BEGIN,
   GET_USER_SUCCESS,
+  EDIT_SOCIALS_BEGIN,
+  EDIT_SOCIALS_SUCCESS,
+  EDIT_SOCIALS_ERROR,
+  CHANGE_PW_BEGIN,
+  CHANGE_PW_SUCCESS,
+  CHANGE_PW_ERROR,
 } from "./action"
 import axios from "axios"
 import reducer from "./reducer"
@@ -19,6 +25,7 @@ const BASE_URL = "http://localhost:8082"
 const initialState = {
   token: token,
   data: "",
+  isError: false,
 }
 
 const AppContext = React.createContext()
@@ -28,6 +35,9 @@ const AppProvider = ({ children }) => {
   const authFetch = axios.create({
     baseURL: "http://localhost:8082",
   })
+  const config = {
+    headers: { Authorization: `Bearer ${state.token}` },
+  }
 
   // response interceptor
   authFetch.interceptors.request.use(
@@ -88,15 +98,13 @@ const AppProvider = ({ children }) => {
   }
 
   const loginUser = async (currentUser) => {
-    console.log("Ayushhhhhhhhhhhhhhh")
     dispatch({
       type: LOGIN_USER_BEGIN,
     })
     try {
       let { data } = await axios.post(`${BASE_URL}/login`, currentUser)
-      console.log("hdffnwf")
       data = JSON.parse(JSON.stringify(data))
-      console.log("ncsdncsd")
+
       dispatch({
         type: LOGIN_USER_SUCCESS,
         payload: {
@@ -117,7 +125,6 @@ const AppProvider = ({ children }) => {
 
   const logoutUser = () => {
     dispatch({ type: LOGOUT_USER })
-    console.log("Ayush")
     removeUserFromLocalStorage()
   }
 
@@ -129,12 +136,7 @@ const AppProvider = ({ children }) => {
     try {
       let { data } = await authFetch("/profile")
       let { email, username, name, socials } = data.data
-      let { github } = socials
-      console.log(email)
-      console.log(username)
-      console.log(name)
-      console.log(github)
-      // console.log(data.data.socials.github)
+      let { github, hackerrank, codechef } = socials
       dispatch({
         type: GET_USER_SUCCESS,
         payload: {
@@ -142,13 +144,66 @@ const AppProvider = ({ children }) => {
           username,
           name,
           github,
+          hackerrank,
+          codechef,
         },
       })
     } catch (error) {
       console.log(error.response)
-      logoutUser()
     }
   }
+
+  const editSocials = async (socials) => {
+    dispatch({
+      type: EDIT_SOCIALS_BEGIN,
+    })
+
+    try {
+      let { data } = await authFetch.patch("/edit", socials)
+      dispatch({
+        type: EDIT_SOCIALS_SUCCESS,
+      })
+    } catch (error) {
+      console.log(error)
+      dispatch({
+        type: EDIT_SOCIALS_ERROR,
+        payload: { msg: error },
+      })
+    }
+  }
+
+  const changePassword = async (pwdetails) => {
+    console.log(pwdetails)
+    dispatch({
+      type: CHANGE_PW_BEGIN,
+    })
+
+    try {
+      let { data } = await axios.patch(
+        `${BASE_URL}/password`,
+        pwdetails,
+        config
+      )
+      dispatch({
+        type: CHANGE_PW_SUCCESS,
+        payload: {
+          token: data.data.token,
+        },
+      })
+      addUserToLocalStorage({ token: data.data.token })
+    } catch (error) {
+      console.log(error)
+      if (error.response.status === 401) {
+        console.log("AUTH ERROR")
+        dispatch({
+          type: CHANGE_PW_ERROR,
+          payload: { msg: error },
+        })
+      }
+    }
+  }
+
+  const checkUsername = () => {}
 
   return (
     <AppContext.Provider
@@ -158,6 +213,9 @@ const AppProvider = ({ children }) => {
         loginUser,
         logoutUser,
         getUser,
+        editSocials,
+        changePassword,
+        checkUsername,
       }}
     >
       {children}

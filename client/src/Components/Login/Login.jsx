@@ -42,6 +42,7 @@ export const Login = () => {
             placeholder='Username'
             value={values.username}
             onChange={handleChange}
+            required
           />
           <input
             type='password'
@@ -49,6 +50,7 @@ export const Login = () => {
             placeholder='Password'
             value={values.password}
             onChange={handleChange}
+            required
           />
         </div>
         <button className=' loginbtn' type='submit'>

@@ -2,15 +2,36 @@ import React, { useEffect, useState } from "react"
 import "./Setting.scss"
 import NavbarComponent from "../../Components/Navbar/NavbarComponent"
 import { useAppContext } from "../../Context/appContext"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 const Setting = () => {
-  const { getUser, email, username, name, github } = useAppContext()
+  const initialState = {
+    github: "",
+    hackerrank: "",
+    codechef: "",
+  }
+  const {
+    getUser,
+    email,
+    username,
+    name,
+    github,
+    hackerrank,
+    codechef,
+    editSocials,
+  } = useAppContext()
   const [isEdit, setIsEdit] = useState(false)
+  const [values, setValues] = useState(initialState)
 
   useEffect(() => {
-    console.log("test")
     getUser()
   }, [])
+
+  const handleChange = (e) => {
+    console.log(e.target)
+    setValues({ ...values, [e.target.name]: e.target.value })
+  }
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -21,8 +42,17 @@ const Setting = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault()
     console.log("submit")
+    console.log(values)
+    const { github, hackerrank, codechef } = values
+    const socials = { github, hackerrank, codechef }
+    const socialsdata = { socials }
+    editSocials(socialsdata)
+    getUser()
+
     setIsEdit(false)
+    toast("Socials Changed Successfully")
   }
+
   return (
     <>
       <div className='home'>
@@ -87,7 +117,10 @@ const Setting = () => {
                           <input
                             type='text'
                             className='col-sm-5 text-secondary'
-                            defaultValue={github}
+                            required
+                            name='github'
+                            value={values.github}
+                            onChange={handleChange}
                           />
                         ) : (
                           <p className='col-sm-5 text-secondary'>{github}</p>
@@ -102,10 +135,13 @@ const Setting = () => {
                           <input
                             type='text'
                             className='col-sm-5 text-secondary'
-                            defaultValue={github}
+                            required
+                            name='codechef'
+                            value={values.codechef}
+                            onChange={handleChange}
                           />
                         ) : (
-                          <p className='col-sm-5 text-secondary'>{github}</p>
+                          <p className='col-sm-5 text-secondary'>{codechef}</p>
                         )}
                       </div>
                       <hr />
@@ -117,10 +153,15 @@ const Setting = () => {
                           <input
                             type='text'
                             className='col-sm-5 text-secondary'
-                            defaultValue={github}
+                            required
+                            name='hackerrank'
+                            value={values.hackerrank}
+                            onChange={handleChange}
                           />
                         ) : (
-                          <p className='col-sm-5 text-secondary'>{github}</p>
+                          <p className='col-sm-5 text-secondary'>
+                            {hackerrank}
+                          </p>
                         )}
                       </div>
                       <hr />
@@ -151,6 +192,7 @@ const Setting = () => {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
     </>
   )
