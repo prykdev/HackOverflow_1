@@ -60,5 +60,17 @@ const getSocialData = async (social, username) => {
   }
 }
 
+const checkAllSocials = async (socials) => {
+  const github = await getSocialData("github", socials.github);
+  const hackerrank = await getSocialData("hackerrank", socials.hackerrrank);
+  const codechef = await getSocialData("codechef", socials.codechef);
+  if (github.status === 404)
+    throw new ControllerError(404, 'Github username incorrect!');
+  if (hackerrank.status === 404)
+    throw new ControllerError(404, 'Hackerrank username incorrect!');
+  if (codechef.status === 404 || codechef.data.result === undefined)
+    throw new ControllerError(404, 'CodeChef username incorrect!');
+}
+
 Object.freeze(CommonUtils);
-module.exports = { getSocialData, ...CommonUtils };
+module.exports = { getSocialData, checkAllSocials, ...CommonUtils };

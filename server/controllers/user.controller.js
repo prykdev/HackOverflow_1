@@ -3,11 +3,14 @@ const { controllerBoilerPlate, controllerResponse } = require('../utils/controll
 const userService = require('../services/user.service.js');
 const { checkExist, signToken, hashPassword, validateUser, checkPassword } = require('../utils/user.utils.js');
 const ControllerError = require('../errors/controller.error.js');
+const { checkAllSocials } = require('../utils/common.utils.js');
 
 module.exports = {
 
   // Creating User
   createUser: ('/signup', controllerBoilerPlate(async (req) => {
+    // Checking if user social handles are valid or not
+    checkAllSocials(req.body.socials);
     // Hashing password for securely storing in database
     req.body.password = hashPassword(req.body.password);
     // Creating User
@@ -21,6 +24,8 @@ module.exports = {
 
   // Editing User
   editUser: ('/edit', controllerBoilerPlate(async (req) => {
+    // Checking if user social handles are valid or not
+    checkAllSocials(req.body.socials);
     // Updating data in database
     const data = await userService.updateById(req.user._id, req.body);
     return controllerResponse(204, 'Successful');
@@ -58,6 +63,6 @@ module.exports = {
     // Creating new JWT Token for user
     token = signToken(req.user._id);
     const data = await userService.updateById(req.user._id, { password, token });
-    return controllerResponse(201, 'Successful', {token});
+    return controllerResponse(201, 'Successful', { token });
   })),
 };
