@@ -1,9 +1,8 @@
 // Importing File Dependencies
 const { controllerBoilerPlate, controllerResponse } = require('../utils/controller.utils.js');
 const ControllerError = require('../errors/controller.error.js');
-const { getCodechefToken, getRequest } = require('../utils/common.utils.js');
+const { getRequest, getSocialData } = require('../utils/common.utils.js');
 const githubUtils = require('../utils/github.utils.js');
-const axios = require('axios');
 
 module.exports = {
 
@@ -22,20 +21,23 @@ module.exports = {
     if (username === "" || !username) {
       username = req.user.socials.github;
     }
-    const { data } = await getSocialData("github", username);
+    const data = await getSocialData("github", username);
+    if (data.status === 404)
+      throw new ControllerError(404, 'User not found!');
+    const github = data.data;
     const organizations = await githubUtils.getOrganizations(username);
     const githubData = {
       graph: `https://activity-graph.herokuapp.com/graph?username=${username}&bg_color=1a1b27&color=6899eb&line=4c8ed9&point=255e5e&area=true&hide_border=true`,
       stats: `https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=tokyonight`,
       mul: `https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&theme=tokyonight&layout=compact`,
       contributions: `https://github-readme-streak-stats.herokuapp.com/?user=${username}&theme=tokyonight&ring=DD2727&fire=DD2727&currStreakNum=6695E6`,
-      username: data.login,
-      public_repos: data.public_repos,
-      public_gists: data.public_gists,
-      followers: data.followers,
-      following: data.following,
+      username: github.login,
+      public_repos: github.public_repos,
+      public_gists: github.public_gists,
+      followers: github.followers,
+      following: github.following,
       organizations: organizations.length,
-      created_at: data.created_at,
+      created_at: github.created_at,
     };
     return controllerResponse(201, 'Successful', githubData);
   })),
@@ -45,49 +47,39 @@ module.exports = {
     if (username === "" || !username) {
       username = req.user.socials.hackerrank;
     }
-    username = "tgoyal63"
+    const data = (await getSocialData("hackerrank", username));
+    if (data.status === 404)
+      throw new ControllerError(404, 'User not found!');
     const submissionsUrl = `https://www.hackerrank.com/rest/hackers/${username}/submission_histories`;
     const badgesUrl = `https://www.hackerrank.com/rest/hackers/${username}/badges`;
-    const profileUrl = `https://www.hackerrank.com/rest/contests/master/hackers/${username}/profile`;
     const submissions = (await getRequest(submissionsUrl)).data;
     const sum = (submissions) => Object.values(submissions).reduce((a, b) => parseInt(a) + parseInt(b));
     totalSubmissions = sum(submissions);
     const badges = (await getRequest(badgesUrl)).data.models;
-    const profile = (await getRequest(profileUrl)).data;
-
+    const profile = data.data.model;
     return controllerResponse(201, 'Successful', {
+      username: profile.username,
+      created_at: profile.created_at,
+      level: profile.level,
+      followers_count: profile.followers_count,
       totalSubmissions,
       totalBadges: badges.length,
-      badges,
-      profile,
-      username
+      badgeData: badges.map((badge) => { return { badge_name: badge.badge_name, stars: badge.stars } }),
     });
   })),
-}
 
-const getSocialData = async (social, username) => {
-  let url;
-  let headers = { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0" };
-  if (social === 'github')
-    url = `https://api.github.com/users/${username}`;
-  else if (social === 'hackerrank')
-    url = `https://www.hackerrank.com/rest/hackers/${username}`;
-  else if (social === 'codechef') {
-    url = `https://api.codechef.com/users/${username}`;
-    const accessToken = await getCodechefToken();
-    headers = {
-      Authorization: `Bearer ${accessToken}`
-    };
-  }
-  try {
-    const data = await getRequest(url, headers);
-    if (data.status === 200) {
-      return data;
+  codechef: (['/codechef', '/codechef/:username'], controllerBoilerPlate(async (req) => {
+    let username = req.params.username;
+    if (username === "" || !username) {
+      username = req.user.socials.codechef;
     }
-  } catch (error) {
-    if (error.response.status === 404) {
-      return error.response;
-    }
-    throw new ControllerError(500, 'Something went wrong!');
-  }
+    const data = (await getSocialData("codechef", username));
+    if (data.status === 404 || data.data.result === undefined)
+      throw new ControllerError(404, 'User not found!');
+    const codechefData = (({ username, rankings, ratings, submissionStats, language, band }) => ({ username, rankings, ratings, submissionStats, language, band }))(data.data.result.data.content);
+    let { submissionStats } = codechefData;
+    const totalSubmissions = (submissionStats) => Object.values(submissionStats).reduce((a, b) => parseInt(a) + parseInt(b));
+    codechefData.submissionStats = totalSubmissions(submissionStats);
+    return controllerResponse(201, 'Successful', codechefData);
+  })),
 }

@@ -1,5 +1,5 @@
 const axios = require('axios');
-const CommonUtlis = {
+const CommonUtils = {
   generateResponse: (statusCode, message, data) => {
     console.log(`msg: ${message}, data: ${data}`);
     return {
@@ -36,5 +36,29 @@ const CommonUtlis = {
   }
 };
 
-Object.freeze(CommonUtlis);
-module.exports = CommonUtlis;
+const getSocialData = async (social, username) => {
+  let url, headers;
+  if (social === 'github')
+    url = `https://api.github.com/users/${username}`;
+  else if (social === 'hackerrank')
+    url = `https://www.hackerrank.com/rest/contests/master/hackers/${username}/profile`;
+  else if (social === 'codechef') {
+    url = `https://api.codechef.com/users/${username}`;
+    const accessToken = await CommonUtils.getCodechefToken();
+    headers = {
+      Authorization: `Bearer ${accessToken}`
+    };
+  }
+  try {
+    const data = await CommonUtils.getRequest(url, headers);
+    return data;
+  } catch (error) {
+    if (error.response.status === 404) {
+      return error.response;
+    }
+    throw new ControllerError(500, 'Something went wrong!');
+  }
+}
+
+Object.freeze(CommonUtils);
+module.exports = { getSocialData, ...CommonUtils };
