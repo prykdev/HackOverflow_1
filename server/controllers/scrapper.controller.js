@@ -77,9 +77,13 @@ module.exports = {
     if (data.status === 404 || data.data.result === undefined)
       throw new ControllerError(404, 'User not found!');
     const codechefData = (({ username, rankings, ratings, submissionStats, language, band }) => ({ username, rankings, ratings, submissionStats, language, band }))(data.data.result.data.content);
-    let { submissionStats } = codechefData;
-    const totalSubmissions = (submissionStats) => Object.values(submissionStats).reduce((a, b) => parseInt(a) + parseInt(b));
-    codechefData.submissionStats = totalSubmissions(submissionStats);
+    codechefData.rankings = codechefData.rankings.allContestRanking;
+    codechefData.ratings = codechefData.ratings.allContest;
+    // Calculating div on the basis of ratings
+    if(codechefData.ratings < 1400) codechefData.div = 4
+    else if(codechefData.ratings < 1600) codechefData.div = 4
+    else if(codechefData.ratings < 2000) codechefData.div = 4
+    else codechefData.div = 1
     return controllerResponse(201, 'Successful', codechefData);
   })),
 }

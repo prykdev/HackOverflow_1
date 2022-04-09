@@ -47,8 +47,9 @@ module.exports = {
   // Checking if user exists
   check: ('/check', controllerBoilerPlate(async (req) => {
     data = await checkExist(req.body.entity, req.body.value);
+    let response = (({ name, username, email, socials }) => ({ name, username, email, socials }))(data);
     if (data)
-      return controllerResponse(400, req.body.entity + ' already registered!');
+      return controllerResponse(400, req.body.entity + ' already registered!', response);
     return controllerResponse(200, req.body.entity + ' available!');
   })),
 
