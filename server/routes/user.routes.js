@@ -8,7 +8,7 @@ const { signUpSchema, loginSchema, checkSchema, editSchema, changePasswordSchema
 router.post('/signup', validate(signUpSchema), user.createUser);
 router.post('/login', validate(loginSchema), user.login);
 router.patch('/edit', authMiddleware, validate(editSchema), user.editUser);
-router.post('/check', validate(checkSchema), user.check);
+router.post(['/check', '/search'], validate(checkSchema), user.check);
 router.get('/profile', authMiddleware, user.profile);
 router.patch('/password', authMiddleware, validate(changePasswordSchema), user.changePassword);
 

@@ -14,7 +14,7 @@ const controllerBoilerPlate = (wrapped) => (req, res, next) => wrapped(req, res,
   .catch((err) => {
     if (err instanceof ControllerError || err instanceof ServiceError) {
       return controllerResponse(err.status, err.message, err.data);
-    } else if (err.code = 11000) {
+    } else if (err.code === 11000) {
       return controllerResponse(409, `${Object.values(err.keyValue)} already exists!`, err.keyValue);
     }
     return controllerResponse(500, err);

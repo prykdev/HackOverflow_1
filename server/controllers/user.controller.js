@@ -10,7 +10,9 @@ module.exports = {
   // Creating User
   createUser: ('/signup', controllerBoilerPlate(async (req) => {
     // Checking if user social handles are valid or not
-    checkAllSocials(req.body.socials);
+    const check = await checkAllSocials(req.body.socials);
+    if (check.status === 404)
+      throw new ControllerError(404, `${check.value} username incorrect!`);
     // Hashing password for securely storing in database
     req.body.password = hashPassword(req.body.password);
     // Creating User
@@ -25,7 +27,9 @@ module.exports = {
   // Editing User
   editUser: ('/edit', controllerBoilerPlate(async (req) => {
     // Checking if user social handles are valid or not
-    checkAllSocials(req.body.socials);
+    const check = await checkAllSocials(req.body.socials);
+    if (check.status === 404)
+      throw new ControllerError(404, `${check.value} username incorrect!`);
     // Updating data in database
     const data = await userService.updateById(req.user._id, req.body);
     return controllerResponse(204, 'Successful');
@@ -45,12 +49,19 @@ module.exports = {
   })),
 
   // Checking if user exists
-  check: ('/check', controllerBoilerPlate(async (req) => {
-    data = await checkExist(req.body.entity, req.body.value);
-    let response = (({ name, username, email, socials }) => ({ name, username, email, socials }))(data);
-    if (data)
-      return controllerResponse(400, req.body.entity + ' already registered!', response);
-    return controllerResponse(200, req.body.entity + ' available!');
+  check: (['/check', '/search'], controllerBoilerPlate(async (req) => {
+    const data = await checkExist(req.body.entity, req.body.value);
+    if (req.originalUrl === '/check') {
+      if (data)
+        throw new ControllerError(400, req.body.entity + ' already registered!');
+      return controllerResponse(200, req.body.entity + ' available!');
+    } else if (req.originalUrl === '/search') {
+      if (data) {
+        const response = (({ name, username, email, socials }) => ({ name, username, email, socials }))(data);
+        return controllerResponse(200, "Successful", response);
+      }
+      throw new ControllerError(404, "User not found!");
+    }
   })),
 
   // Changing User Password

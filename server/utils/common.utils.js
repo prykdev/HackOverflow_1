@@ -62,14 +62,15 @@ const getSocialData = async (social, username) => {
 
 const checkAllSocials = async (socials) => {
   const github = await getSocialData("github", socials.github);
-  const hackerrank = await getSocialData("hackerrank", socials.hackerrrank);
+  const hackerrank = await getSocialData("hackerrank", socials.hackerrank);
   const codechef = await getSocialData("codechef", socials.codechef);
   if (github.status === 404)
-    throw new ControllerError(404, 'Github username incorrect!');
+    return { status: 404, value: "Github" };
   if (hackerrank.status === 404)
-    throw new ControllerError(404, 'Hackerrank username incorrect!');
+    return { status: 404, value: "Hackerrank" };
   if (codechef.status === 404 || codechef.data.result === undefined)
-    throw new ControllerError(404, 'CodeChef username incorrect!');
+    return { status: 404, value: "Codechef" };
+  return {status: 200};
 }
 
 Object.freeze(CommonUtils);

@@ -9,10 +9,10 @@ const user = new Schema({
   friends: [{ type: Schema.Types.ObjectId, ref: 'friends' }],
   socials: {
     github: { type: String, default: "" },
-    codeforces: { type: String, default: "" },
-    hackerearth: { type: String, default: "" },
-    atcoder: { type: String, default: "" },
-    leetcode: { type: String, default: "" },
+    // codeforces: { type: String, default: "" },
+    // hackerearth: { type: String, default: "" },
+    // atcoder: { type: String, default: "" },
+    // leetcode: { type: String, default: "" },
     codechef: { type: String, default: "" },
     hackerrank: { type: String, default: "" }
   },

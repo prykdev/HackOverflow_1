@@ -9,10 +9,10 @@ const signUpSchema = {
     password: Joi.string().required(),
     socials: Joi.object({
       github: Joi.string().required(),
-      codeforces: Joi.string(),
-      hackerearth: Joi.string(),
-      atcoder: Joi.string(),
-      leetcode: Joi.string(),
+      // codeforces: Joi.string(),
+      // hackerearth: Joi.string(),
+      // atcoder: Joi.string(),
+      // leetcode: Joi.string(),
       codechef: Joi.string().required(),
       hackerrank: Joi.string().required()
     })
@@ -51,10 +51,10 @@ const editSchema = {
   body: Joi.object({
     socials: Joi.object({
       github: Joi.string().required(),
-      codeforces: Joi.string(),
-      hackerearth: Joi.string(),
-      atcoder: Joi.string(),
-      leetcode: Joi.string(),
+      // codeforces: Joi.string(),
+      // hackerearth: Joi.string(),
+      // atcoder: Joi.string(),
+      // leetcode: Joi.string(),
       codechef: Joi.string().required(),
       hackerrank: Joi.string().required()
     })
