@@ -3,6 +3,7 @@ import "./styles.scss"
 import NavbarComponent from "../../Components/Navbar/NavbarComponent"
 import { Outlet } from "react-router-dom"
 import { Container, Row, Col } from "react-bootstrap"
+import { Footer } from "../../Components/Footer/Footer.jsx"
 
 const Dashboard = () => {
   return (
@@ -47,8 +48,10 @@ const Dashboard = () => {
               </Col>
             </Row>
           </Container>
+         
         </div>
       </div>
+    <Footer/>
     </div>
   )
 }

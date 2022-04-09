@@ -1,22 +1,25 @@
-import React, { useEffect } from "react"
-import { Nav, NavDropdown, Container, Navbar } from "react-bootstrap"
-import { Link } from "react-router-dom"
-import { useAppContext } from "../../Context/appContext"
-import { useNavigate } from "react-router-dom"
+import React, { useEffect } from "react";
+import { Nav, NavDropdown, Container, Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useAppContext } from "../../Context/appContext";
+import { useNavigate } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import "./NavbarComponent.scss";
 
 const NavbarComponent = () => {
-  const { token, logoutUser } = useAppContext()
-  const navigate = useNavigate()
+  const { token, logoutUser } = useAppContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!token) {
-      navigate("/")
+      navigate("/");
     }
-  }, [token, navigate])
+  }, [token, navigate]);
   return (
-    <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
+
+    <Navbar className ="navheader" collapseOnSelect expand='lg' >
       <Container>
-        <Navbar.Brand>HACKOVERFLOW</Navbar.Brand>
+        <Navbar.Brand className="nav-logo" style={{cursor:"pointer"}} href="/homepage"> <span>Ha</span>ck<span>ov</span>er<span>Flow</span></Navbar.Brand>
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='ms-auto'>
@@ -37,17 +40,21 @@ const NavbarComponent = () => {
               <NavDropdown.Item as={Link} to='/changepw'>
                 Change Password
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <button type='button' onClick={logoutUser}>
-                  Logout
-                </button>
-              </NavDropdown.Item>
             </NavDropdown>
+            <Button
+              style={{ color: "#fff" }}
+              variant="contained"
+              color="primary"
+              onClick={logoutUser}
+            >
+              Logout
+            </Button>
           </Nav>
+
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  )
-}
+  );
+};
 
-export default NavbarComponent
+export default NavbarComponent;
