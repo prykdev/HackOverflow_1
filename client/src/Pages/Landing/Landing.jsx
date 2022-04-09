@@ -2,10 +2,16 @@ import React, { useState } from "react"
 import { Login } from "../../Components/Login/Login"
 import { Signup } from "../../Components/Signup/Signup"
 import "./Landing.scss"
+import NavbarComponent from "../../Components/Navbar/NavbarComponent"
+import { useLocation } from "react-router-dom"
+
 const Landing = () => {
   const [isSignUp, setIsSignUp] = useState(true)
+  const {pathname} = useLocation();
+  console.log(pathname)
   return (
     <>
+ <NavbarComponent pathname={pathname}/>
       <div className='landing'>
         <div className='loginBoxabc'>
           <img
@@ -24,14 +30,6 @@ const Landing = () => {
               ? "Already have an account? Login"
               : "Don't have an account? Sign up"}
           </div>
-          {/* <div className='btn'>
-            <button
-              className='btnlanding'
-              
-            >
-              {isSignUp ? "Login" : "Sign up"}
-            </button>
-          </div> */}
         </div>
       </div>
     </>

@@ -53,18 +53,18 @@ const ChangePassword = () => {
   return (
     <>
       <NavbarComponent />
-      <div className='landing'>
-        <div className='loginBoxabc'>
+      <div className='landing-cp'>
+        <div className='loginBoxabc-cp'>
           <img
-            className='userabc'
+            className='userabc-cp'
             src='https://cdn1.iconfinder.com/data/icons/avatars-55/100/avatar_profile_user_music_headphones_shirt_cool-512.png'
             height='100px'
             width='100px'
           />
           <h3>Change Your Password</h3>
-          <div className='loginBox text-center'>
+          <div className='loginBox-cp text-center'>
             <form onSubmit={onSubmit}>
-              <div className='inputBox'>
+              <div className='inputBox-cp'>
                 <input
                   type='password'
                   name='currentPassword'
@@ -90,7 +90,7 @@ const ChangePassword = () => {
                   onChange={handleChange}
                 />
               </div>
-              <button className=' loginbtn' type='submit'>
+              <button className='loginbtn-cp' type='submit'>
                 Submit
               </button>
             </form>

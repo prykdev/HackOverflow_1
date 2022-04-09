@@ -1,0 +1,18 @@
+::-webkit-scrollbar{
+    width: .6em;
+  }
+  ::-webkit-scrollbar-track{
+    background:  hsl(72, 8%, 88%);
+    border-radius: 100vw;
+    margin-block: .5em ;
+  }
+  
+  ::-webkit-scrollbar-thumb{
+    background:  hsl(0, 1%, 61%) ;
+    border-radius: 100vw;
+  
+  }
+  
+  ::-webkit-scrollbar-thumb:hover{
+    background:hsl(176, 6%, 20%);
+  }

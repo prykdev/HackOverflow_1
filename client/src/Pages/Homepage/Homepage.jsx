@@ -4,15 +4,19 @@ import Button from '@material-ui/core/Button';
 import img1 from './img-1.svg';
 import img2 from './img-2.svg';
 import NavbarComponent from '../../Components/Navbar/NavbarComponent';
+import { useLocation } from "react-router-dom"
 
 import {
     Link
 } from "react-router-dom";
 
 export const Homepage = () => {
+  const {pathname} = useLocation();
+
+
   return (
     <div>
-     <NavbarComponent/>
+     <NavbarComponent pathname={pathname}/>
 
       <div id="home">
         <div className="home-container">
@@ -28,7 +32,7 @@ export const Homepage = () => {
               financial problems.
             </div>
 
-            <Link to="/register">
+            <Link to="/register" style={{ textDecoration: 'none' }}>
               <Button
                 style={{ marginTop: 25, color: "#fff" }}
                 size="large"
