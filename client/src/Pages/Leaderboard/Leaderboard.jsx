@@ -1,23 +1,56 @@
-import React from "react"
-import Table from "../../Components/LeaderBoard/Table/Table"
-import "./Leaderboard.scss"
+import React from "react";
+import NavbarComponent from "../../Components/Navbar/NavbarComponent";
+import { Outlet } from "react-router-dom";
+import { Table ,Row , Button,Col} from "react-bootstrap";
+
 const Leaderboard = () => {
   return (
-    <div className='container'>
-      <div className='row'>
-        <div className='col-lg-12'>
-          <div className='main-header'>Leaderboard</div>
-        </div>
-      </div>
-      <div className='row'>
-        <div className='col-lg-12'>
-          <div className='overflow-table'>
-            <Table />
-          </div>
+    <div className="dashboardHome">
+      <Outlet />
+      <NavbarComponent />
+      <div className="dashboardCard text-center">
+        <h1>Leaderboard</h1>
+        <div className="card-container" style={{color:"white"}}>
+          <Row className="mx-0">
+            <Button as={Col} variant="primary" style={{marginRight:"20px"}}>
+              Global
+            </Button>
+            <br/>
+            <Button as={Col} variant="success">
+              Friends
+            </Button>
+          </Row>
+          <Table bordered style={{color: "white"}}>
+            <thead style={{background: "#0d4386", color: "black"}}>
+              <tr>
+                <th>#Rank</th>
+                <th width="60%">Username</th>
+                <th>Rating </th>
+              </tr>
+            </thead>
+            <tbody >
+              <tr >
+                <td>1</td>
+                <td>Mark</td>
+                <td>@mdo</td>
+              </tr>
+
+              <tr >
+                <td>1</td>
+                <td>Mark</td>
+                <td>@mdo</td>
+              </tr>
+              
+              <tr >
+                <td>1</td>
+                <td>Mark</td>
+                <td>@mdo</td>
+              </tr>
+            </tbody>
+          </Table>
         </div>
       </div>
     </div>
-  )
-}
-
-export default Leaderboard
+  );
+};
+export default Leaderboard;
