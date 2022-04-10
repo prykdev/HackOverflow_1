@@ -187,7 +187,8 @@ const Dashboard = () => {
             <Row>
               <h2>Badges</h2>
               <div className='photo-container'>
-                <Swiper
+                {totalBadges > 2 ? 
+                (<Swiper
                   effect='coverflow'
                   grabCursor='true'
                   centeredSlides='true'
@@ -234,7 +235,22 @@ const Dashboard = () => {
                         </SwiperSlide>
                       )
                     })}
-                </Swiper>
+                </Swiper>): <></>}
+                {totalBadges < 2 ? (<Swiper>
+                  {badgeData &&
+                    badgeData.map((badge) => {
+                      return (
+                        <SwiperSlide>
+                          <div className='swiper-card'>
+                            <h3>
+                              <p>{badge.badge_name}</p>
+                            </h3>
+                            <p>{badge.stars}⭐</p>
+                          </div>
+                        </SwiperSlide>
+                      )
+                    })}
+                </Swiper>): <></>}
               </div>
             </Row>
           </Container>
