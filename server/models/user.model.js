@@ -17,7 +17,7 @@ const user = new Schema({
     hackerrank: { type: String, default: "" }
   },
   token: { type: String, default: "" }
-});
+}, {timestamps: true});
 
 model('users', user);
 

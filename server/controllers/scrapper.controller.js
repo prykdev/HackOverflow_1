@@ -24,6 +24,8 @@ module.exports = {
     const data = await getSocialData("github", username);
     if (data.status === 404)
       throw new ControllerError(404, 'User not found!');
+    else if (data.status === 403 && data.statusText === 'rate limit exceeded')
+      throw new ControllerError(403, 'Github API Rate Limit exceeded!');
     const github = data.data;
     const organizations = await githubUtils.getOrganizations(username);
     const githubData = {
@@ -53,8 +55,14 @@ module.exports = {
     const submissionsUrl = `https://www.hackerrank.com/rest/hackers/${username}/submission_histories`;
     const badgesUrl = `https://www.hackerrank.com/rest/hackers/${username}/badges`;
     const submissions = (await getRequest(submissionsUrl)).data;
+    console.log(typeof (submissions));
+    if (submissions === {}) {
+      console.log("Check")
+    }
+    console.log("b");
     const sum = (submissions) => Object.values(submissions).reduce((a, b) => parseInt(a) + parseInt(b));
     totalSubmissions = sum(submissions);
+    console.log("a");
     const badges = (await getRequest(badgesUrl)).data.models;
     const profile = data.data.model;
     return controllerResponse(201, 'Successful', {
@@ -80,9 +88,9 @@ module.exports = {
     codechefData.rankings = codechefData.rankings.allContestRanking;
     codechefData.ratings = codechefData.ratings.allContest;
     // Calculating div on the basis of ratings
-    if(codechefData.ratings < 1400) codechefData.div = 4
-    else if(codechefData.ratings < 1600) codechefData.div = 4
-    else if(codechefData.ratings < 2000) codechefData.div = 4
+    if (codechefData.ratings < 1400) codechefData.div = 4
+    else if (codechefData.ratings < 1600) codechefData.div = 4
+    else if (codechefData.ratings < 2000) codechefData.div = 4
     else codechefData.div = 1
     return controllerResponse(201, 'Successful', codechefData);
   })),

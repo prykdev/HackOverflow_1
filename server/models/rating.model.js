@@ -11,7 +11,7 @@ const rating = new Schema({
         time: { type: String, required: true },
     }],
     rating: { type: String, default: "100" },
-});
+}, {timestamps: true});
 
 model('ratings', rating);
 

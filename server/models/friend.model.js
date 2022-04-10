@@ -6,16 +6,19 @@ const friend = new Schema({
   status: {
     type: Number,
     enums: [
-      0,    //'add friend',
+      0,    //'add friend', -> rejected
       1,    //'requested',
       2,    //'pending',
-      3,    //'friends'
+      3,    //'friends' -> accepted
     ]
   }
 }, { timestamps: true })
-module.exports = mongoose.model('friends', friend)
+module.exports = model('friends', friend)
 
 module.exports = {
   model: model('friends'),
   schema: friend,
 };
+
+// addFriend: create
+// 
