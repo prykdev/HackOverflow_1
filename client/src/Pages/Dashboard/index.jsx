@@ -32,7 +32,8 @@ const Dashboard = () => {
       <NavbarComponent />
 
       <div className='dashboardCard text-center'>
-        <h1>Github-{username}</h1>
+        <h1>Github</h1>
+        <h6>&#123;Github username:{username}&#125;</h6>
         <div className='card-container'>
           <Container>
             <Row>
@@ -61,7 +62,7 @@ const Dashboard = () => {
               <div className='github-cards'>
                 <div className='github-card'>
                   <h3>
-                    <p>Public Repositories</p>
+                    <p>Public Repos</p>
                   </h3>
                   <p>{public_repos}</p>
                 </div>

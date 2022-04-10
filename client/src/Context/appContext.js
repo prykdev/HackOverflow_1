@@ -82,8 +82,7 @@ const AppProvider = ({ children }) => {
     })
     try {
       let { data } = await axios.post(`${BASE_URL}/signup`, currentUser)
-      data = JSON.parse(JSON.stringify(data))
-      console.log(data)
+
       dispatch({
         type: REGISTER_USER_SUCCESS,
         payload: {
@@ -107,7 +106,6 @@ const AppProvider = ({ children }) => {
     })
     try {
       let { data } = await axios.post(`${BASE_URL}/login`, currentUser)
-      data = JSON.parse(JSON.stringify(data))
 
       dispatch({
         type: LOGIN_USER_SUCCESS,
