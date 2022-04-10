@@ -28,6 +28,8 @@ module.exports = async (req, res, next) => {
       throw new ControllerError(401, 'Invalid User token!');
     }
   } catch (err) {
+    if (!err.status)
+      res.status(500).send({ message: err });
     res.status(err.status).send({ status: err.status, message: err.message });
   }
 };

@@ -77,4 +77,9 @@ module.exports = {
     const data = await userService.updateById(req.user._id, { password, token });
     return controllerResponse(201, 'Successful', { token });
   })),
+
+  getFriends: ('/friends', controllerBoilerPlate(async (req) => {
+    const data = await userService.getFriends(req.user._id);
+    return controllerResponse(200, 'Successful', data);
+  }))
 };

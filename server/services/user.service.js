@@ -1,6 +1,7 @@
 // Importing File Dependencies
 const { serviceBoilerPlate } = require('../utils/service.utils.js');
 const user = require('../models/user.model.js').model;
+const friend = require('../models/friend.model.js').model;
 const ServiceError = require('../errors/service.error.js');
 
 module.exports = {
@@ -37,5 +38,28 @@ module.exports = {
     // Deleting a user by its id from database
     deleteById: serviceBoilerPlate(async (_id) => {
         await user.findOneAndDelete({ _id }).exec();
+    }),
+
+    getFriends: serviceBoilerPlate(async (_id) => {
+        const data = user.aggregate([
+            {$lookup: {
+              from: friend.collection.name,
+              let: { friends: "$friends" },
+              pipeline: [
+                {$match: {
+                  recipient: _id,
+                  $expr: { $in: [ "$_id", "$$friends" ] }
+                }},
+                { $project: { status: 1 } }
+              ],
+              as: "friends"
+            }},
+            { $addFields: {
+              friendsStatus: {
+                $ifNull: [ { $min: "$friends.status" }, 0 ]
+              }
+            }}
+          ]);
+        return data;
     }),
 };
