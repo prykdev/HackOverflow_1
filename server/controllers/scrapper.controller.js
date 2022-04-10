@@ -1,7 +1,7 @@
 // Importing File Dependencies
 const { controllerBoilerPlate, controllerResponse } = require('../utils/controller.utils.js');
 const ControllerError = require('../errors/controller.error.js');
-const { getRequest, getSocialData } = require('../utils/common.utils.js');
+const { getRequest, getSocialData, formatDate } = require('../utils/common.utils.js');
 const githubUtils = require('../utils/github.utils.js');
 
 module.exports = {
@@ -39,7 +39,7 @@ module.exports = {
       followers: github.followers,
       following: github.following,
       organizations: organizations.length,
-      github_created_at: github.created_at,
+      github_created_at: formatDate(github.created_at),
     };
     return controllerResponse(201, 'Successful', githubData);
   })),
@@ -64,7 +64,7 @@ module.exports = {
     const profile = data.data.model;
     return controllerResponse(201, 'Successful', {
       hackerrankUsername: profile.username,
-      hackerrank_created_at: profile.created_at,
+      hackerrank_created_at: formatDate(profile.created_at),
       level: profile.level,
       followers_count: profile.followers_count,
       totalSubmissions,
