@@ -15,6 +15,9 @@ import {
   CHANGE_PW_BEGIN,
   CHANGE_PW_SUCCESS,
   CHANGE_PW_ERROR,
+  GET_GITHUBDATA_ERROR,
+  GET_GITHUBDATA_SUCCESS,
+  GET_GITHUBDATA_BEGIN,
 } from "./action"
 import axios from "axios"
 import reducer from "./reducer"
@@ -80,6 +83,7 @@ const AppProvider = ({ children }) => {
     try {
       let { data } = await axios.post(`${BASE_URL}/signup`, currentUser)
       data = JSON.parse(JSON.stringify(data))
+      console.log(data)
       dispatch({
         type: REGISTER_USER_SUCCESS,
         payload: {
@@ -205,6 +209,54 @@ const AppProvider = ({ children }) => {
 
   const checkUsername = () => {}
 
+  const getGithub = async () => {
+    dispatch({
+      type: GET_GITHUBDATA_BEGIN,
+    })
+
+    try {
+      let { data } = await authFetch("/github")
+      console.log(data.data)
+      let {
+        graph,
+        stats,
+        mul,
+        contributions,
+        username,
+        public_repos,
+        public_gists,
+        followers,
+        following,
+        organizations,
+        created_at,
+      } = data.data
+      console.log(graph + "cdscdsvdv")
+
+      dispatch({
+        type: GET_GITHUBDATA_SUCCESS,
+        payload: {
+          graph,
+          stats,
+          mul,
+          contributions,
+          username,
+          public_repos,
+          public_gists,
+          followers,
+          following,
+          organizations,
+          created_at,
+        },
+      })
+    } catch (error) {
+      console.log(error.response)
+      dispatch({
+        type: GET_GITHUBDATA_ERROR,
+        payload: { msg: error },
+      })
+    }
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -216,6 +268,7 @@ const AppProvider = ({ children }) => {
         editSocials,
         changePassword,
         checkUsername,
+        getGithub,
       }}
     >
       {children}

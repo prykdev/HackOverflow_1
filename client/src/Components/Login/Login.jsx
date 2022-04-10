@@ -22,7 +22,6 @@ export const Login = () => {
     const { username, password } = values
     const currentUser = { username, password }
     console.log(currentUser)
-    console.log({ token })
     loginUser(currentUser)
   }
 

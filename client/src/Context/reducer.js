@@ -14,6 +14,9 @@ import {
   CHANGE_PW_BEGIN,
   CHANGE_PW_SUCCESS,
   CHANGE_PW_ERROR,
+  GET_GITHUBDATA_BEGIN,
+  GET_GITHUBDATA_SUCCESS,
+  GET_GITHUBDATA_ERROR,
 } from "./action"
 import { initialState } from "./appContext"
 
@@ -94,6 +97,29 @@ const reducer = (state, action) => {
   }
   if (action.type === CHANGE_PW_ERROR) {
     return { ...state, isError: true }
+  }
+
+  if (action.type === GET_GITHUBDATA_BEGIN) {
+    return { ...state }
+  }
+  if (action.type === GET_GITHUBDATA_SUCCESS) {
+    return {
+      ...state,
+      graph: action.payload.graph,
+      stats: action.payload.stats,
+      mul: action.payload.mul,
+      contributions: action.payload.contributions,
+      username: action.payload.username,
+      public_repos: action.payload.public_repos,
+      public_gists: action.payload.public_gists,
+      followers: action.payload.followers,
+      following: action.payload.following,
+      organizations: action.payload.organizations,
+      created_at: action.payload.created_at,
+    }
+  }
+  if (action.type === GET_GITHUBDATA_ERROR) {
+    return { ...state }
   }
 }
 

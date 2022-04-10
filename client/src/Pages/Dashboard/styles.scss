@@ -33,3 +33,31 @@
   flex-wrap: wrap;
   flex-direction: column;
 }
+
+
+.github-cards {
+  display: flex;
+}
+.github-card {
+  background: #1A1B27;
+  border-radius: 0.3rem;
+  padding: 1.5rem;
+
+  box-shadow: 3px 3px 12px 2px rgba(black, 0.6);
+  transition: 0.2s;
+  border:1px solid white
+}
+
+p{
+  color:#70A4FC !important;
+}
+.github-card:not(:first-child) {
+  margin-left: -2rem;
+}
+.github-card:not(:last-child):hover,
+.github-card:not(:last-child):focus-within {
+  transform: translateY(-1rem);
+  ~ .github-card {
+    transform: translateX(2rem);
+  }
+}
