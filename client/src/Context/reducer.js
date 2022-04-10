@@ -17,6 +17,12 @@ import {
   GET_GITHUBDATA_BEGIN,
   GET_GITHUBDATA_SUCCESS,
   GET_GITHUBDATA_ERROR,
+  GET_HACKERRANKDATA_BEGIN,
+  GET_HACKERRANKDATA_SUCCESS,
+  GET_HACKERRANKDATA_ERROR,
+  GET_CODECHEFDATA_BEGIN,
+  GET_CODECHEFDATA_SUCCESS,
+  GET_CODECHEFDATA_ERROR,
 } from "./action"
 import { initialState } from "./appContext"
 
@@ -109,16 +115,55 @@ const reducer = (state, action) => {
       stats: action.payload.stats,
       mul: action.payload.mul,
       contributions: action.payload.contributions,
-      username: action.payload.username,
+      githubUsername: action.payload.githubUsername,
       public_repos: action.payload.public_repos,
       public_gists: action.payload.public_gists,
       followers: action.payload.followers,
       following: action.payload.following,
       organizations: action.payload.organizations,
-      created_at: action.payload.created_at,
+      github_created_at: action.payload.github_created_at,
     }
   }
   if (action.type === GET_GITHUBDATA_ERROR) {
+    return { ...state, isGithubError: true }
+  }
+
+  if (action.type === GET_HACKERRANKDATA_BEGIN) {
+    return { ...state }
+  }
+  if (action.type === GET_HACKERRANKDATA_SUCCESS) {
+    return {
+      ...state,
+      hackerrankUsername: action.payload.hackerrankUsername,
+      hackerrank_created_at: action.payload.hackerrank_created_at,
+      level: action.payload.level,
+      followers_count: action.payload.followers_count,
+      totalSubmissions: action.payload.totalSubmissions,
+      totalBadges: action.payload.totalBadges,
+      badgeData: action.payload.badgeData,
+    }
+  }
+  if (action.type === GET_HACKERRANKDATA_ERROR) {
+    return { ...state }
+  }
+
+  if (action.type === GET_CODECHEFDATA_BEGIN) {
+    return { ...state }
+  }
+  if (action.type === GET_CODECHEFDATA_SUCCESS) {
+    return {
+      ...state,
+      codechefUsername: action.payload.codechefUsername,
+      ratings: action.payload.ratings,
+      language: action.payload.language,
+      band: action.payload.band,
+      div: action.payload.div,
+      global: action.payload.global,
+      country: action.payload.country,
+      submissionStats: action.payload.submissionStats,
+    }
+  }
+  if (action.type === GET_CODECHEFDATA_ERROR) {
     return { ...state }
   }
 }

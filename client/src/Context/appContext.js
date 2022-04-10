@@ -18,6 +18,12 @@ import {
   GET_GITHUBDATA_ERROR,
   GET_GITHUBDATA_SUCCESS,
   GET_GITHUBDATA_BEGIN,
+  GET_HACKERRANKDATA_BEGIN,
+  GET_HACKERRANKDATA_SUCCESS,
+  GET_HACKERRANKDATA_ERROR,
+  GET_CODECHEFDATA_BEGIN,
+  GET_CODECHEFDATA_SUCCESS,
+  GET_CODECHEFDATA_ERROR,
 } from "./action"
 import axios from "axios"
 import reducer from "./reducer"
@@ -28,7 +34,7 @@ const BASE_URL = "http://localhost:8082"
 const initialState = {
   token: token,
   data: "",
-  isError: false,
+  isGithubError: false,
 }
 
 const AppContext = React.createContext()
@@ -220,15 +226,14 @@ const AppProvider = ({ children }) => {
         stats,
         mul,
         contributions,
-        username,
+        githubUsername,
         public_repos,
         public_gists,
         followers,
         following,
         organizations,
-        created_at,
+        github_created_at,
       } = data.data
-      console.log(graph + "cdscdsvdv")
 
       dispatch({
         type: GET_GITHUBDATA_SUCCESS,
@@ -237,19 +242,99 @@ const AppProvider = ({ children }) => {
           stats,
           mul,
           contributions,
-          username,
+          githubUsername,
           public_repos,
           public_gists,
           followers,
           following,
           organizations,
-          created_at,
+          github_created_at,
         },
       })
     } catch (error) {
       console.log(error.response)
       dispatch({
         type: GET_GITHUBDATA_ERROR,
+        payload: { msg: error },
+      })
+    }
+  }
+
+  const getHackerrank = async () => {
+    dispatch({
+      type: GET_HACKERRANKDATA_BEGIN,
+    })
+
+    try {
+      let { data } = await authFetch("/hackerrank")
+      console.log(data.data)
+      let {
+        hackerrankUsername,
+        hackerrank_created_at,
+        level,
+        followers_count,
+        totalSubmissions,
+        totalBadges,
+        badgeData,
+      } = data.data
+      dispatch({
+        type: GET_HACKERRANKDATA_SUCCESS,
+        payload: {
+          hackerrankUsername,
+          hackerrank_created_at,
+          level,
+          followers_count,
+          totalSubmissions,
+          totalBadges,
+          badgeData,
+        },
+      })
+    } catch (error) {
+      console.log(error.response)
+      dispatch({
+        type: GET_HACKERRANKDATA_ERROR,
+        payload: { msg: error },
+      })
+    }
+  }
+
+  const getCodechef = async () => {
+    dispatch({
+      type: GET_CODECHEFDATA_BEGIN,
+    })
+
+    try {
+      let { data } = await authFetch("/codechef")
+      console.log(data.data)
+      let {
+        codechefUsername,
+        rankings,
+        ratings,
+        language,
+        band,
+        div,
+        submissionStats,
+      } = data.data
+      let { global, country } = rankings
+      console.log(submissionStats)
+
+      dispatch({
+        type: GET_CODECHEFDATA_SUCCESS,
+        payload: {
+          codechefUsername,
+          ratings,
+          language,
+          band,
+          div,
+          global,
+          country,
+          submissionStats,
+        },
+      })
+    } catch (error) {
+      console.log(error.response)
+      dispatch({
+        type: GET_CODECHEFDATA_ERROR,
         payload: { msg: error },
       })
     }
@@ -267,6 +352,8 @@ const AppProvider = ({ children }) => {
         changePassword,
         checkUsername,
         getGithub,
+        getHackerrank,
+        getCodechef,
       }}
     >
       {children}

@@ -5,6 +5,22 @@ import { Outlet } from "react-router-dom"
 import { Container, Row, Col } from "react-bootstrap"
 import { Footer } from "../../Components/Footer/Footer.jsx"
 import { useAppContext } from "../../Context/appContext"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+
+import "swiper/scss"
+import "swiper/scss/navigation"
+import "swiper/scss/pagination"
+
+// import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react"
+
+// import Swiper core and required modules. In this example,
+// we will use Pagination and Coverflow
+import SwiperCore, { Pagination, EffectCoverflow } from "swiper"
+
+// configure Swiper to use modules
+SwiperCore.use([Pagination, EffectCoverflow])
 
 const Dashboard = () => {
   const {
@@ -13,17 +29,42 @@ const Dashboard = () => {
     stats,
     mul,
     contributions,
-    username,
+    githubUsername,
     public_repos,
     public_gists,
     followers,
     following,
     organizations,
-    created_at,
+    github_created_at,
+    getHackerrank,
+    hackerrankUsername,
+    hackerrank_created_at,
+    level,
+    followers_count,
+    totalSubmissions,
+    totalBadges,
+    getCodechef,
+    codechefUsername,
+    ratings,
+    language,
+    band,
+    div,
+    global,
+    country,
+    badgeData,
+    submissionStats,
+    isGithubError,
   } = useAppContext()
 
-  useEffect(() => {
-    getGithub()
+  let badgeLength
+
+  useEffect(async () => {
+    await getGithub()
+    await getHackerrank()
+    await getCodechef()
+    if (isGithubError) {
+      toast("Github API rate limit exceeded!!!")
+    }
   }, [])
 
   return (
@@ -33,7 +74,7 @@ const Dashboard = () => {
 
       <div className='dashboardCard text-center'>
         <h1>Github</h1>
-        <h6>&#123;Github username:{username}&#125;</h6>
+        <h6>&#123;Github username:{githubUsername}&#125;</h6>
         <div className='card-container'>
           <Container>
             <Row>
@@ -92,15 +133,281 @@ const Dashboard = () => {
                 </div>
                 <div className='github-card'>
                   <h3>
-                    <p>Created At</p>
+                    <p>Created</p>
                   </h3>
-                  <p>{created_at}</p>
+                  <p>{github_created_at}</p>
                 </div>
               </div>
             </Row>
           </Container>
         </div>
       </div>
+
+      <div className='dashboardCard text-center'>
+        <h1>Hackerrank</h1>
+        <h6>&#123;Hackerrank username:{hackerrankUsername}&#125;</h6>
+        <div className='card-container'>
+          <Container>
+            <Row>
+              <div className='github-cards'>
+                <div className='github-card'>
+                  <h3>
+                    <p>Level</p>
+                  </h3>
+                  <p>{level}</p>
+                </div>
+                <div className='github-card'>
+                  <h3>
+                    <p>Followers</p>
+                  </h3>
+                  <p>{followers_count}</p>
+                </div>
+                <div className='github-card'>
+                  <h3>
+                    <p>Submissions</p>
+                  </h3>
+                  <p>{totalSubmissions}</p>
+                </div>
+                <div className='github-card'>
+                  <h3>
+                    <p>Badges</p>
+                  </h3>
+                  <p>{totalBadges}</p>
+                </div>
+                <div className='github-card'>
+                  <h3>
+                    <p>Created</p>
+                  </h3>
+                  <p>{hackerrank_created_at}</p>
+                </div>
+              </div>
+            </Row>
+          </Container>
+          <Container>
+            <Row>
+              <h2>Badges</h2>
+              <div className='photo-container'>
+                {totalBadges >= 2 ? (
+                  <Swiper
+                    effect='coverflow'
+                    grabCursor='true'
+                    centeredSlides='true'
+                    spaceBetween={0}
+                    slidesPerView={4}
+                    loop='false'
+                    pagination={{ clickable: true, dynamicBullets: true }}
+                    coverflowEffect={{
+                      rotate: 10,
+                      stretch: 15,
+                      depth: 150,
+                      modifier: 1,
+                      slideShadows: true,
+                    }}
+                    breakpoints={{
+                      700: {
+                        spaceBetween: 0,
+                        slidesPerView: 4,
+                      },
+                      500: {
+                        spaceBetween: 100,
+                        slidesPerView: 2,
+                      },
+                      411: {
+                        spaceBetween: 100,
+                        slidesPerView: 2,
+                      },
+                      300: {
+                        spaceBetween: 0,
+                        slidesPerView: 1,
+                      },
+                    }}
+                  >
+                    {badgeData &&
+                      badgeData.map((badge, index) => {
+                        return (
+                          <SwiperSlide>
+                            <div className='swiper-card'>
+                              <h3>
+                                <p>{badge.badge_name}</p>
+                              </h3>
+                              <p>{badge.stars}⭐</p>
+                            </div>
+                          </SwiperSlide>
+                        )
+                      })}
+                  </Swiper>
+                ) : (
+                  <Swiper>
+                    <SwiperSlide>
+                      <div className='swiper-card'>
+                        {badgeData &&
+                          badgeData.map((badge, index) => {
+                            return (
+                              <>
+                                <h3>
+                                  <p>{badge.badge_name}</p>
+                                </h3>
+                                <p>{badge.stars}⭐</p>
+                              </>
+                            )
+                          })}
+                      </div>
+                    </SwiperSlide>
+                  </Swiper>
+                )}
+              </div>
+            </Row>
+          </Container>
+        </div>
+      </div>
+
+      <div className='dashboardCard text-center'>
+        <h1>Codechef</h1>
+        <h6>&#123;Codechef username:{codechefUsername}&#125;</h6>
+        <div className='card-container'>
+          <Container>
+            <Row>
+              <div className='github-cards'>
+                <div className='github-card'>
+                  <h3>
+                    <p>Ratings</p>
+                  </h3>
+                  <p>{ratings}</p>
+                </div>
+                <div className='github-card'>
+                  <h3>
+                    <p>Global Rank</p>
+                  </h3>
+                  <p>{global}</p>
+                </div>
+                <div className='github-card'>
+                  <h3>
+                    <p>Local Rank</p>
+                  </h3>
+                  <p>{country}</p>
+                </div>
+                <div className='github-card'>
+                  <h3>
+                    <p>Language</p>
+                  </h3>
+                  <p>{language}</p>
+                </div>
+                <div className='github-card'>
+                  <h3>
+                    <p>Band</p>
+                  </h3>
+                  <p>{band}</p>
+                </div>
+                <div className='github-card'>
+                  <h3>
+                    <p>Div</p>
+                  </h3>
+                  <p>{div}</p>
+                </div>
+              </div>
+            </Row>
+          </Container>
+          <Container>
+            <Row>
+              <h2>Submissions Stats</h2>
+              <div className='photo-container'>
+                <Swiper
+                  effect='coverflow'
+                  grabCursor='true'
+                  centeredSlides='true'
+                  spaceBetween={0}
+                  slidesPerView={4}
+                  loop='true'
+                  pagination={{ clickable: true, dynamicBullets: true }}
+                  coverflowEffect={{
+                    rotate: 10,
+                    stretch: 15,
+                    depth: 150,
+                    modifier: 1,
+                    slideShadows: false,
+                  }}
+                  breakpoints={{
+                    700: {
+                      spaceBetween: 0,
+                      slidesPerView: 4,
+                    },
+                    500: {
+                      spaceBetween: 100,
+                      slidesPerView: 2,
+                    },
+                    411: {
+                      spaceBetween: 100,
+                      slidesPerView: 2,
+                    },
+                    300: {
+                      spaceBetween: 0,
+                      slidesPerView: 1,
+                    },
+                  }}
+                >
+                  <SwiperSlide>
+                    <div className='swiper-card'>
+                      <h3>
+                        <p>Solved</p>
+                      </h3>
+                      <p>{submissionStats && submissionStats.solvedProblems}</p>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div className='swiper-card'>
+                      <h3>
+                        <p>Attempt</p>
+                      </h3>
+                      <p>
+                        {submissionStats && submissionStats.attemptedProblems}
+                      </p>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div className='swiper-card'>
+                      <h3>
+                        <p>Submitted</p>
+                      </h3>
+                      <p>
+                        {submissionStats && submissionStats.submittedSolutions}
+                      </p>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div className='swiper-card'>
+                      <h3>
+                        <p>WrongSubmissions</p>
+                      </h3>
+                      <p>
+                        {submissionStats && submissionStats.wrongSubmissions}
+                      </p>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div className='swiper-card'>
+                      <h3>
+                        <p>WrongSubmissions</p>
+                      </h3>
+                      <p>
+                        {submissionStats && submissionStats.wrongSubmissions}
+                      </p>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div className='swiper-card'>
+                      <h3>
+                        <p>RunTimeError</p>
+                      </h3>
+                      <p>{submissionStats && submissionStats.runTimeError}</p>
+                    </div>
+                  </SwiperSlide>
+                </Swiper>
+              </div>
+            </Row>
+          </Container>
+        </div>
+      </div>
+      {isGithubError ? <ToastContainer /> : <></>}
       <Footer />
     </div>
   )
