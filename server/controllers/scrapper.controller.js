@@ -26,8 +26,6 @@ module.exports = {
       throw new ControllerError(404, 'User not found!');
     else if (data.status === 403 && data.statusText === 'rate limit exceeded')
       throw new ControllerError(403, 'Github API Rate Limit exceeded!');
-    else if (data.status === 500)
-      throw new ControllerError(500, data.error);
     const github = data.data;
     const organizations = await githubUtils.getOrganizations(username);
     const githubData = {

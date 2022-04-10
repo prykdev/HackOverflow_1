@@ -56,8 +56,7 @@ const getSocialData = async (social, username) => {
     if (error.response.status === 404) {
       return error.response;
     }
-    console.log({error});
-    return {status: 500, error};
+    return error.response;
   }
 }
 
