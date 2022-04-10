@@ -56,7 +56,7 @@ const getSocialData = async (social, username) => {
     if (error.response.status === 404) {
       return error.response;
     }
-    throw new ControllerError(500, 'Something went wrong!');
+    return {status: 500, error};
   }
 }
 

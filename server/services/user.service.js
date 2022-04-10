@@ -41,25 +41,25 @@ module.exports = {
     }),
 
     getFriends: serviceBoilerPlate(async (_id) => {
-        const data = user.aggregate([
-            {$lookup: {
-              from: friend.collection.name,
-              let: { friends: "$friends" },
-              pipeline: [
-                {$match: {
-                  recipient: _id,
-                  $expr: { $in: [ "$_id", "$$friends" ] }
+        const data = await user.aggregate([
+            { "$match": { _id } },
+            { "$lookup": {
+              "from": friend.collection.name,
+              "let": { "friends": "$friends" },
+              "pipeline": [
+                { "$match": {
+                  "friends.status": 1,
                 }},
-                { $project: { status: 1 } }
+                { "$project": { 
+                    "name": 1, 
+                    "email": 1,
+                    "avatar": 1
+                  }
+                }
               ],
-              as: "friends"
-            }},
-            { $addFields: {
-              friendsStatus: {
-                $ifNull: [ { $min: "$friends.status" }, 0 ]
-              }
-            }}
-          ]);
+              "as": "friends"
+            }}, 
+          ])
         return data;
     }),
 };
