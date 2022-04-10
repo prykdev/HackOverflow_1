@@ -14,8 +14,8 @@ module.exports = {
     if (!data)
       throw new ControllerError(404, "User not found!");
 
-    const docA = await friendService.create({ requester: req.user._id, recipient: data._id}, { $set: { status: 1 }});
-    const docB = await friendService.create({ recipient: req.user._id, requester: data._id}, { $set: { status: 2 }});
+    const docA = await friendService.create({ requester: req.user._id, recipient: data._id }, { $set: { status: 1 } });
+    const docB = await friendService.create({ recipient: req.user._id, requester: data._id }, { $set: { status: 2 } });
 
     const updateUserA = await userService.updateById(req.user._id, { $addToSet: { friends: docA._id } });
     const updateUserB = await userService.updateById(data._id, { $addToSet: { friends: docB._id } });
@@ -49,5 +49,9 @@ module.exports = {
     return controllerResponse(201, 'Successful');
   })),
 
+  getFriendsLogs: ('/friendsLogs', controllerBoilerPlate(async (req) => {
+    const data = await friendService.search({requester: req.user._id, status: 3});
+    return controllerResponse(200, data);
+  }))
 
 };

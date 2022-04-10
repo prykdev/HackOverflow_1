@@ -33,13 +33,13 @@ module.exports = {
       stats: `https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=tokyonight`,
       mul: `https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&theme=tokyonight&layout=compact`,
       contributions: `https://github-readme-streak-stats.herokuapp.com/?user=${username}&theme=tokyonight&ring=DD2727&fire=DD2727&currStreakNum=6695E6`,
-      username: github.login,
+      githubUsername: github.login,
       public_repos: github.public_repos,
       public_gists: github.public_gists,
       followers: github.followers,
       following: github.following,
       organizations: organizations.length,
-      created_at: github.created_at,
+      github_created_at: github.created_at,
     };
     return controllerResponse(201, 'Successful', githubData);
   })),
@@ -63,8 +63,8 @@ module.exports = {
     const badges = (await getRequest(badgesUrl)).data.models;
     const profile = data.data.model;
     return controllerResponse(201, 'Successful', {
-      username: profile.username,
-      created_at: profile.created_at,
+      hackerrankUsername: profile.username,
+      hackerrank_created_at: profile.created_at,
       level: profile.level,
       followers_count: profile.followers_count,
       totalSubmissions,
@@ -81,14 +81,21 @@ module.exports = {
     const data = (await getSocialData("codechef", username));
     if (data.status === 404 || data.data.result === undefined)
       throw new ControllerError(404, 'User not found!');
-    const codechefData = (({ username, rankings, ratings, submissionStats, language, band }) => ({ username, rankings, ratings, submissionStats, language, band }))(data.data.result.data.content);
-    codechefData.rankings = codechefData.rankings.allContestRanking;
-    codechefData.ratings = codechefData.ratings.allContest;
+    const codechefData = data.data.result.data.content;
+
     // Calculating div on the basis of ratings
     if (codechefData.ratings < 1400) codechefData.div = 4
     else if (codechefData.ratings < 1600) codechefData.div = 4
     else if (codechefData.ratings < 2000) codechefData.div = 4
     else codechefData.div = 1
-    return controllerResponse(201, 'Successful', codechefData);
+    return controllerResponse(201, 'Successful', {
+      codechefUsername: codechefData.username,
+      rankings: codechefData.rankings.allContestRanking,
+      ratings: codechefData.ratings.allContest,
+      language: codechefData.language,
+      band: codechefData.band,
+      submissionStats: codechefData.submissionStats,
+      div: codechefData.div
+    });
   })),
 }

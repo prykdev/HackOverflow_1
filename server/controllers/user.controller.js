@@ -80,6 +80,15 @@ module.exports = {
 
   getFriends: ('/friends', controllerBoilerPlate(async (req) => {
     const data = await userService.getFriends(req.user._id);
-    return controllerResponse(200, 'Successful', data);
+    const friendIds = data[0].friends.map((e) => e.recipient);
+    console.log(friendIds);
+    const friends = await friendIds.map(async (e) => {
+      const a = await checkExist("_id", e);
+      console.log({a});
+      return a.username;
+    });
+    await setTimeout(() => {}, 2000);
+    console.log({friends});
+    return controllerResponse(200, 'Successful', friends);
   }))
 };

@@ -6,5 +6,6 @@ const authMiddleware = require('../middlewares/auth.middleware');
 router.get('/addfriend/:username', authMiddleware, friend.createFriend);
 router.get('/acceptfriend/:username', authMiddleware, friend.editFriend);
 router.get('/rejectfriend/:username', authMiddleware, friend.deleteFriend);
+router.get('/friendsLogs', authMiddleware, friend.getFriendsLogs);
 
 module.exports = router;

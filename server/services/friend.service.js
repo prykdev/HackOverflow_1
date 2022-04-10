@@ -6,19 +6,24 @@ const ServiceError = require('../errors/service.error.js');
 module.exports = {
 
     // Creating a friend request in database
-    create: serviceBoilerPlate(async (search, body) => {
-        const response = await friend.findOneAndUpdate(search, body, { upsert: true, new: true }).exec();
+    create: serviceBoilerPlate(async (data, body) => {
+        const response = await friend.findOneAndUpdate(data, body, { upsert: true, new: true }).exec();
         return response;
     }),
 
     // Updating a friend request in database
-    update: serviceBoilerPlate(async (search, body) => {
-        const data = await friend.findOneAndUpdate(search, body).exec();
-        return data;
+    update: serviceBoilerPlate(async (data, body) => {
+        const response = await friend.findOneAndUpdate(data, body).exec();
+        return response;
     }),
 
     // Deleting a friend by its id from database
-    delete: serviceBoilerPlate(async (search) => {
-        await friend.findOneAndDelete(search).exec();
+    delete: serviceBoilerPlate(async (data) => {
+        await friend.findOneAndDelete(data).exec();
     }),
+
+    search: serviceBoilerPlate(async (data) => {
+        const response = await friend.find(data).exec();
+        return response;
+    })
 };
