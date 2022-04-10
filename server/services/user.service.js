@@ -40,30 +40,36 @@ module.exports = {
     await user.findOneAndDelete({ _id }).exec();
   }),
 
-  getFriends: serviceBoilerPlate(async (_id) => {
-    const data = user.aggregate([
-      {
-        $lookup: {
-          from: friend.collection.name,
-          let: { friends: "$friends" },
-          pipeline: [
-            {
-              $match: {
-                requester: _id,
-                $expr: { $in: ["$_id", "$$friends"] },
-              }
-            },
-            { $project: { recipient: 1, _id: 0 } }
-          ],
-          as: "friends"
-        }
-      }, {
-        $project: { friends: 1, username: 1 }
-      }, {
-        $match: { _id }
-      },
-    ]).exec();
+  getFriendsData: serviceBoilerPlate(async (_id, status) => {
+    const data = await user.aggregate([{
+      $lookup: {
+        from: friend.collection.name,
+        localField: "friends",
+        foreignField: "_id",
+        as: "friends",
+        let: { friends: "$friends" },
+        pipeline: [{
+          $match: { status, requester: _id }
+        }, {
+          $project: { recipient: 1, _id: 0 }
+        }],
+      }
+    }, {
+      $match: { _id }
+    }, {
+      $project: { username: 1, friends: 1, _id: 0 }
+    }, {
+      $lookup: {
+        from: user.collection.name,
+        localField: "friends.recipient",
+        foreignField: "_id",
+        as: "friends",
+        let: { friends: "$friends" },
+        pipeline: [ {
+          $project: { username: 1, _id: 0 }
+        }],
+      }
+    }]).exec();
     return data;
-  }),
-
+  })
 };

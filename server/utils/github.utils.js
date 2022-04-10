@@ -40,9 +40,20 @@ const getOrganizations = async (username) => {
   }
 }
 
+const getCommits = async (username) => {
+  try {
+    const commitsUrl = `https://api.github.com/search/commits?q=author:${username}`;
+    const response = await getRequest(commitsUrl);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 module.exports = {
   getOrganizations,
   getFollowers,
   getFollowing,
-  getRepositories
+  getRepositories,
+  getCommits
 }

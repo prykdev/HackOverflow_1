@@ -79,16 +79,18 @@ module.exports = {
   })),
 
   getFriends: ('/friends', controllerBoilerPlate(async (req) => {
-    const data = await userService.getFriends(req.user._id);
-    const friendIds = data[0].friends.map((e) => e.recipient);
-    console.log(friendIds);
-    const friends = await friendIds.map(async (e) => {
-      const a = await checkExist("_id", e);
-      console.log({a});
-      return a.username;
-    });
-    await setTimeout(() => {}, 2000);
-    console.log({friends});
-    return controllerResponse(200, 'Successful', friends);
-  }))
+    const data = await userService.getFriendsData(req.user._id, 3);
+    return controllerResponse(200, 'Successful', data);
+  })),
+
+  getPending: ('/pending', controllerBoilerPlate(async (req) => {
+    const data = await userService.getFriendsData(req.user._id, 2);
+    return controllerResponse(200, 'Successful', data);
+  })),
+
+  getFriendRequests: ('/friendrequsts', controllerBoilerPlate(async (req) => {
+    const data = await userService.getFriendsData(req.user._id, 1);
+    return controllerResponse(200, 'Successful', data);
+  })),
+
 };
