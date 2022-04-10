@@ -29,7 +29,7 @@ module.exports = async (req, res, next) => {
     }
   } catch (err) {
     if (!err.status)
-      res.status(500).send({ message: err });
-    res.status(err.status).send({ status: err.status, message: err.message });
+      return res.status(500).send({ message: err });
+    return res.status(err.status).send({ status: err.status, message: err.message });
   }
 };
