@@ -12,8 +12,8 @@ const friend = new Schema({
       3,    //'friends' -> accepted
     ]
   }
-}, { timestamps: true })
-module.exports = model('friends', friend)
+}, { timestamps: true });
+model('friends', friend);
 
 module.exports = {
   model: model('friends'),

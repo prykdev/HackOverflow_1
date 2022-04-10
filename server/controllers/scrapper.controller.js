@@ -55,14 +55,11 @@ module.exports = {
     const submissionsUrl = `https://www.hackerrank.com/rest/hackers/${username}/submission_histories`;
     const badgesUrl = `https://www.hackerrank.com/rest/hackers/${username}/badges`;
     const submissions = (await getRequest(submissionsUrl)).data;
-    console.log(typeof (submissions));
-    if (submissions === {}) {
-      console.log("Check")
+    if (JSON.stringify(submissions) === "{}") totalSubmissions = 0;
+    else {
+      const sum = (submissions) => Object.values(submissions).reduce((a, b) => parseInt(a) + parseInt(b));
+      totalSubmissions = sum(submissions);
     }
-    console.log("b");
-    const sum = (submissions) => Object.values(submissions).reduce((a, b) => parseInt(a) + parseInt(b));
-    totalSubmissions = sum(submissions);
-    console.log("a");
     const badges = (await getRequest(badgesUrl)).data.models;
     const profile = data.data.model;
     return controllerResponse(201, 'Successful', {
