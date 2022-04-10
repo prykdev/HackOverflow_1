@@ -1,7 +1,7 @@
 const { model, Schema } = require('mongoose');
 
 const rating = new Schema({
-    userId: { type: String, required: true },
+    userId: { type: Schema.Types.ObjectId, ref: 'users' },
     upvotes: [{
         userId: { type: String, required: true },
         time: { type: String, required: true },

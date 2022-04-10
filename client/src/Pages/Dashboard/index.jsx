@@ -187,74 +187,54 @@ const Dashboard = () => {
             <Row>
               <h2>Badges</h2>
               <div className='photo-container'>
-                {totalBadges >= 2 ? (
-                  <Swiper
-                    effect='coverflow'
-                    grabCursor='true'
-                    centeredSlides='true'
-                    spaceBetween={0}
-                    slidesPerView={4}
-                    loop='false'
-                    pagination={{ clickable: true, dynamicBullets: true }}
-                    coverflowEffect={{
-                      rotate: 10,
-                      stretch: 15,
-                      depth: 150,
-                      modifier: 1,
-                      slideShadows: true,
-                    }}
-                    breakpoints={{
-                      700: {
-                        spaceBetween: 0,
-                        slidesPerView: 4,
-                      },
-                      500: {
-                        spaceBetween: 100,
-                        slidesPerView: 2,
-                      },
-                      411: {
-                        spaceBetween: 100,
-                        slidesPerView: 2,
-                      },
-                      300: {
-                        spaceBetween: 0,
-                        slidesPerView: 1,
-                      },
-                    }}
-                  >
-                    {badgeData &&
-                      badgeData.map((badge, index) => {
-                        return (
-                          <SwiperSlide>
-                            <div className='swiper-card'>
-                              <h3>
-                                <p>{badge.badge_name}</p>
-                              </h3>
-                              <p>{badge.stars}⭐</p>
-                            </div>
-                          </SwiperSlide>
-                        )
-                      })}
-                  </Swiper>
-                ) : (
-                  <Swiper>
-                    <SwiperSlide>
-                      <div className='swiper-card'>
-                        {badgeData &&
-                          badgeData.map((badge, index) => {
-                            return (
-                              <>
-                                <h3>
-                                  <p>{badge.badge_name}</p>
-                                </h3>
-                                <p>{badge.stars}⭐</p>
-                              </>
-                            )
-                          })}
-                      </div>
-                    </SwiperSlide>
-                  </Swiper>
-                )}
+                <Swiper
+                  effect='coverflow'
+                  grabCursor='true'
+                  centeredSlides='true'
+                  spaceBetween={0}
+                  slidesPerView={4}
+                  loop='true'
+                  pagination={{ clickable: true, dynamicBullets: true }}
+                  coverflowEffect={{
+                    rotate: 10,
+                    stretch: 15,
+                    depth: 150,
+                    modifier: 1,
+                    slideShadows: true,
+                  }}
+                  breakpoints={{
+                    700: {
+                      spaceBetween: 0,
+                      slidesPerView: 4,
+                    },
+                    500: {
+                      spaceBetween: 100,
+                      slidesPerView: 2,
+                    },
+                    411: {
+                      spaceBetween: 100,
+                      slidesPerView: 2,
+                    },
+                    300: {
+                      spaceBetween: 0,
+                      slidesPerView: 1,
+                    },
+                  }}
+                >
+                  {badgeData &&
+                    badgeData.map((badge) => {
+                      return (
+                        <SwiperSlide>
+                          <div className='swiper-card'>
+                            <h3>
+                              <p>{badge.badge_name}</p>
+                            </h3>
+                            <p>{badge.stars}⭐</p>
+                          </div>
+                        </SwiperSlide>
+                      )
+                    })}
+                </Swiper>
               </div>
             </Row>
           </Container>
@@ -324,7 +304,7 @@ const Dashboard = () => {
                     stretch: 15,
                     depth: 150,
                     modifier: 1,
-                    slideShadows: false,
+                    slideShadows: true,
                   }}
                   breakpoints={{
                     700: {
@@ -348,7 +328,17 @@ const Dashboard = () => {
                   <SwiperSlide>
                     <div className='swiper-card'>
                       <h3>
-                        <p>Solved</p>
+                        <p>Partially Solved</p>
+                      </h3>
+                      <p>
+                        {submissionStats && submissionStats.partiallySolvedProblems}
+                      </p>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div className='swiper-card'>
+                      <h3>
+                        <p>Solved Problems</p>
                       </h3>
                       <p>{submissionStats && submissionStats.solvedProblems}</p>
                     </div>
@@ -356,7 +346,7 @@ const Dashboard = () => {
                   <SwiperSlide>
                     <div className='swiper-card'>
                       <h3>
-                        <p>Attempt</p>
+                        <p>Attempted Problems</p>
                       </h3>
                       <p>
                         {submissionStats && submissionStats.attemptedProblems}
@@ -366,7 +356,7 @@ const Dashboard = () => {
                   <SwiperSlide>
                     <div className='swiper-card'>
                       <h3>
-                        <p>Submitted</p>
+                        <p>Submitted Solutions</p>
                       </h3>
                       <p>
                         {submissionStats && submissionStats.submittedSolutions}
@@ -376,7 +366,7 @@ const Dashboard = () => {
                   <SwiperSlide>
                     <div className='swiper-card'>
                       <h3>
-                        <p>WrongSubmissions</p>
+                        <p>Wrong Submissions</p>
                       </h3>
                       <p>
                         {submissionStats && submissionStats.wrongSubmissions}
@@ -386,17 +376,17 @@ const Dashboard = () => {
                   <SwiperSlide>
                     <div className='swiper-card'>
                       <h3>
-                        <p>WrongSubmissions</p>
+                        <p>Accepted Submission</p>
                       </h3>
                       <p>
-                        {submissionStats && submissionStats.wrongSubmissions}
+                        {submissionStats && submissionStats.acceptedSubmissions}
                       </p>
                     </div>
                   </SwiperSlide>
                   <SwiperSlide>
                     <div className='swiper-card'>
                       <h3>
-                        <p>RunTimeError</p>
+                        <p>RunTime Error</p>
                       </h3>
                       <p>{submissionStats && submissionStats.runTimeError}</p>
                     </div>
