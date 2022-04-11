@@ -46,10 +46,10 @@ const NavbarComponent = ({ pathname }) => {
               </Nav.Link>
               <Nav.Link
                 as={Link}
-                to='/search'
+                to='/about'
                 style={{ textDecoration: "none" }}
               >
-                Search
+                About
               </Nav.Link>
               <NavDropdown
                 title='Profile▼'
