@@ -30,20 +30,21 @@ const Setting = () => {
   }, [])
 
   const handleChange = (e) => {
-    console.log(e.target)
     setValues({ ...values, [e.target.name]: e.target.value })
   }
 
   const handleClick = (e) => {
     e.preventDefault()
-    console.log("click")
     setIsEdit(true)
+  }
+
+  const handleCancel = (e) => {
+    e.preventDefault()
+    setIsEdit(false)
   }
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
-    console.log("submit")
-    console.log(values)
     const { github, hackerrank, codechef } = values
     const socials = { github, hackerrank, codechef }
     const socialsdata = { socials }
@@ -58,7 +59,7 @@ const Setting = () => {
     <>
       <div className='home'>
         <NavbarComponent />
-        <div class="settings">
+        <div className='settings'>
           <Container>
             {/* <h1>Profile Settings</h1> */}
             <Row>
@@ -71,9 +72,9 @@ const Setting = () => {
                     width='250'
                   />
                   <h2>{name}</h2>
-                  <h6 className='data-text mb-1'>{username}</h6>
-                  <h6 className='data-text mb-1'>UpVote : 78</h6>
-                  <h6 className='data-text mb-1'>DownVote : 29</h6>
+                  <h6 className='data-text mb-1 p-2'>{username}</h6>
+                  <h6 className='data-text mb-1  p-1'>UpVotes : 78</h6>
+                  <h6 className='data-text mb-1  p-1'>DownVotes : 29</h6>
                 </Card>
               </Col>
               <Col md={8}>
@@ -143,9 +144,10 @@ const Setting = () => {
                             onChange={handleChange}
                           />
                         </Col>
-                      ) : (<Col sm={5}>
-                        <p className='data-text'>{codechef}</p>
-                      </Col>
+                      ) : (
+                        <Col sm={5}>
+                          <p className='data-text'>{codechef}</p>
+                        </Col>
                       )}
                     </Row>
                     <hr />
@@ -166,29 +168,30 @@ const Setting = () => {
                         </Col>
                       ) : (
                         <Col sm={5}>
-                          <p className='data-text'>
-                            {hackerrank}
-                          </p>
+                          <p className='data-text'>{hackerrank}</p>
                         </Col>
                       )}
                     </Row>
                     <hr />
                     <Row>
                       <Col sm={12}>
-                        {isEdit ? (<div>
-                          <Button
-                            type='submit'
-                            className='btn btn-info ms-5 mb-3 ps-3'
-                          >
-                            SAVE
-                          </Button>
-                          <Button
-                            type='reset'
-                            className='btn btn-danger ms-5 mb-3 ps-3'
-                          >
-                            Cancel
-                          </Button>
-                        </div>) : (
+                        {isEdit ? (
+                          <div>
+                            <Button
+                              type='submit'
+                              className='btn btn-info ms-5 mb-3 ps-3'
+                            >
+                              SAVE
+                            </Button>
+                            <Button
+                              type='reset'
+                              onClick={handleCancel}
+                              className='btn btn-danger ms-5 mb-3 ps-3'
+                            >
+                              Cancel
+                            </Button>
+                          </div>
+                        ) : (
                           <Button
                             type='button'
                             className='btn btn-info ms-5 mb-3 ps-3'
