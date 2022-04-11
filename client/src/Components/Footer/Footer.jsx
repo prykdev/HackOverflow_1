@@ -17,9 +17,7 @@ export const Footer = () => {
                   </div>
                   <div className='footer-text'>
                     <p>
-                      Lorem ipsum dolor sit amet, consec tetur adipisicing elit,
-                      sed do eiusmod tempor incididuntut consec tetur
-                      adipisicing elit,Lorem ipsum dolor sit amet.
+                      Thid is footer
                     </p>
                   </div>
                 </div>
