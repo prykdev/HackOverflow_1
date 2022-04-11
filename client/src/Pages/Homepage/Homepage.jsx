@@ -19,18 +19,17 @@ export const Homepage = () => {
         <div className='home-container'>
           <div className='home-content'>
             <div className='home-lead'>
-              <span>S</span>ocial Coding Experience, <br />A
+              <span>S</span>ocial Coding Experience <br />
             </div>
 
             <div className='home-text'>
-              <span>I</span>n todays online platform where the are are lot of
-              platform to practice as well as to solve problems we have build a
-              platform by using API's Of different platform.
+              <span>L</span>et's Compare and explore our ranking with the globe and 
+              with our friends
             </div>
 
             <Link to='/register' style={{ textDecoration: "none" }}>
               <Button
-                style={{ marginTop: 25, color: "#fff" }}
+                style={{ marginTop: 25, backgroundColor: "#FF6666" }}
                 size='large'
                 variant='contained'
                 color='primary'
@@ -56,9 +55,9 @@ export const Homepage = () => {
             </div>
 
             <div className='home-text-right'>
-              <span>W</span>e provide you quality education with no cost.
-              Connect with finest teachers around you and get access to notes ,
-              materials and many more .
+              <span>I</span>n todays online platform where the are are lot of
+              platform to practice as well as to solve problems we have build a
+              platform by using API's Of different platform..
             </div>
           </div>
         </div>

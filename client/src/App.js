@@ -7,7 +7,7 @@ import Setting from "./Pages/Settings/Setting"
 import ChangePassword from "./Pages/ChangePassword/ChangePassword"
 import { Homepage } from "./Pages/Homepage/Homepage"
 import Dashboard from "./Pages/Dashboard/Dashboard"
-import Search from "./Pages/Search/Search"
+import About from "./Pages/About/About"
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
           <Route path='/settings' element={<Setting />}></Route>
           <Route exact path='/changepw' element={<ChangePassword />}></Route>
           <Route exact path='/register' element={<Landing />}></Route>
-          <Route exact path='/search' element={<Search />}></Route>
+          <Route exact path='/about' element={<About />}></Route>
         </Routes>
       </BrowserRouter>
     </>
