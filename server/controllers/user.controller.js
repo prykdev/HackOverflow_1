@@ -50,7 +50,12 @@ module.exports = {
 
   // Checking if user exists
   check: (['/check', '/search'], controllerBoilerPlate(async (req) => {
-    const data = await checkExist(req.body.entity, req.body.value);
+    const {username, email} = req.body;
+    let data;
+    if(username)
+      data = await checkExist('username', username);
+    else if(email)
+      data = await checkExist('email', email);
     if (req.originalUrl === '/check') {
       if (data)
         throw new ControllerError(400, req.body.entity + ' already registered!');

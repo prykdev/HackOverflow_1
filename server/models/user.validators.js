@@ -37,14 +37,14 @@ const loginSchema = {
 };
 
 const checkSchema = {
-  body: Joi.object({
-    entity: Joi.string().valid('username', 'email').required(),
-    value: Joi.string().required(),
-  }).when(Joi.object({ entity: Joi.string().valid('email') }).unknown(), {
-    then: Joi.object({
-      value: Joi.string().email().required(),
-    })
-  }),
+  body: Joi.alternatives().try(
+    Joi.object().keys({
+      username: Joi.string().required(),
+    }),
+    Joi.object().keys({
+      email: Joi.string().email().required(),
+    }),
+  ),
 }
 
 const editSchema = {
