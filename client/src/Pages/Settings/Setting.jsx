@@ -63,160 +63,147 @@ const Setting = () => {
             <h1>Profile Settings</h1>
             <Row>
               <Col md={4}>
-                <Card className='d-flex flex-column align-items-center'>
+                <Card className='d-flex flex-column align-items-center text-center'>
                   <img
                     src='https://bootdey.com/img/Content/avatar/avatar7.png'
                     alt='Admin'
                     className='rounded-circle'
                     width='250'
                   />
-                  <div className='mt-3'>
-                    <h2>{name}</h2>
-                    <h6 className='text-secondary mb-1'>{username}</h6>
-                    <h6 className='text-secondary mb-1'>UpVote : 78</h6>
-                    <h6 className='text-secondary mb-1'>DownVote : 29</h6>
-                  </div>
+                  <h2>{name}</h2>
+                  <h6 className='text-secondary mb-1'>{username}</h6>
+                  <h6 className='text-secondary mb-1'>UpVote : 78</h6>
+                  <h6 className='text-secondary mb-1'>DownVote : 29</h6>
                 </Card>
               </Col>
               <Col md={8}>
                 <Card>
-                </Card>
-              </Col>
-            </Row>
-          </Container>
-        </div>
-
-        <div className='settingContainer'>
-          <div className='main-body'>
-            <div className='row gutters-sm'>
-              <div className='col-md-4 mb-3'>
-                <div className='settingCard h-5'>
-                  <div className='settingCard-body'>
-                    <div className='d-flex flex-column align-items-center text-center'>
-                      <img
-                        src='https://bootdey.com/img/Content/avatar/avatar7.png'
-                        alt='Admin'
-                        className='rounded-circle'
-                        width='250'
-                      />
-                      <div className='mt-3'>
-                        <h2>{name}</h2>
-                        <h6 className='text-secondary mb-1'>{username}</h6>
-                        <h6 className='text-secondary mb-1'>UpVote : 78</h6>
-                        <h6 className='text-secondary mb-1'>DownVote : 29</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className='col-md-8'>
-                <form onSubmit={handleFormSubmit}>
-                  <div className='settingCard mb-3'>
-                    <div className='settingCard-body'>
-                      <div className='row'>
-                        <div className='col-sm-3'>
-                          <h6 className='mb-0'>User Name</h6>
-                        </div>
-                        <p className='col-sm-5 text-secondary'>{username}</p>
-                      </div>
-                      <hr />
-                      <div className='row'>
-                        <div className='col-sm-3'>
-                          <h6 className='mb-0'>Full Name</h6>
-                        </div>
-                        <p className='col-sm-5 text-secondary'>{name}</p>
-                      </div>
-                      <hr />
-                      <div className='row'>
-                        <div className='col-sm-3'>
-                          <h6 className='mb-0'>Email</h6>
-                        </div>
-                        <p className='col-sm-5 text-secondary'>{email}</p>
-                      </div>
-                      <hr />
-                      <div className='row'>
-                        <div className='col-sm-3'>
-                          <h6 className='mb-0'>Github Username</h6>
-                        </div>
-                        {isEdit ? (
+                  <form onSubmit={handleFormSubmit}>
+                    <Row>
+                      <Col sm={4}>
+                        <h6 className='mb-0'>User Name</h6>
+                      </Col>
+                      <Col sm={5}>
+                        <p className='text-secondary'>{username}</p>
+                      </Col>
+                    </Row>
+                    <hr />
+                    <Row>
+                      <Col sm={4}>
+                        <h6 className='mb-0'>Full Name</h6>
+                      </Col>
+                      <Col sm={5}>
+                        <p className='text-secondary'>{name}</p>
+                      </Col>
+                    </Row>
+                    <hr />
+                    <Row>
+                      <Col sm={4}>
+                        <h6 className='mb-0'>Email</h6>
+                      </Col>
+                      <Col sm={5}>
+                        <p className='text-secondary'>{email}</p>
+                      </Col>
+                    </Row>
+                    <hr />
+                    <Row>
+                      <Col sm={4}>
+                        <h6 className='mb-0'>Github Username</h6>
+                      </Col>
+                      {isEdit ? (
+                        <Col sm={5}>
                           <input
                             type='text'
-                            className='col-sm-5 text-secondary'
+                            className='text-secondary'
                             required
                             name='github'
                             value={values.github}
                             onChange={handleChange}
                           />
-                        ) : (
-                          <p className='col-sm-5 text-secondary'>{github}</p>
-                        )}
-                      </div>
-                      <hr />
-                      <div className='row'>
-                        <div className='col-sm-3'>
-                          <h6 className='mb-0'>CodeChef Username</h6>
-                        </div>
-                        {isEdit ? (
+                        </Col>
+                      ) : (
+                        <Col sm={5}>
+                          <p className='text-secondary'>{github}</p>
+                        </Col>
+                      )}
+                    </Row>
+                    <hr />
+                    <Row>
+                      <Col sm={4}>
+                        <h6 className='mb-0'>CodeChef Username</h6>
+                      </Col>
+                      {isEdit ? (
+                        <Col sm={5}>
                           <input
                             type='text'
-                            className='col-sm-5 text-secondary'
+                            className='text-secondary'
                             required
                             name='codechef'
                             value={values.codechef}
                             onChange={handleChange}
                           />
-                        ) : (
-                          <p className='col-sm-5 text-secondary'>{codechef}</p>
-                        )}
-                      </div>
-                      <hr />
-                      <div className='row'>
-                        <div className='col-sm-3'>
-                          <h6 className='mb-0'>Hackerrank Username</h6>
-                        </div>
-                        {isEdit ? (
+                        </Col>
+                      ) : (<Col sm={5}>
+                        <p className='text-secondary'>{codechef}</p>
+                      </Col>
+                      )}
+                    </Row>
+                    <hr />
+                    <Row>
+                      <Col sm={4}>
+                        <h6 className='mb-0'>Hackerrank Username</h6>
+                      </Col>
+                      {isEdit ? (
+                        <Col sm={5}>
                           <input
                             type='text'
-                            className='col-sm-5 text-secondary'
+                            className='text-secondary'
                             required
                             name='hackerrank'
                             value={values.hackerrank}
                             onChange={handleChange}
                           />
-                        ) : (
-                          <p className='col-sm-5 text-secondary'>
+                        </Col>
+                      ) : (
+                        <Col sm={5}>
+                          <p className='text-secondary'>
                             {hackerrank}
                           </p>
+                        </Col>
+                      )}
+                    </Row>
+                    <hr />
+                    <Row>
+                      <Col sm={12}>
+                        {isEdit ? (<div>
+                          <Button
+                            type='submit'
+                            className='btn btn-info ms-5 mb-3 ps-3'
+                          >
+                            SAVE
+                          </Button>
+                          <Button
+                            type='reset'
+                            className='btn btn-danger ms-5 mb-3 ps-3'
+                          >
+                            Cancel
+                          </Button>
+                        </div>) : (
+                          <Button
+                            type='button'
+                            className='btn btn-info ms-5 mb-3 ps-3'
+                            onClick={handleClick}
+                          >
+                            EDIT
+                          </Button>
                         )}
-                      </div>
-                      <hr />
-                      <div className='row'>
-                        <div className='col-sm-12'>
-                          {isEdit ? (
-                            <button
-                              type='submit'
-                              className='btn btn-info ms-5 mb-3 ps-3'
-                            >
-                              SAVE
-                            </button>
-                          ) : (
-                            <button
-                              type='button'
-                              className='btn btn-info ms-5 mb-3 ps-3'
-                              onClick={handleClick}
-                            >
-                              EDIT
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+                      </Col>
+                    </Row>
+                  </form>
+                </Card>
+              </Col>
+            </Row>
+          </Container>
         </div>
         <ToastContainer />
       </div>
