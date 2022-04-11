@@ -51,55 +51,53 @@ const ChangePassword = () => {
     }
   }
   return (
-    <>
+    <div className='landing-cp'>
       <NavbarComponent />
-      <div className='landing-cp'>
-        <div className='loginBoxabc-cp'>
-          <img
-            className='userabc-cp'
-            src='https://cdn1.iconfinder.com/data/icons/avatars-55/100/avatar_profile_user_music_headphones_shirt_cool-512.png'
-            height='100px'
-            width='100px'
-          />
-          <h3>Change Your Password</h3>
-          <div className='loginBox-cp text-center'>
-            <form onSubmit={onSubmit}>
-              <div className='inputBox-cp'>
-                <input
-                  type='password'
-                  name='currentPassword'
-                  placeholder='Current Password'
-                  value={values.currentPassword}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  type='password'
-                  name='newPassword'
-                  placeholder='New Password'
-                  value={values.newPassword}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  type='password'
-                  name='confirmPassword'
-                  placeholder='Confirm Password'
-                  required
-                  value={values.confirmPassword}
-                  onChange={handleChange}
-                />
-              </div>
-              <button className='loginbtn-cp' type='submit'>
-                Submit
-              </button>
-            </form>
-          </div>
+      <div className='loginBoxabc-cp'>
+        <img
+          className='userabc-cp'
+          src='https://cdn1.iconfinder.com/data/icons/avatars-55/100/avatar_profile_user_music_headphones_shirt_cool-512.png'
+          height='100px'
+          width='100px'
+        />
+        <h3>Change Your Password</h3>
+        <div className='loginBox-cp text-center'>
+          <form onSubmit={onSubmit}>
+            <div className='inputBox-cp'>
+              <input
+                type='password'
+                name='currentPassword'
+                placeholder='Current Password'
+                value={values.currentPassword}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type='password'
+                name='newPassword'
+                placeholder='New Password'
+                value={values.newPassword}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type='password'
+                name='confirmPassword'
+                placeholder='Confirm Password'
+                required
+                value={values.confirmPassword}
+                onChange={handleChange}
+              />
+            </div>
+            <button className='loginbtn-cp' type='submit'>
+              Submit
+            </button>
+          </form>
         </div>
-        <ToastContainer />
-        
       </div>
-    </>
+      <ToastContainer />
+
+    </div>
   )
 }
 
