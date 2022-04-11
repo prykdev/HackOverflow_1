@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import "./styles.scss"
 import NavbarComponent from "../../Components/Navbar/NavbarComponent"
 import { Outlet } from "react-router-dom"
-import { Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col, Card, Button , ListGroup} from "react-bootstrap"
 import { Footer } from "../../Components/Footer/Footer.jsx"
 import { useAppContext } from "../../Context/appContext"
 import { ToastContainer, toast } from "react-toastify"
@@ -56,8 +56,6 @@ const Dashboard = () => {
     isGithubError,
   } = useAppContext()
 
-  let badgeLength
-
   useEffect(async () => {
     await getGithub()
     await getHackerrank()
@@ -71,7 +69,55 @@ const Dashboard = () => {
     <div className='dashboardHome'>
       <Outlet />
       <NavbarComponent />
+      <div className="github">
+        <div className="container">
+          <div className="header">
+            <h3 className="heading">GitHub</h3>
+            <img src={require("../../assets/GitHub-Mark-Light-32px.png")}  alt="github" />
+            <h6>username: <span className="username">{githubUsername}</span></h6>
+          </div>
+          <Row>
+            <Col lg={12} className="githubStats">
+              <img src={graph} width='100%' />
+            </Col>
+          </Row>
+          <Row>
+            <Col lg={6} className="githubStats">
+              <img src={stats} width='100%' />
+            </Col>
+            <Col lg={6} className="githubStats">
+              <img src={contributions} width='100%' />
+            </Col>
+          </Row>
+          <Row>
+            <Col lg={6} className="githubStats">
+              <img src={mul} width='100%' />
+            </Col>
+            <Col lg={6} className="githubStats">
+              <Card className="g-card">
+                <Card.Body>
+                  <Card.Title>GitHub Data</Card.Title>
+                  <Card.Text>
+                    <Row>
+                      <Col lg={6}>Public Repos: {public_repos}</Col>
+                      <Col lg={6}>Followers: {followers}</Col>
+                    </Row>
+                    <Row>
+                      <Col lg={6}>Public Gists: {public_gists}</Col>
+                      <Col lg={6}>Following: {following}</Col>
+                    </Row>
+                    <Row>
+                      <Col lg={6}>Created: {github_created_at}</Col>
+                      <Col lg={6}>Organizations: {organizations}</Col>
+                    </Row>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
 
+          </Row>
+        </div>
+      </div>
       <div className='dashboardCard text-center'>
         <h1>Github</h1>
         <h6>&#123;Github username:{githubUsername}&#125;</h6>
@@ -187,55 +233,55 @@ const Dashboard = () => {
             <Row>
               <h2>Badges</h2>
               <div className='photo-container'>
-                {totalBadges > 2 ? 
-                (<Swiper
-                  effect='coverflow'
-                  grabCursor='true'
-                  centeredSlides='true'
-                  spaceBetween={0}
-                  slidesPerView={4}
-                  loop='true'
-                  pagination={{ clickable: true, dynamicBullets: true }}
-                  coverflowEffect={{
-                    rotate: 10,
-                    stretch: 15,
-                    depth: 150,
-                    modifier: 1,
-                    slideShadows: true,
-                  }}
-                  breakpoints={{
-                    700: {
-                      spaceBetween: 0,
-                      slidesPerView: 4,
-                    },
-                    500: {
-                      spaceBetween: 100,
-                      slidesPerView: 2,
-                    },
-                    411: {
-                      spaceBetween: 100,
-                      slidesPerView: 2,
-                    },
-                    300: {
-                      spaceBetween: 0,
-                      slidesPerView: 1,
-                    },
-                  }}
-                >
-                  {badgeData &&
-                    badgeData.map((badge) => {
-                      return (
-                        <SwiperSlide>
-                          <div className='swiper-card'>
-                            <h3>
-                              <p>{badge.badge_name}</p>
-                            </h3>
-                            <p>{badge.stars}⭐</p>
-                          </div>
-                        </SwiperSlide>
-                      )
-                    })}
-                </Swiper>): <></>}
+                {totalBadges > 2 ?
+                  (<Swiper
+                    effect='coverflow'
+                    grabCursor='true'
+                    centeredSlides='true'
+                    spaceBetween={0}
+                    slidesPerView={4}
+                    loop='true'
+                    pagination={{ clickable: true, dynamicBullets: true }}
+                    coverflowEffect={{
+                      rotate: 10,
+                      stretch: 15,
+                      depth: 150,
+                      modifier: 1,
+                      slideShadows: true,
+                    }}
+                    breakpoints={{
+                      700: {
+                        spaceBetween: 0,
+                        slidesPerView: 4,
+                      },
+                      500: {
+                        spaceBetween: 100,
+                        slidesPerView: 2,
+                      },
+                      411: {
+                        spaceBetween: 100,
+                        slidesPerView: 2,
+                      },
+                      300: {
+                        spaceBetween: 0,
+                        slidesPerView: 1,
+                      },
+                    }}
+                  >
+                    {badgeData &&
+                      badgeData.map((badge) => {
+                        return (
+                          <SwiperSlide>
+                            <div className='swiper-card'>
+                              <h3>
+                                <p>{badge.badge_name}</p>
+                              </h3>
+                              <p>{badge.stars}⭐</p>
+                            </div>
+                          </SwiperSlide>
+                        )
+                      })}
+                  </Swiper>) : <></>}
                 {totalBadges < 2 ? (<Swiper>
                   {badgeData &&
                     badgeData.map((badge) => {
@@ -250,7 +296,7 @@ const Dashboard = () => {
                         </SwiperSlide>
                       )
                     })}
-                </Swiper>): <></>}
+                </Swiper>) : <></>}
               </div>
             </Row>
           </Container>

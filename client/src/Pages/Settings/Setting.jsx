@@ -58,7 +58,7 @@ const Setting = () => {
       <div className='home'>
         <NavbarComponent />
         <div className='settingContainer'>
-          <h1 className='text-center' style={{ color: "#aebed9" }}>
+          <h1>
             Profile Settings
           </h1>
           <div className='main-body'>

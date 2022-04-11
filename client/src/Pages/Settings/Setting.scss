@@ -1,28 +1,21 @@
 .home {
-  margin: 0;
-  padding: 0;
-  background: url(https://bit.ly/3iBhyBi) no-repeat;
+  background: #121217;
   height: 100vh;
-  font-family: sans-serif;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  overflow: hidden;
+}
+
+h1{
+  color:#FF6666;
 }
 
 .settingContainer {
   margin-top: 60px !important;
-  margin: 20px;
+  margin: 7rem;
   text-align: left;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #6899eb;
 }
 .main-body {
   padding: 15px;
 }
-.settingCard {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-}
+
 
 .settingCard {
   position: relative;
@@ -30,7 +23,7 @@
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #1a1b27;
+  background-color: #17171F;
   background-clip: border-box;
   border: 0 solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;

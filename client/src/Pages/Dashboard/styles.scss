@@ -1,13 +1,12 @@
 .dashboardHome {
   margin: 0;
   padding: 0;
-  background: url(https://bit.ly/3iBhyBi) no-repeat;
+  background: #121217;
   height: 100vh;
   font-family: sans-serif;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  overflow-y: auto;
   overflow-x: hidden;
 }
 
@@ -19,6 +18,44 @@
   padding: 0px 20px 10px 20px;
   margin: 25px 40px 0px;
   color: #d2d2d2;
+}
+
+.github,
+.codechef {
+  padding-top: 60px;
+  margin: 0px;
+}
+
+.hackerrank {
+  padding-top: 60px;
+  margin: 0px;
+  background-color: #FF6666
+}
+
+.header {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+h6 {
+  color: #FFF;
+}
+
+.github .heading,
+.github .username,
+.codeChef .heading,
+.codeChef .username {
+  color: #FF6666;
+}
+
+.hackerrank .heading,
+.hackerrank .username {
+  color: #121217;
+}
+
+.githubStats {
+  padding-bottom: 30px;
 }
 
 .card-container {
@@ -40,40 +77,43 @@
   align-items: center;
   justify-content: center;
 }
+
 .github-card {
   background: #1A1B27;
   border-radius: 0.3rem;
   padding: 1.3rem;
-  width:30vw;
+  width: 30vw;
   box-shadow: 3px 3px 12px 2px rgba(black, 0.6);
   transition: 0.2s;
-  border:1px solid white;
+  border: 1px solid white;
   align-items: center;
   justify-content: center;
 }
 
-.github-card p{
-  color:#70A4FC !important;
+.github-card p {
+  color: #70A4FC !important;
 }
 
-.github-card p:nth-child(2){
+.github-card p:nth-child(2) {
   font-size: 1.5rem;
-  color:#339E94  !important;
+  color: #339E94 !important;
 }
 
 .github-card:not(:first-child) {
   margin-left: -2rem;
 }
+
 .github-card:not(:last-child):hover,
 .github-card:not(:last-child):focus-within {
   transform: translateY(-1rem);
-  ~ .github-card {
+
+  ~.github-card {
     transform: translateX(2rem);
   }
 }
 
 .photo-container {
-  padding:30px;
+  padding: 30px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -83,14 +123,39 @@
   height: 50vh;
 }
 
-.swiper-card{
+.swiper-card {
   background: #70A4FC;
   border-radius: 3rem;
   padding: 1.5rem;
   transition: 0.2s;
-  border:2px solid #1A1B27 ;
+  border: 2px solid #1A1B27;
 }
 
-.swiper-card p{
-  color:#1A1B27 !important;
+.swiper-card p {
+  color: #1A1B27 !important;
+}
+
+.g-card {
+  background-color: #17171F !important;
+}
+
+.list-group-item {
+  background-color: #17171F !important;
+}
+
+.card-title {
+  color: #FF6666;
+  font-weight: bold;
+  // font-family: 'Segoe UI', Ubuntu, Sans-Serif;
+}
+
+.card-text {
+  color: white;
+  // margin-top: 0.7rem;
+  // padding: 0.5rem;
+  font: 1.25rem 'Segoe UI', Ubuntu, Sans-Serif;
+}
+
+.card-text .row{
+  padding: 0.55rem;
 }
