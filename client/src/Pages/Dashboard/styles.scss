@@ -136,6 +136,7 @@ h6 {
 }
 
 .g-card {
+  height: 100%;
   background-color: #17171F !important;
 }
 
@@ -146,13 +147,11 @@ h6 {
 .card-title {
   color: #FF6666;
   font-weight: bold;
-  // font-family: 'Segoe UI', Ubuntu, Sans-Serif;
+
 }
 
 .card-text {
   color: white;
-  // margin-top: 0.7rem;
-  // padding: 0.5rem;
   font: 1.25rem 'Segoe UI', Ubuntu, Sans-Serif;
 }
 
