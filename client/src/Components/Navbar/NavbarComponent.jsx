@@ -78,6 +78,15 @@ const NavbarComponent = ({ pathname }) => {
               >
                 Leaderboard
               </Nav.Link>
+
+              <Nav.Link
+                as={Link}
+                to='/friends'
+                style={{ textDecoration: "none" }}
+              >
+                Friends
+              </Nav.Link>
+
               <Nav.Link
                 as={Link}
                 to='/about'

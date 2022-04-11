@@ -9,6 +9,7 @@ import { Homepage } from "./Pages/Homepage/Homepage"
 import Dashboard from "./Pages/Dashboard/Dashboard"
 import About from "./Pages/About/About"
 import SearchDashboard from "./Pages/Dashboard copy/SearchDashboard"
+import Friends from "./Pages/Friends/Friends"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/leaderboard' element={<Leaderboard />}></Route>
           <Route exact path='/' element={<Homepage />}></Route>
           <Route path='/settings' element={<Setting />}></Route>
+          <Route path='/friends' element={<Friends />}></Route>
           <Route
             exact
             path='/changepassword'
