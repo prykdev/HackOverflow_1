@@ -60,20 +60,20 @@ const Setting = () => {
         <NavbarComponent />
         <div class="settings">
           <Container>
-            <h1>Profile Settings</h1>
+            {/* <h1>Profile Settings</h1> */}
             <Row>
               <Col md={4}>
                 <Card className='d-flex flex-column align-items-center text-center'>
                   <img
                     src='https://bootdey.com/img/Content/avatar/avatar7.png'
                     alt='Admin'
-                    className='rounded-circle'
+                    className='rounded-circle pt-5'
                     width='250'
                   />
                   <h2>{name}</h2>
-                  <h6 className='text-secondary mb-1'>{username}</h6>
-                  <h6 className='text-secondary mb-1'>UpVote : 78</h6>
-                  <h6 className='text-secondary mb-1'>DownVote : 29</h6>
+                  <h6 className='data-text mb-1'>{username}</h6>
+                  <h6 className='data-text mb-1'>UpVote : 78</h6>
+                  <h6 className='data-text mb-1'>DownVote : 29</h6>
                 </Card>
               </Col>
               <Col md={8}>
@@ -84,7 +84,7 @@ const Setting = () => {
                         <h6 className='mb-0'>User Name</h6>
                       </Col>
                       <Col sm={5}>
-                        <p className='text-secondary'>{username}</p>
+                        <p className='data-text'>{username}</p>
                       </Col>
                     </Row>
                     <hr />
@@ -93,7 +93,7 @@ const Setting = () => {
                         <h6 className='mb-0'>Full Name</h6>
                       </Col>
                       <Col sm={5}>
-                        <p className='text-secondary'>{name}</p>
+                        <p className='data-text'>{name}</p>
                       </Col>
                     </Row>
                     <hr />
@@ -102,7 +102,7 @@ const Setting = () => {
                         <h6 className='mb-0'>Email</h6>
                       </Col>
                       <Col sm={5}>
-                        <p className='text-secondary'>{email}</p>
+                        <p className='data-text'>{email}</p>
                       </Col>
                     </Row>
                     <hr />
@@ -114,7 +114,7 @@ const Setting = () => {
                         <Col sm={5}>
                           <input
                             type='text'
-                            className='text-secondary'
+                            className='data-text'
                             required
                             name='github'
                             value={values.github}
@@ -123,7 +123,7 @@ const Setting = () => {
                         </Col>
                       ) : (
                         <Col sm={5}>
-                          <p className='text-secondary'>{github}</p>
+                          <p className='data-text'>{github}</p>
                         </Col>
                       )}
                     </Row>
@@ -136,7 +136,7 @@ const Setting = () => {
                         <Col sm={5}>
                           <input
                             type='text'
-                            className='text-secondary'
+                            className='data-text'
                             required
                             name='codechef'
                             value={values.codechef}
@@ -144,7 +144,7 @@ const Setting = () => {
                           />
                         </Col>
                       ) : (<Col sm={5}>
-                        <p className='text-secondary'>{codechef}</p>
+                        <p className='data-text'>{codechef}</p>
                       </Col>
                       )}
                     </Row>
@@ -157,7 +157,7 @@ const Setting = () => {
                         <Col sm={5}>
                           <input
                             type='text'
-                            className='text-secondary'
+                            className='data-text'
                             required
                             name='hackerrank'
                             value={values.hackerrank}
@@ -166,7 +166,7 @@ const Setting = () => {
                         </Col>
                       ) : (
                         <Col sm={5}>
-                          <p className='text-secondary'>
+                          <p className='data-text'>
                             {hackerrank}
                           </p>
                         </Col>
