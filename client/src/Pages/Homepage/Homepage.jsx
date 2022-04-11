@@ -12,7 +12,7 @@ export const Homepage = () => {
   const { pathname } = useLocation()
 
   return (
-    <div>
+    <div className='main-home'>
       <NavbarComponent pathname={pathname} />
 
       <div id='home'>

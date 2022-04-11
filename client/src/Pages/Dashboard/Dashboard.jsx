@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import "./styles.scss"
+import "./Dashboard.scss"
 import NavbarComponent from "../../Components/Navbar/NavbarComponent"
 import { Outlet } from "react-router-dom"
 import { Container, Row, Col, Card, Button, ListGroup } from "react-bootstrap"
@@ -211,18 +211,22 @@ const Dashboard = () => {
                     <Row>
                       <Col lg={6}>
                         Partially Solved:{" "}
-                        {submissionStats && submissionStats.partiallySolvedProblems}
+                        {submissionStats &&
+                          submissionStats.partiallySolvedProblems}
                       </Col>
                       <Col lg={6}>
-                        Solved Problems: {submissionStats && submissionStats.solvedProblems}
+                        Solved Problems:{" "}
+                        {submissionStats && submissionStats.solvedProblems}
                       </Col>
                     </Row>
                     <Row>
                       <Col lg={6}>
-                        Attempted Problems: {submissionStats && submissionStats.attemptedProblems}
+                        Attempted Problems:{" "}
+                        {submissionStats && submissionStats.attemptedProblems}
                       </Col>
                       <Col lg={6}>
-                        Time Limit exceeded: {submissionStats && submissionStats.timeLimitExceed}
+                        Time Limit exceeded:{" "}
+                        {submissionStats && submissionStats.timeLimitExceed}
                       </Col>
                     </Row>
                     <Row>
@@ -231,7 +235,8 @@ const Dashboard = () => {
                         {submissionStats && submissionStats.submittedSolutions}
                       </Col>
                       <Col lg={6}>
-                        Wrong Submissions: {submissionStats && submissionStats.wrongSubmissions}
+                        Wrong Submissions:{" "}
+                        {submissionStats && submissionStats.wrongSubmissions}
                       </Col>
                     </Row>
                     <Row>
@@ -240,7 +245,8 @@ const Dashboard = () => {
                         {submissionStats && submissionStats.acceptedSubmissions}
                       </Col>
                       <Col lg={6}>
-                        RunTime Error: {submissionStats && submissionStats.runTimeError}
+                        RunTime Error:{" "}
+                        {submissionStats && submissionStats.runTimeError}
                       </Col>
                     </Row>
                   </Card.Text>

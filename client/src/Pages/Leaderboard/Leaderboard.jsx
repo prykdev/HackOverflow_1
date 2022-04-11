@@ -3,26 +3,31 @@ import NavbarComponent from "../../Components/Navbar/NavbarComponent"
 import { Outlet } from "react-router-dom"
 import { Table, Row, Button, Col } from "react-bootstrap"
 import { Footer } from "../../Components/Footer/Footer.jsx"
+import "./Leaderboard.scss"
 
 const Leaderboard = () => {
   return (
-    <div className='dashboardHome'>
+    <div className='leaderboard-home'>
       <Outlet />
       <NavbarComponent />
-      <div className='dashboardCard text-center'>
+      <div className='leaderboard-container'>
         <h1>Leaderboard</h1>
-        <div className='card-container' style={{ color: "white" }}>
+        <div className='leaderboard-card' style={{ color: "white" }}>
           <Row className='mx-0'>
-            <Button as={Col} variant='primary' style={{ marginRight: "20px" }}>
+            <Button
+              as={Col}
+              className='global-btn'
+              style={{ marginRight: "20px" }}
+            >
               Global
             </Button>
             <br />
-            <Button as={Col} variant='success'>
+            <Button as={Col} className='friend-btn'>
               Friends
             </Button>
           </Row>
           <Table bordered style={{ color: "white" }}>
-            <thead style={{ background: "#0d4386", color: "black" }}>
+            <thead>
               <tr>
                 <th>#Rank</th>
                 <th width='60%'>Username</th>

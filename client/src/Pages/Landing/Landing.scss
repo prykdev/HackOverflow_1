@@ -1,24 +1,15 @@
+.landing-home{
+  background: #121217;
+}
+
+
 .landing {
   margin: 0;
   padding: 0;
-  background: url(https://bit.ly/3iBhyBi) no-repeat;
   height: 102vh;
-  font-family: sans-serif;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  overflow: hidden;
+  background: #121217;
 }
 
-@media screen and (max-width: 600px) {
-  .landing {
-    background-size: cover;
-  }
-}
-
-#particles-js {
-  height: 100%;
-}
 
 .loginBoxabc {
   box-shadow: 0 4px 20px rgb(0 0 0 / 0.5);
@@ -28,7 +19,7 @@
   transform: translate(-50%, -50%);
   width: 350px;
   min-height: 150px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: #17171F;
   border-radius: 10px;
   padding: 10px;
   box-sizing: border-box;
@@ -43,7 +34,7 @@
 h3 {
   margin: 0;
   padding: 0 0 20px;
-  color: gainsboro;
+  color: #FF6666 !important;
   text-align: center;
 }
 

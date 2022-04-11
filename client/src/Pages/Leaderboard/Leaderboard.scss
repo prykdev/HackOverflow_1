@@ -1,0 +1,43 @@
+.leaderboard-home{
+    background: #121217;
+    height: 100%;
+}
+
+.leaderboard-container{
+    margin-top: 60px !important;
+    margin: 7rem;
+    text-align: left;
+}
+
+  h1{
+    color:#FF6666;
+  }
+  
+
+  .leaderboard-card{
+    display: flex;
+    gap: 10px;
+    background-color: #17171F;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+    row-gap: 20px;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+ 
+  thead{
+    background-color: #FF6666;
+  }
+   
+
+  .global-btn{
+      background-color:#FF6666 !important;
+      color: #121217 !important;
+      border: none !important;
+  }
+  .friend-btn{
+    background-color:#ffffff !important;
+    color: #121217 !important;
+    border: none !important;
+  }

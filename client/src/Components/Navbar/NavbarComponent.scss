@@ -41,7 +41,7 @@
     height: 2px;
     bottom: 0;
     left: 0;
-    background: #569AFF;
+    background: #FF6666;
     transform-origin: bottom right;
     transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
 }
@@ -53,10 +53,15 @@
 }
 
 .nav-link:hover{
-    color: #569AFF !important;
+    color: #FF6666 !important;
     transform: translateY(-4px);
 }
 
 
 
 
+.logout-btn{
+    background-color: #FF6666 !important;
+    color:#FFF !important;
+    font-weight: bold !important;
+}

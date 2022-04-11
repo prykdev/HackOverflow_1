@@ -22,11 +22,7 @@ const NavbarComponent = ({ pathname }) => {
   return (
     <Navbar sticky='top' className='navheader' collapseOnSelect expand='lg'>
       <Container>
-        <Navbar.Brand
-          className='nav-logo'
-          style={{ cursor: "pointer" }}
-          href='/homepage'
-        >
+        <Navbar.Brand className='nav-logo' style={{ cursor: "pointer" }}>
           {" "}
           <span>Ha</span>ck<span>ov</span>er<span>Flow</span>
         </Navbar.Brand>
@@ -48,24 +44,26 @@ const NavbarComponent = ({ pathname }) => {
               >
                 Leaderboard
               </Nav.Link>
+              <Nav.Link
+                as={Link}
+                to='/search'
+                style={{ textDecoration: "none" }}
+              >
+                Search
+              </Nav.Link>
               <NavDropdown
                 title='Profile▼'
                 id='collasible-nav-dropdown'
                 style={{ fontSize: "16px" }}
               >
-                <NavDropdown.Item as={Link} to='/setting'>
+                <NavDropdown.Item as={Link} to='/settings'>
                   Settings
                 </NavDropdown.Item>
                 <NavDropdown.Item as={Link} to='/changepw'>
                   Change Password
                 </NavDropdown.Item>
               </NavDropdown>
-              <Button
-                style={{ color: "#fff" }}
-                variant='contained'
-                color='primary'
-                onClick={logoutUser}
-              >
+              <Button className='logout-btn' onClick={logoutUser}>
                 Logout
               </Button>
             </Nav>
