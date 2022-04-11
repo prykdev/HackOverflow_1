@@ -211,36 +211,36 @@ const Dashboard = () => {
                     <Row>
                       <Col lg={6}>
                         Partially Solved:{" "}
-                        {submissionStats.partiallySolvedProblems}
+                        {submissionStats && submissionStats.partiallySolvedProblems}
                       </Col>
                       <Col lg={6}>
-                        Solved Problems: {submissionStats.solvedProblems}
+                        Solved Problems: {submissionStats && submissionStats.solvedProblems}
                       </Col>
                     </Row>
                     <Row>
                       <Col lg={6}>
-                        Attempted Problems: {submissionStats.attemptedProblems}
+                        Attempted Problems: {submissionStats && submissionStats.attemptedProblems}
                       </Col>
                       <Col lg={6}>
-                        Time Limit exceeded: {submissionStats.timeLimitExceed}
+                        Time Limit exceeded: {submissionStats && submissionStats.timeLimitExceed}
                       </Col>
                     </Row>
                     <Row>
                       <Col lg={6}>
                         Submitted Solutions:{" "}
-                        {submissionStats.submittedSolutions}
+                        {submissionStats && submissionStats.submittedSolutions}
                       </Col>
                       <Col lg={6}>
-                        Wrong Submissions: {submissionStats.wrongSubmissions}
+                        Wrong Submissions: {submissionStats && submissionStats.wrongSubmissions}
                       </Col>
                     </Row>
                     <Row>
                       <Col lg={6}>
                         Accepted Submission:{" "}
-                        {submissionStats.acceptedSubmissions}
+                        {submissionStats && submissionStats.acceptedSubmissions}
                       </Col>
                       <Col lg={6}>
-                        RunTime Error: {submissionStats.runTimeError}
+                        RunTime Error: {submissionStats && submissionStats.runTimeError}
                       </Col>
                     </Row>
                   </Card.Text>

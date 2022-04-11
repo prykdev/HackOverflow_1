@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import "./Setting.scss"
 import NavbarComponent from "../../Components/Navbar/NavbarComponent"
+import { Container, Row, Col, Card, Button, ListGroup } from "react-bootstrap"
 import { useAppContext } from "../../Context/appContext"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -57,10 +58,35 @@ const Setting = () => {
     <>
       <div className='home'>
         <NavbarComponent />
+        <div class="settings">
+          <Container>
+            <h1>Profile Settings</h1>
+            <Row>
+              <Col md={4}>
+                <Card className='d-flex flex-column align-items-center'>
+                  <img
+                    src='https://bootdey.com/img/Content/avatar/avatar7.png'
+                    alt='Admin'
+                    className='rounded-circle'
+                    width='250'
+                  />
+                  <div className='mt-3'>
+                    <h2>{name}</h2>
+                    <h6 className='text-secondary mb-1'>{username}</h6>
+                    <h6 className='text-secondary mb-1'>UpVote : 78</h6>
+                    <h6 className='text-secondary mb-1'>DownVote : 29</h6>
+                  </div>
+                </Card>
+              </Col>
+              <Col md={8}>
+                <Card>
+                </Card>
+              </Col>
+            </Row>
+          </Container>
+        </div>
+
         <div className='settingContainer'>
-          <h1>
-            Profile Settings
-          </h1>
           <div className='main-body'>
             <div className='row gutters-sm'>
               <div className='col-md-4 mb-3'>
