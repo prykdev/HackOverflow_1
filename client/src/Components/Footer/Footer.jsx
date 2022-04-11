@@ -1,147 +1,96 @@
 import React from "react"
-import {
-  MDBFooter,
-  MDBContainer,
-  MDBIcon,
-  MDBInput,
-  MDBCol,
-  MDBRow,
-  MDBBtn,
-} from "mdb-react-ui-kit"
 import "./Footer.scss"
 
 export const Footer = () => {
   return (
-    <div>
-      <div className='Footer'>
-        <br />
-        <MDBFooter
-          className='text-center'
-          color='white'
-          style={{ backgroundColor: "#1A1A2E" }}
-        >
-          <MDBContainer className='p-1'>
-            <section className='mb-4'>
-              <p style={{ color: "white" }}>
-                You can send request and compare yourself with your friends and
-                your global rank you can also check your github stats.
-              </p>
-            </section>
-            <section className=''>
-              <MDBRow>
-                <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-                  <h5 className='text-uppercase'>Portfoio</h5>
-                  <ul className='list-unstyled mb-0'>
+    <>
+      <footer className='footer-section'>
+        <div className='container'>
+          <div className='footer-content pt-5 pb-5'>
+            <div className='row'>
+              <div className='col-xl-4 col-lg-4 mb-50'>
+                <div className='footer-widget'>
+                  <div className='footer-logo'>
+                    <h2>
+                      <span>Ha</span>ck<span>ov</span>er<span>Flow</span>
+                    </h2>
+                  </div>
+                  <div className='footer-text'>
+                    <p>
+                      Lorem ipsum dolor sit amet, consec tetur adipisicing elit,
+                      sed do eiusmod tempor incididuntut consec tetur
+                      adipisicing elit,Lorem ipsum dolor sit amet.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className='col-xl-4 col-lg-4 col-md-6 mb-30'>
+                <div className='footer-widget'>
+                  <div className='footer-widget-heading'>
+                    <h3>Useful Links</h3>
+                  </div>
+                  <ul>
                     <li>
-                      <a
-                        href='https://priyankaprasad.vercel.app/'
-                        className='text-white'
-                      >
-                        Priyanka
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href='' className='text-white'>
-                        Tushar
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href='' className='text-white'>
-                        Ayush
-                      </a>
-                    </li>
-                  </ul>
-                </MDBCol>
-
-                <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-                  <h5 className='text-uppercase'>Team</h5>
-                  <ul className='list-unstyled mb-0'>
-                    <li>Priyanka</li>
-                    <li>Tushar Goyal</li>
-                    <li>Ayush singla</li>
-                  </ul>
-                </MDBCol>
-
-                <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-                  <h5 className='text-uppercase'>Github</h5>
-
-                  <ul className='list-unstyled mb-0'>
-                    <li>
-                      <a
-                        href='https://github.com/prykdev'
-                        className='text-white'
-                      >
-                        Prykdev
-                      </a>
+                      <a href='#'>Home</a>
                     </li>
                     <li>
-                      <a
-                        href='https://github.com/tgoyal63'
-                        className='text-white'
-                      >
-                        tgoyal63
-                      </a>
+                      <a href='#'>about</a>
                     </li>
-
                     <li>
-                      <a
-                        href='https://github.com/ayu913'
-                        className='text-white'
-                      >
-                        ayu913
-                      </a>
+                      <a href='#'>services</a>
+                    </li>
+                    <li>
+                      <a href='#'>services</a>
                     </li>
                   </ul>
-                </MDBCol>
-                <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-                  <h5 className='text-uppercase'>Linkedin</h5>
-                  <ul className='list-unstyled mb-0'>
-                    <li>
-                      <a
-                        href='https://www.linkedin.com/in/prykdev/'
-                        className='text-white'
-                      >
-                        Prykdev
+                </div>
+              </div>
+              <div className='col-xl-4 col-lg-4 col-md-6 mb-50'>
+                <div className='footer-widget'>
+                  <div className='footer-widget-heading'>
+                    <h3>Follow Us</h3>
+                  </div>
+                  <div className='footer-text mb-25'>
+                    <p>
+                      Don’t miss to subscribe to our new feeds, kindly fill the
+                      form below.
+                    </p>
+                  </div>
+                  <div className='subscribe-form'>
+                    <div className='footer-social-icon'>
+                      <span>Follow us</span>
+                      <a href='#'>
+                        <i className='fab fa-facebook-f facebook-bg'></i>
                       </a>
-                    </li>
-                    <li>
-                      <a
-                        href='https://www.linkedin.com/in/tgoyal63'
-                        className='text-white'
-                      >
-                        tgoyal63
+                      <a href='#'>
+                        <i className='fab fa-twitter twitter-bg'></i>
                       </a>
-                    </li>
-                    <li>
-                      <a
-                        href='https://www.linkedin.com/in/ayu913'
-                        className='text-white'
-                      >
-                        ayu913
+                      <a href='#'>
+                        <i className='fab fa-google-plus-g google-bg'></i>
                       </a>
-                    </li>
-                  </ul>
-                </MDBCol>
-              </MDBRow>
-            </section>
-          </MDBContainer>
-
-          <div
-            className='text-center p-3'
-            style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
-          >
-            © 2022 Copyright:
-            <a
-              className='text-white'
-              href='https://github.com/prykdev/HackOverflow_1'
-            >
-              Hackoverflow
-            </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </MDBFooter>
-      </div>
-    </div>
+        </div>
+        <div className='copyright-area'>
+          <div className='container'>
+            <div className='row'>
+              <div className='col-xl-6 col-lg-6 text-center text-lg-left'>
+                <div className='copyright-text'>
+                  <p>
+                    Copyright &copy; 2018, All Right Reserved{" "}
+                    <a href='https://codepen.io/anupkumar92/'>Anup</a>
+                  </p>
+                </div>
+              </div>
+              <div className='col-xl-6 col-lg-6 d-none d-lg-block text-right'></div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
   )
 }
