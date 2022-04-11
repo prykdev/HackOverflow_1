@@ -57,11 +57,26 @@
     transform: translateY(-4px);
 }
 
-
+.navbar-container {
+    display: flex;
+    justify-content: space-around;
+}
 
 
 .logout-btn{
     background-color: #FF6666 !important;
     color:#FFF !important;
     font-weight: bold !important;
+}
+
+.search-bar{
+    display:flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.search-input{
+    background-color: #1A1A2E50;
+    height: 2.3rem;
+    width: 10rem;
 }

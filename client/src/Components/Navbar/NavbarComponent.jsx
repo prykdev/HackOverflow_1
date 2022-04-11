@@ -5,6 +5,7 @@ import { useAppContext } from "../../Context/appContext"
 import { useNavigate } from "react-router-dom"
 import Button from "@material-ui/core/Button"
 import "./NavbarComponent.scss"
+import 'font-awesome/css/font-awesome.min.css';
 
 const NavbarComponent = ({ pathname }) => {
   const { token, logoutUser } = useAppContext()
@@ -26,10 +27,22 @@ const NavbarComponent = ({ pathname }) => {
           {" "}
           <span>Ha</span>ck<span>ov</span>er<span>Flow</span>
         </Navbar.Brand>
+        <div className="search-bar">
+          <input type="text" className="search-input" placeholder="Enter Username" />
+          <button class="btn btn-outline-secondary" type="button">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           {!isLogin ? (
             <Nav className='ms-auto'>
+              {/* <div className="search-bar">
+                <input type="text" className="search-input" placeholder="Enter Username" />
+                <button class="btn btn-outline-secondary" type="button">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div> */}
               <Nav.Link
                 as={Link}
                 to='/dashboard'
