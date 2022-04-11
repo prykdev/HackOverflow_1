@@ -24,6 +24,9 @@ import {
   GET_CODECHEFDATA_BEGIN,
   GET_CODECHEFDATA_SUCCESS,
   GET_CODECHEFDATA_ERROR,
+  SEARCH_USER_BEGIN,
+  SEARCH_USER_SUCCESS,
+  SEARCH_USER_ERROR,
 } from "./action"
 import axios from "axios"
 import reducer from "./reducer"
@@ -340,6 +343,29 @@ const AppProvider = ({ children }) => {
     }
   }
 
+  const searchUser = async (username) => {
+    dispatch({
+      type: SEARCH_USER_BEGIN,
+    })
+    try {
+      let { data } = await authFetch.post(`${BASE_URL}/search`, { username })
+      const { socials } = data.data
+
+      dispatch({
+        type: SEARCH_USER_SUCCESS,
+        payload: {
+          socials,
+        },
+      })
+    } catch (error) {
+      console.log(error)
+      dispatch({
+        type: SEARCH_USER_ERROR,
+        payload: { msg: error },
+      })
+    }
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -354,6 +380,7 @@ const AppProvider = ({ children }) => {
         getGithub,
         getHackerrank,
         getCodechef,
+        searchUser,
       }}
     >
       {children}

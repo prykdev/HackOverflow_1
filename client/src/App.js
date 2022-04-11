@@ -8,6 +8,7 @@ import ChangePassword from "./Pages/ChangePassword/ChangePassword"
 import { Homepage } from "./Pages/Homepage/Homepage"
 import Dashboard from "./Pages/Dashboard/Dashboard"
 import About from "./Pages/About/About"
+import SearchDashboard from "./Pages/Dashboard copy/SearchDashboard"
 
 function App() {
   return (
@@ -19,9 +20,17 @@ function App() {
           <Route path='/leaderboard' element={<Leaderboard />}></Route>
           <Route exact path='/' element={<Homepage />}></Route>
           <Route path='/settings' element={<Setting />}></Route>
-          <Route exact path='/changepw' element={<ChangePassword />}></Route>
+          <Route
+            exact
+            path='/changepassword'
+            element={<ChangePassword />}
+          ></Route>
           <Route exact path='/register' element={<Landing />}></Route>
           <Route exact path='/about' element={<About />}></Route>
+          <Route
+            path='/searchdashboard/:id'
+            element={<SearchDashboard />}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </>

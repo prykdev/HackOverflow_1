@@ -23,6 +23,9 @@ import {
   GET_CODECHEFDATA_BEGIN,
   GET_CODECHEFDATA_SUCCESS,
   GET_CODECHEFDATA_ERROR,
+  SEARCH_USER_BEGIN,
+  SEARCH_USER_SUCCESS,
+  SEARCH_USER_ERROR,
 } from "./action"
 import { initialState } from "./appContext"
 
@@ -164,6 +167,19 @@ const reducer = (state, action) => {
     }
   }
   if (action.type === GET_CODECHEFDATA_ERROR) {
+    return { ...state }
+  }
+
+  if (action.type === SEARCH_USER_BEGIN) {
+    return { ...state }
+  }
+  if (action.type === SEARCH_USER_SUCCESS) {
+    return {
+      ...state,
+      socials: action.payload.socials,
+    }
+  }
+  if (action.type === SEARCH_USER_ERROR) {
     return { ...state }
   }
 }

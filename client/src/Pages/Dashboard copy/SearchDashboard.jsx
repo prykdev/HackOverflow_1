@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import "./Dashboard.scss"
+import "./SearchDashboard.scss"
 import NavbarComponent from "../../Components/Navbar/NavbarComponent"
 import { Outlet } from "react-router-dom"
 import { Container, Row, Col, Card, Button, ListGroup } from "react-bootstrap"
@@ -11,7 +11,7 @@ import Github from "../../Components/Github/Github"
 import Hackerrank from "../../Components/Hackerrank/Hackerrank"
 import CodeChef from "../../Components/CodeChef/CodeChef"
 
-const Dashboard = () => {
+const SearchDashboard = () => {
   const { getGithub, getHackerrank, getCodechef, isGithubError } =
     useAppContext()
 
@@ -38,4 +38,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default SearchDashboard
