@@ -38,7 +38,7 @@ module.exports = {
   // Viewing User Profile
   profile: ('/profile', controllerBoilerPlate(async (req) => {
     const data = await checkExist('_id', req.id);
-    let response = (({ name, username, email, friends, socials }) => ({ name, username, email, friends, socials }))(data);
+    let response = (({ name, username, email, socials }) => ({ name, username, email, socials }))(data);
     return controllerResponse(200, 'Successful', response);
   })),
 
@@ -50,19 +50,22 @@ module.exports = {
 
   // Checking if user exists
   check: (['/check', '/search'], controllerBoilerPlate(async (req) => {
-    const {username, email} = req.body;
+    const { username, email } = req.body;
     let data;
-    if(username)
+    if (username) {
+      entity = "username";
       data = await checkExist('username', username);
-    else if(email)
+    } else if (email) {
+      entity = "username";
       data = await checkExist('email', email);
+    }
     if (req.originalUrl === '/check') {
       if (data)
-        throw new ControllerError(400, req.body.entity + ' already registered!');
-      return controllerResponse(200, req.body.entity + ' available!');
+        throw new ControllerError(400, entity + ' already registered!');
+      return controllerResponse(200, entity + ' available!');
     } else if (req.originalUrl === '/search') {
       if (data) {
-        const response = (({ name, username, email, friends, socials }) => ({ name, username, email, friends, socials }))(data);
+        const response = (({ name, username, email, socials }) => ({ name, username, email, socials }))(data);
         return controllerResponse(200, "Successful", response);
       }
       throw new ControllerError(404, "User not found!");
@@ -101,5 +104,5 @@ module.exports = {
     const data = await userService.getVotesData(req.user._id, status);
     return controllerResponse(200, 'Successful', data);
   })),
-  
+
 };

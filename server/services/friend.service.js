@@ -19,7 +19,8 @@ module.exports = {
 
     // Deleting a friend by its id from database
     delete: serviceBoilerPlate(async (data) => {
-        await friend.findOneAndDelete(data).exec();
+        const response = await friend.findOneAndDelete(data).exec();
+        return response;
     }),
 
     search: serviceBoilerPlate(async (data) => {
