@@ -93,7 +93,8 @@ module.exports = {
     else if (type === "requests") status = 2;
     else if (type === "all") status = 3
     const data = await userService.getFriendsData(req.user._id, status);
-    return controllerResponse(200, 'Successful', data);
+    data[0].friends = data[0].friends.map((friend) => friend.username);
+    return controllerResponse(200, 'Successful', data[0]);
   })),
 
   getVotes: ('/votes/:type', controllerBoilerPlate(async (req) => {
