@@ -2,15 +2,13 @@ const { model, Schema } = require('mongoose');
 
 const rating = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'users' },
-    upvotes: [{
-        userId: { type: String, required: true },
+    votes: [{
+        userId: { type: Schema.Types.ObjectId, ref: 'users' },
+        upVote : {type: Boolean, default: false},
+        downVote : {type: Boolean, default: false},
         time: { type: String, required: true },
     }],
-    downvotes: [{
-        userId: { type: String, required: true },
-        time: { type: String, required: true },
-    }],
-    rating: { type: String, default: "100" },
+    score: { type: String, default: "100" },
 }, {timestamps: true});
 
 model('ratings', rating);

@@ -1,22 +1,11 @@
-import React from "react"
+import React, {useEffect} from "react"
 import "./Hackerrank.scss"
 import { useAppContext } from "../../Context/appContext"
-import { Container, Row, Col, Card, Button, ListGroup } from "react-bootstrap"
+import { Container, Row, Col, Card} from "react-bootstrap"
 
-const Hackerrank = () => {
+const Hackerrank = (props) => {
+  const { username } = props;
   const {
-    getGithub,
-    graph,
-    stats,
-    mul,
-    contributions,
-    githubUsername,
-    public_repos,
-    public_gists,
-    followers,
-    following,
-    organizations,
-    github_created_at,
     getHackerrank,
     hackerrankUsername,
     hackerrank_created_at,
@@ -24,21 +13,14 @@ const Hackerrank = () => {
     followers_count,
     totalSubmissions,
     totalBadges,
-    getCodechef,
-    codechefUsername,
-    ratings,
-    language,
-    band,
-    div,
-    global,
-    country,
     badgeData,
-    submissionStats,
-    isGithubError,
   } = useAppContext()
+  useEffect(async () => {
+    getHackerrank(username)
+  }, [username]);
   return (
     <div className='hackerrank'>
-      <div className='container'>
+      <Container>
         <div className='header'>
           <h3 className='heading'>Hackerrank</h3>
           {/* <img src={require("../../assets/GitHub-Mark-Light-32px.png")}  alt="github" /> */}
@@ -87,7 +69,7 @@ const Hackerrank = () => {
             </Card>
           </Col>
         </Row>
-      </div>
+      </Container>
     </div>
   )
 }

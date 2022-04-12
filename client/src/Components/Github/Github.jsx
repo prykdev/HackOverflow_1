@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useEffect } from "react"
 import "./Github.scss"
 import { useAppContext } from "../../Context/appContext"
-import { Container, Row, Col, Card, Button, ListGroup } from "react-bootstrap"
+import { Container, Row, Col, Card } from "react-bootstrap"
 
-const Github = () => {
+const Github = (props) => {
+  const { username } = props;
   const {
     getGithub,
     graph,
@@ -17,28 +18,14 @@ const Github = () => {
     following,
     organizations,
     github_created_at,
-    getHackerrank,
-    hackerrankUsername,
-    hackerrank_created_at,
-    level,
-    followers_count,
-    totalSubmissions,
-    totalBadges,
-    getCodechef,
-    codechefUsername,
-    ratings,
-    language,
-    band,
-    div,
-    global,
-    country,
-    badgeData,
-    submissionStats,
     isGithubError,
   } = useAppContext()
+  useEffect(async () => {
+    getGithub(username)
+  }, [username]);
   return (
     <div className='github'>
-      <div className='container'>
+      <Container>
         <div className='header'>
           <h3 className='heading'>GitHub</h3>
           {/* <img src={require("../../assets/GitHub-Mark-Light-32px.png")}  alt="github" /> */}
@@ -85,7 +72,7 @@ const Github = () => {
             </Card>
           </Col>
         </Row>
-      </div>
+      </Container>
     </div>
   )
 }

@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useEffect } from "react"
 import "./CodeChef.scss"
 import { useAppContext } from "../../Context/appContext"
-import { Container, Row, Col, Card, Button, ListGroup } from "react-bootstrap"
+import { Container, Row, Col, Card } from "react-bootstrap"
 
-const CodeChef = () => {
+const CodeChef = (props) => {
+  const { username } = props;
   const {
     getCodechef,
     codechefUsername,
@@ -13,12 +14,14 @@ const CodeChef = () => {
     div,
     global,
     country,
-    badgeData,
     submissionStats,
   } = useAppContext()
+  useEffect(async () => {
+    getCodechef(username)
+  }, [username]);
   return (
     <div className='codechef'>
-      <div className='container'>
+      <Container>
         <div className='header'>
           <h3 className='heading'>Codechef</h3>
           {/* <img src={require("../../assets/GitHub-Mark-Light-32px.png")}  alt="github" /> */}
@@ -99,7 +102,7 @@ const CodeChef = () => {
             </Card>
           </Col>
         </Row>
-      </div>
+      </Container>
     </div>
   )
 }

@@ -1,8 +1,7 @@
 import React, { useEffect } from "react"
 import "./SearchDashboard.scss"
 import NavbarComponent from "../../Components/Navbar/NavbarComponent"
-import { Outlet, useParams, useLocation } from "react-router-dom"
-import { Container, Row, Col, Card, Button, ListGroup } from "react-bootstrap"
+import { Outlet, useLocation } from "react-router-dom"
 import { Footer } from "../../Components/Footer/Footer.jsx"
 import { useAppContext } from "../../Context/appContext"
 import { ToastContainer, toast } from "react-toastify"
@@ -13,9 +12,6 @@ import CodeChef from "../../Components/CodeChef/CodeChef"
 
 const SearchDashboard = () => {
   const {
-    getGithub,
-    getHackerrank,
-    getCodechef,
     isGithubError,
     socials,
     searchUser,
@@ -28,10 +24,7 @@ const SearchDashboard = () => {
   console.log(username)
 
   useEffect(async () => {
-    if (!socials) await searchUser(username)
-    await getGithub(socials.github)
-    await getHackerrank(socials.hackerrank)
-    await getCodechef(socials.codechef)
+    await searchUser(username)
     if (isGithubError) {
       toast("Github API rate limit exceeded!!!")
     }
@@ -48,9 +41,9 @@ const SearchDashboard = () => {
           <button class='btn btn-warning' title='Cancel'></button>
         </div>
       </div> */}
-      <Github />
-      <Hackerrank />
-      <CodeChef />
+      <Github username={socials && socials.github} />
+      <Hackerrank username={socials && socials.hackerrank} />
+      <CodeChef username={socials && socials.codechef} />
 
       {isGithubError ? <ToastContainer /> : <></>}
       <Footer />

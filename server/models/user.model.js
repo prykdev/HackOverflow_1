@@ -7,6 +7,7 @@ const user = new Schema({
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
   friends: [{ type: Schema.Types.ObjectId, ref: 'friends' }],
+  ratings: [{ type: Schema.Types.ObjectId, ref: 'ratings' }],
   socials: {
     github: { type: String, default: "" },
     // codeforces: { type: String, default: "" },
