@@ -39,7 +39,7 @@ const NavbarComponent = ({ pathname }) => {
       <Container>
         <Navbar.Brand className='nav-logo' style={{ cursor: "pointer" }}>
           {" "}
-          <span>Ha</span>ck<span>ov</span>er<span>Flow</span>
+          <span>Ha</span>ck<span>Ov</span>er<span>flow</span>
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
