@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import NavbarComponent from "../../Components/Navbar/NavbarComponent"
 import { Footer } from "../../Components/Footer/Footer.jsx"
 import { Container, Row, Col, Card, Button, ListGroup } from "react-bootstrap"
@@ -7,15 +7,30 @@ import { Tabs, Tab } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { useAppContext } from "../../Context/appContext"
 const Friends = () => {
-  const { getPendingReq, username, friends, getCancelReq } = useAppContext()
-  useEffect(() => {
-    getPendingReq()
-  }, [])
+  const {
+    getPendingReq,
+    pending,
+    requests,
+    friends,
+    getCancelReq,
+    getFriendsReq,
+    getRequestsReq,
+  } = useAppContext()
+
+  const [isCancel, setisCancel] = useState(false)
+
+  useEffect(async () => {
+    await getPendingReq()
+    await getFriendsReq()
+    await getRequestsReq()
+  }, [isCancel])
 
   function handleCancel(friend) {
     console.log(friend)
+    setisCancel(!isCancel)
     getCancelReq(friend)
   }
+
   return (
     <div className='home'>
       <NavbarComponent />
@@ -46,6 +61,23 @@ const Friends = () => {
                       <td>Name</td>
                       <td style={{ width: "30%" }}> Remove </td>
                     </tr>
+                    {friends &&
+                      friends.map((friend) => (
+                        <tr>
+                          <td> {friend}</td>
+                          <td style={{ width: "30%" }}>
+                            <button
+                              type='button'
+                              onClick={(event) => {
+                                event.preventDefault()
+                                handleCancel(friend)
+                              }}
+                            >
+                              ❌
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </Tab>
@@ -57,14 +89,17 @@ const Friends = () => {
                       <td>Name</td>
                       <td style={{ width: "30%" }}> Cancel Request </td>
                     </tr>
-                    {friends &&
-                      friends.map((friend) => (
+                    {pending &&
+                      pending.map((friend) => (
                         <tr>
                           <td> {friend}</td>
                           <td style={{ width: "30%" }}>
                             <button
                               type='button'
-                              onClick={() => handleCancel(friend)}
+                              onClick={(event) => {
+                                event.preventDefault()
+                                handleCancel(friend)
+                              }}
                             >
                               ❌
                             </button>
@@ -81,6 +116,23 @@ const Friends = () => {
                       <td>Name</td>
                       <td style={{ width: "30%" }}> Reject Request </td>
                     </tr>
+                    {requests &&
+                      requests.map((friend) => (
+                        <tr>
+                          <td> {friend}</td>
+                          <td style={{ width: "30%" }}>
+                            <button
+                              type='button'
+                              onClick={(event) => {
+                                event.preventDefault()
+                                handleCancel(friend)
+                              }}
+                            >
+                              ❌
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </Tab>

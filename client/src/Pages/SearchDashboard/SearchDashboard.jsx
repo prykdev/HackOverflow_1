@@ -23,7 +23,7 @@ const SearchDashboard = () => {
 
   useEffect(async () => {
     console.log("useeffect")
-    await searchUser(username)
+    if (username) await searchUser(username)
     if (isGithubError) {
       toast("Github API rate limit exceeded!!!")
     }

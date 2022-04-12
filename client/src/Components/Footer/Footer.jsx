@@ -1,33 +1,33 @@
-import React from "react";
-import "./Footer.scss";
+import React from "react"
+import "./Footer.scss"
 
 export const Footer = () => {
   return (
-    <div className="footer">
-      <div className="footer-head">
-        <div className="footer-logo" style={{ cursor: "pointer" }}>
+    <div className='footer h-30 w-100'>
+      <div className='footer-head'>
+        <div className='footer-logo' style={{ cursor: "pointer" }}>
           {" "}
           <span>Ha</span>ck<span>Ov</span>er<span>flow</span>
         </div>
       </div>
 
-      <div className="footer-navlinks">
+      <div className='footer-navlinks'>
         <ul>
           <li>
             {" "}
-            <a href="#">Dashboard</a>{" "}
+            <a href='#'>Dashboard</a>{" "}
           </li>
           <li>
             {" "}
-            <a href="#">About</a>{" "}
+            <a href='#'>About</a>{" "}
           </li>
           <li>
             {" "}
-            <a href="#">Leaderboard </a>{" "}
+            <a href='#'>Leaderboard </a>{" "}
           </li>
           <li>
             {" "}
-            <a href="#">Friends </a>{" "}
+            <a href='#'>Friends </a>{" "}
           </li>
           {/* <li>
             {" "}
@@ -36,23 +36,23 @@ export const Footer = () => {
         </ul>
       </div>
 
-      <div className="footer-socials">
+      <div className='footer-socials'>
         <div>
-          <i className="fa fa-twitter"></i>
+          <i className='fa fa-twitter'></i>
         </div>
         <div>
-          <i className="fa fa-linkedin"></i>
+          <i className='fa fa-linkedin'></i>
         </div>
         <div>
-          <i className="fa fa-instagram"></i>
+          <i className='fa fa-instagram'></i>
         </div>
       </div>
-      <div className="footer-copyright">
+      <div className='footer-copyright'>
         <p>
           Copyright &copy; 2022, All Right Reserved{" "}
-          <a href="https://github.com/prykdev/HackOverflow_1"> HackOverflow</a>
+          <a href='https://github.com/prykdev/HackOverflow_1'> HackOverflow</a>
         </p>
       </div>
     </div>
-  );
-};
+  )
+}

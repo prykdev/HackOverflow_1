@@ -32,6 +32,10 @@ import {
   GET_PENDING_REQ_SUCCESS,
   GET_CANCEL_REQ_BEGIN,
   GET_CANCEL_REQ_SUCCESS,
+  GET_FRIENDS_REQ_BEGIN,
+  GET_FRIENDS_REQ_SUCCESS,
+  GET_REQUESTS_REQ_BEGIN,
+  GET_REQUESTS_REQ_SUCCESS,
 } from "./action"
 import axios from "axios"
 import reducer from "./reducer"
@@ -407,16 +411,12 @@ const AppProvider = ({ children }) => {
 
     try {
       let { data } = await authFetch.get(`${BASE_URL}/friends/pending`)
-      console.log(data.data)
-      let { username, friends } = data.data
-      console.log(username)
-      console.log(friends)
-
+      let pending = data.data.friends
+      console.log({ pending })
       dispatch({
         type: GET_PENDING_REQ_SUCCESS,
         payload: {
-          username,
-          friends,
+          pending,
         },
       })
     } catch (error) {
@@ -434,6 +434,46 @@ const AppProvider = ({ children }) => {
 
       dispatch({
         type: GET_CANCEL_REQ_SUCCESS,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+
+  const getFriendsReq = async () => {
+    dispatch({
+      type: GET_FRIENDS_REQ_BEGIN,
+    })
+
+    try {
+      let { data } = await authFetch.get(`${BASE_URL}/friends/friends`)
+      let friends = data.data.friends
+
+      dispatch({
+        type: GET_FRIENDS_REQ_SUCCESS,
+        payload: {
+          friends,
+        },
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+
+  const getRequestsReq = async () => {
+    dispatch({
+      type: GET_REQUESTS_REQ_BEGIN,
+    })
+
+    try {
+      let { data } = await authFetch.get(`${BASE_URL}/friends/requests`)
+      let requests = data.data.friends
+
+      dispatch({
+        type: GET_REQUESTS_REQ_SUCCESS,
+        payload: {
+          requests,
+        },
       })
     } catch (error) {
       console.log(error.response)
@@ -458,6 +498,8 @@ const AppProvider = ({ children }) => {
         addFriend,
         getPendingReq,
         getCancelReq,
+        getFriendsReq,
+        getRequestsReq,
       }}
     >
       {children}

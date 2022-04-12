@@ -31,6 +31,10 @@ import {
   ADD_FRIEND_ERROR,
   GET_PENDING_REQ_BEGIN,
   GET_PENDING_REQ_SUCCESS,
+  GET_FRIENDS_REQ_BEGIN,
+  GET_FRIENDS_REQ_SUCCESS,
+  GET_REQUESTS_REQ_BEGIN,
+  GET_REQUESTS_REQ_SUCCESS,
   GET_CANCEL_REQ_BEGIN,
   GET_CANCEL_REQ_SUCCESS,
 } from "./action"
@@ -208,8 +212,31 @@ const reducer = (state, action) => {
   if (action.type === GET_PENDING_REQ_SUCCESS) {
     return {
       ...state,
-      username: action.payload.username,
+      pending: action.payload.pending,
+    }
+  }
+
+  if (action.type === GET_FRIENDS_REQ_BEGIN) {
+    return {
+      ...state,
+    }
+  }
+  if (action.type === GET_FRIENDS_REQ_SUCCESS) {
+    return {
+      ...state,
       friends: action.payload.friends,
+    }
+  }
+
+  if (action.type === GET_REQUESTS_REQ_BEGIN) {
+    return {
+      ...state,
+    }
+  }
+  if (action.type === GET_REQUESTS_REQ_SUCCESS) {
+    return {
+      ...state,
+      requests: action.payload.requests,
     }
   }
   if (action.type === GET_CANCEL_REQ_BEGIN) {
