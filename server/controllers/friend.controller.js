@@ -50,7 +50,7 @@ module.exports = {
   })),
 
   getFriendsLogs: ('/friendsLogs', controllerBoilerPlate(async (req) => {
-    const data = await friendService.search({requester: req.user._id, status: 3});
+    const data = await friendService.search({ requester: req.user._id });
     return controllerResponse(200, data);
   }))
 

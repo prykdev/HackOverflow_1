@@ -83,19 +83,23 @@ module.exports = {
     return controllerResponse(201, 'Successful', { token });
   })),
 
-  getFriends: ('/friends', controllerBoilerPlate(async (req) => {
-    const data = await userService.getFriendsData(req.user._id, 3);
+  getFriends: ('/friends/:type', controllerBoilerPlate(async (req) => {
+    const { type } = req.params;
+    let status;
+    if (type === "pending") status = 1;
+    else if (type === "requests") status = 2;
+    else if (type === "all") status = 3
+    const data = await userService.getFriendsData(req.user._id, status);
     return controllerResponse(200, 'Successful', data);
   })),
 
-  getPending: ('/pending', controllerBoilerPlate(async (req) => {
-    const data = await userService.getFriendsData(req.user._id, 2);
+  getVotes: ('/votes/:type', controllerBoilerPlate(async (req) => {
+    const { type } = req.params;
+    let status;
+    if (type === "upvotes") status = 1;
+    else if (type === "downvotes") status = -1;
+    const data = await userService.getVotesData(req.user._id, status);
     return controllerResponse(200, 'Successful', data);
   })),
-
-  getFriendRequests: ('/friendrequsts', controllerBoilerPlate(async (req) => {
-    const data = await userService.getFriendsData(req.user._id, 1);
-    return controllerResponse(200, 'Successful', data);
-  })),
-
+  
 };

@@ -2,6 +2,7 @@
 const { serviceBoilerPlate } = require('../utils/service.utils.js');
 const user = require('../models/user.model.js').model;
 const friend = require('../models/friend.model.js').model;
+const vote = require('../models/vote.model.js').model;
 const ServiceError = require('../errors/service.error.js');
 
 module.exports = {
@@ -65,6 +66,39 @@ module.exports = {
         foreignField: "_id",
         as: "friends",
         let: { friends: "$friends" },
+        pipeline: [ {
+          $project: { username: 1, _id: 0 }
+        }],
+      }
+    }]).exec();
+    return data;
+  }),
+
+  getVotesData: serviceBoilerPlate(async (_id, status) => {
+    const data = await user.aggregate([{
+      $lookup: {
+        from: vote.collection.name,
+        localField: "votes",
+        foreignField: "_id",
+        as: "votes",
+        let: { votes: "$votes" },
+        pipeline: [{
+          $match: { status, voter: _id }
+        }, {
+          $project: { user: 1, _id: 0 }
+        }],
+      }
+    }, {
+      $match: { _id }
+    }, {
+      $project: { username: 1, votes: 1, _id: 0 }
+    }, {
+      $lookup: {
+        from: user.collection.name,
+        localField: "votes.user",
+        foreignField: "_id",
+        as: "votes",
+        let: { votes: "$votes" },
         pipeline: [ {
           $project: { username: 1, _id: 0 }
         }],
