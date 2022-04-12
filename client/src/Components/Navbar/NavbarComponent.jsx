@@ -55,6 +55,7 @@ const NavbarComponent = ({ pathname }) => {
                     onChange={handleChange}
                     className='search-input'
                     placeholder='Enter Username'
+                    required
                   />
                   <button className='btn btn-outline-secondary' type='submit'>
                     <i className='fa fa-search'></i>

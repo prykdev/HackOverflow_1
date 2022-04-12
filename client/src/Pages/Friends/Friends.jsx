@@ -27,8 +27,9 @@ const Friends = () => {
 
   function handleCancel(friend) {
     console.log(friend)
-    setisCancel(!isCancel)
+
     getCancelReq(friend)
+    setisCancel(!isCancel)
   }
 
   return (

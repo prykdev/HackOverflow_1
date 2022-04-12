@@ -10,6 +10,7 @@ import Github from "../../Components/Github/Github"
 import Hackerrank from "../../Components/Hackerrank/Hackerrank"
 import CodeChef from "../../Components/CodeChef/CodeChef"
 import "font-awesome/css/font-awesome.min.css"
+import { AboutCard } from "../../Components/AboutCard/AboutCard"
 
 const SearchDashboard = () => {
   const { isGithubError, socials, searchUser, addFriend, isAdd } =
@@ -29,40 +30,43 @@ const SearchDashboard = () => {
     }
   }, [username])
 
-  const handleAddFriend = async (e) => {
-    e.preventDefault()
-    console.log(username + "fdfdfewfewgfewgwegweSGVR")
-    await addFriend(username)
+  function handleAddFriend(username) {
+    addFriend(username)
   }
 
   return (
-    <div className='dashboardHome'>
-      <NavbarComponent />
-      <div className='container-fluid mt-5'>
-        <div className='col-lg-12 col-sm-6 text-center d-flex justify-content-center gap-4'>
-          <button className='btn btn-up p-3' title='UpVote'>
-            <i className='fa fa-thumbs-up fa-lg '></i>
-          </button>
-          <button className='btn btn-down  p-3' title='DownVote'>
-            <i className='fa fa-thumbs-down fa-lg'></i>
-          </button>
-          <button
-            className='btn btn-add  p-3'
-            title='Add Friend'
-            type='button'
-            onClick={handleAddFriend}
-          >
-            <i className='fa fa-user-plus fa-lg'></i>
-          </button>
+    <>
+      <div className='dashboardHome'>
+        <NavbarComponent />
+        <div className='container-fluid mt-5'>
+          <div className='col-lg-12 col-sm-6 text-center d-flex justify-content-center gap-4'>
+            <button className='btn btn-up p-3' title='UpVote'>
+              <i className='fa fa-thumbs-up fa-lg '></i>
+            </button>
+            <button className='btn btn-down  p-3' title='DownVote'>
+              <i className='fa fa-thumbs-down fa-lg'></i>
+            </button>
+            <button
+              className='btn btn-add  p-3'
+              title='Add Friend'
+              type='button'
+              onClick={(event) => {
+                event.preventDefault()
+                handleAddFriend(friend)
+              }}
+            >
+              <i className='fa fa-user-plus fa-lg'></i>
+            </button>
+          </div>
         </div>
-      </div>
-      <Github username={socials && socials.github} />
-      <Hackerrank username={socials && socials.hackerrank} />
-      <CodeChef username={socials && socials.codechef} />
+        <Github username={socials && socials.github} />
+        <Hackerrank username={socials && socials.hackerrank} />
+        <CodeChef username={socials && socials.codechef} />
 
-      {/* {isGithubError ? <ToastContainer /> : <></>} */}
-      <Footer />
-    </div>
+        {/* {isGithubError ? <ToastContainer /> : <></>} */}
+        <Footer />
+      </div>
+    </>
   )
 }
 

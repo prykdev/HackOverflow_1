@@ -36,6 +36,8 @@ import {
   GET_FRIENDS_REQ_SUCCESS,
   GET_REQUESTS_REQ_BEGIN,
   GET_REQUESTS_REQ_SUCCESS,
+  ADD_FRIEND_SUCCESS,
+  ADD_FRIEND_ERROR,
 } from "./action"
 import axios from "axios"
 import reducer from "./reducer"
@@ -393,12 +395,12 @@ const AppProvider = ({ children }) => {
       let { data } = await authFetch.get(`${BASE_URL}/addfriend/${username}`)
 
       dispatch({
-        type: SEARCH_USER_SUCCESS,
+        type: ADD_FRIEND_SUCCESS,
       })
     } catch (error) {
       console.log(error)
       dispatch({
-        type: SEARCH_USER_ERROR,
+        type: ADD_FRIEND_ERROR,
         payload: { msg: error },
       })
     }
