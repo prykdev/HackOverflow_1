@@ -38,7 +38,7 @@ module.exports = {
   // Viewing User Profile
   profile: ('/profile', controllerBoilerPlate(async (req) => {
     const data = await checkExist('_id', req.id);
-    let response = (({ name, username, email, socials }) => ({ name, username, email, socials }))(data);
+    let response = (({ name, username, email, votes, socials }) => ({ name, username, email, votes, socials }))(data);
     return controllerResponse(200, 'Successful', response);
   })),
 
@@ -65,7 +65,7 @@ module.exports = {
       return controllerResponse(200, entity + ' available!');
     } else if (req.originalUrl === '/search') {
       if (data) {
-        const response = (({ name, username, email, socials }) => ({ name, username, email, socials }))(data);
+        const response = (({ name, username, email, votes, socials }) => ({ name, username, email, votes, socials }))(data);
         return controllerResponse(200, "Successful", response);
       }
       throw new ControllerError(404, "User not found!");

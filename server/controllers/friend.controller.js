@@ -11,9 +11,10 @@ module.exports = {
   createFriend: ('/addfriend/:username', controllerBoilerPlate(async (req) => {
     const { username } = req.params;
     const data = await checkExist("username", username);
+    if (username === req.user.username)
+      throw new ControllerError(400, "You can't add yourself!");
     if (!data)
       throw new ControllerError(404, "User not found!");
-
     const check = await friendService.search({ requester: req.user._id, recipient: data._id });
     if (check[0]) {
       if (check[0].status === 3)
@@ -36,6 +37,8 @@ module.exports = {
   editFriend: ('/acceptfriend/:username', controllerBoilerPlate(async (req) => {
     const { username } = req.params;
     const data = await checkExist("username", username);
+    if (username === req.user.username)
+      throw new ControllerError(400, "You can't add yourself!");
     if (!data)
       throw new ControllerError(404, "User not found!");
 
