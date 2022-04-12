@@ -27,6 +27,11 @@ import {
   SEARCH_USER_BEGIN,
   SEARCH_USER_SUCCESS,
   SEARCH_USER_ERROR,
+  ADD_FRIEND_BEGIN,
+  GET_PENDING_REQ_BEGIN,
+  GET_PENDING_REQ_SUCCESS,
+  GET_CANCEL_REQ_BEGIN,
+  GET_CANCEL_REQ_SUCCESS,
 } from "./action"
 import axios from "axios"
 import reducer from "./reducer"
@@ -38,6 +43,7 @@ const initialState = {
   token: token,
   data: "",
   isGithubError: false,
+  isAdd: false,
 }
 
 const AppContext = React.createContext()
@@ -375,6 +381,65 @@ const AppProvider = ({ children }) => {
     }
   }
 
+  const addFriend = async (username) => {
+    dispatch({
+      type: ADD_FRIEND_BEGIN,
+    })
+    try {
+      let { data } = await authFetch.get(`${BASE_URL}/addfriend/${username}`)
+
+      dispatch({
+        type: SEARCH_USER_SUCCESS,
+      })
+    } catch (error) {
+      console.log(error)
+      dispatch({
+        type: SEARCH_USER_ERROR,
+        payload: { msg: error },
+      })
+    }
+  }
+
+  const getPendingReq = async () => {
+    dispatch({
+      type: GET_PENDING_REQ_BEGIN,
+    })
+
+    try {
+      let { data } = await authFetch.get(`${BASE_URL}/friends/pending`)
+      console.log(data.data)
+      let { username, friends } = data.data
+      console.log(username)
+      console.log(friends)
+
+      dispatch({
+        type: GET_PENDING_REQ_SUCCESS,
+        payload: {
+          username,
+          friends,
+        },
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+
+  const getCancelReq = async (username) => {
+    dispatch({
+      type: GET_CANCEL_REQ_BEGIN,
+    })
+
+    try {
+      let { data } = await authFetch.delete(`${BASE_URL}/delete/${username}`)
+
+      dispatch({
+        type: GET_CANCEL_REQ_SUCCESS,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -390,6 +455,9 @@ const AppProvider = ({ children }) => {
         getHackerrank,
         getCodechef,
         searchUser,
+        addFriend,
+        getPendingReq,
+        getCancelReq,
       }}
     >
       {children}

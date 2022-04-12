@@ -20,7 +20,7 @@ const NavbarComponent = ({ pathname }) => {
     setSearchUsername(e.target.value)
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     // await searchUser(username)
     navigate(`/searchdashboard/${username}`)

@@ -1,11 +1,21 @@
-import React from "react"
+import React, { useEffect } from "react"
 import NavbarComponent from "../../Components/Navbar/NavbarComponent"
 import { Footer } from "../../Components/Footer/Footer.jsx"
 import { Container, Row, Col, Card, Button, ListGroup } from "react-bootstrap"
 import "./Friends.scss"
 import { Tabs, Tab } from "react-bootstrap"
 import { Link } from "react-router-dom"
-const About = () => {
+import { useAppContext } from "../../Context/appContext"
+const Friends = () => {
+  const { getPendingReq, username, friends, getCancelReq } = useAppContext()
+  useEffect(() => {
+    getPendingReq()
+  }, [])
+
+  function handleCancel(friend) {
+    console.log(friend)
+    getCancelReq(friend)
+  }
   return (
     <div className='home'>
       <NavbarComponent />
@@ -47,6 +57,20 @@ const About = () => {
                       <td>Name</td>
                       <td style={{ width: "30%" }}> Cancel Request </td>
                     </tr>
+                    {friends &&
+                      friends.map((friend) => (
+                        <tr>
+                          <td> {friend}</td>
+                          <td style={{ width: "30%" }}>
+                            <button
+                              type='button'
+                              onClick={() => handleCancel(friend)}
+                            >
+                              ❌
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </Tab>
@@ -69,4 +93,4 @@ const About = () => {
   )
 }
 
-export default About
+export default Friends

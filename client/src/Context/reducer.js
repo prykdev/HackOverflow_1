@@ -26,6 +26,13 @@ import {
   SEARCH_USER_BEGIN,
   SEARCH_USER_SUCCESS,
   SEARCH_USER_ERROR,
+  ADD_FRIEND_BEGIN,
+  ADD_FRIEND_SUCCESS,
+  ADD_FRIEND_ERROR,
+  GET_PENDING_REQ_BEGIN,
+  GET_PENDING_REQ_SUCCESS,
+  GET_CANCEL_REQ_BEGIN,
+  GET_CANCEL_REQ_SUCCESS,
 } from "./action"
 import { initialState } from "./appContext"
 
@@ -180,6 +187,35 @@ const reducer = (state, action) => {
     }
   }
   if (action.type === SEARCH_USER_ERROR) {
+    return { ...state }
+  }
+
+  if (action.type === ADD_FRIEND_BEGIN) {
+    return { ...state }
+  }
+  if (action.type === ADD_FRIEND_SUCCESS) {
+    return { ...state, isAdd: true }
+  }
+  if (action.type === ADD_FRIEND_ERROR) {
+    return { ...state }
+  }
+
+  if (action.type === GET_PENDING_REQ_BEGIN) {
+    return {
+      ...state,
+    }
+  }
+  if (action.type === GET_PENDING_REQ_SUCCESS) {
+    return {
+      ...state,
+      username: action.payload.username,
+      friends: action.payload.friends,
+    }
+  }
+  if (action.type === GET_CANCEL_REQ_BEGIN) {
+    return { ...state }
+  }
+  if (action.type === GET_CANCEL_REQ_SUCCESS) {
     return { ...state }
   }
 }

@@ -10,6 +10,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard"
 import About from "./Pages/About/About"
 import SearchDashboard from "./Pages/SearchDashboard/SearchDashboard"
 import Friends from "./Pages/Friends/Friends"
+import "font-awesome/css/font-awesome.min.css"
 
 function App() {
   return (
