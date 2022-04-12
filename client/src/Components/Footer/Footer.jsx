@@ -16,9 +16,7 @@ export const Footer = () => {
                     </h2>
                   </div>
                   <div className='footer-text'>
-                    <p>
-                      Thid is footer
-                    </p>
+                    <p>Thid is footer</p>
                   </div>
                 </div>
               </div>
@@ -80,7 +78,7 @@ export const Footer = () => {
                 <div className='copyright-text'>
                   <p>
                     Copyright &copy; 2018, All Right Reserved{" "}
-                    <a href='https://codepen.io/anupkumar92/'>Anup</a>
+                    <a href='https://codepen.io/anupkumar92/'> HackoverFlow</a>
                   </p>
                 </div>
               </div>

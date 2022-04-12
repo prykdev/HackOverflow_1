@@ -15,10 +15,12 @@ const Dashboard = () => {
   const { getGithub, getHackerrank, getCodechef, isGithubError } =
     useAppContext()
 
+  var abc = ""
+
   useEffect(async () => {
-    await getGithub()
-    await getHackerrank()
-    await getCodechef()
+    await getGithub(abc)
+    await getHackerrank(abc)
+    await getCodechef(abc)
     if (isGithubError) {
       toast("Github API rate limit exceeded!!!")
     }
@@ -26,7 +28,6 @@ const Dashboard = () => {
 
   return (
     <div className='dashboardHome'>
-      <Outlet />
       <NavbarComponent />
       <Github />
       <Hackerrank />

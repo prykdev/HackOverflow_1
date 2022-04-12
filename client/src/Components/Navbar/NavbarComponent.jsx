@@ -22,22 +22,18 @@ const NavbarComponent = ({ pathname }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await searchUser(username)
-    navigate(`/searchdashboard/{username}`, {
-      state: {
-        github: socials.github,
-        hackerrank: socials.hackerrank,
-        codechef: socials.codechef,
-      },
-    })
+    // await searchUser(username)
+    navigate(`/searchdashboard/${username}`)
   }
+  // console.log(socials + "fdewfewf")
+
   useEffect(() => {
     if (pathname === "/" || pathname === "/register") {
       setIsLogin(true)
     } else if (!token) {
       navigate("/")
     }
-  }, [token, navigate, pathname])
+  }, [token, socials])
   return (
     <Navbar sticky='top' className='navheader' collapseOnSelect expand='lg'>
       <Container>
@@ -45,25 +41,26 @@ const NavbarComponent = ({ pathname }) => {
           {" "}
           <span>Ha</span>ck<span>ov</span>er<span>Flow</span>
         </Navbar.Brand>
-        <div className='search-bar'>
-          <form onSubmit={handleSubmit}>
-            <input
-              type='text'
-              name='username'
-              value={username}
-              onChange={handleChange}
-              className='search-input'
-              placeholder='Enter Username'
-            />
-            <button className='btn btn-outline-secondary' type='submit'>
-              <i className='fa fa-search'></i>
-            </button>
-          </form>
-        </div>
+
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           {!isLogin ? (
             <Nav className='ms-auto'>
+              <div className='search-bar'>
+                <form onSubmit={handleSubmit}>
+                  <input
+                    type='text'
+                    name='username'
+                    value={username}
+                    onChange={handleChange}
+                    className='search-input'
+                    placeholder='Enter Username'
+                  />
+                  <button className='btn btn-outline-secondary' type='submit'>
+                    <i className='fa fa-search'></i>
+                  </button>
+                </form>
+              </div>
               <Nav.Link
                 as={Link}
                 to='/dashboard'

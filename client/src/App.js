@@ -8,7 +8,7 @@ import ChangePassword from "./Pages/ChangePassword/ChangePassword"
 import { Homepage } from "./Pages/Homepage/Homepage"
 import Dashboard from "./Pages/Dashboard/Dashboard"
 import About from "./Pages/About/About"
-import SearchDashboard from "./Pages/Dashboard copy/SearchDashboard"
+import SearchDashboard from "./Pages/SearchDashboard/SearchDashboard"
 import Friends from "./Pages/Friends/Friends"
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/dashboard' element={<Dashboard />}></Route>
           <Route path='/profile' element={<Profile />}></Route>
           <Route path='/leaderboard' element={<Leaderboard />}></Route>
           <Route exact path='/' element={<Homepage />}></Route>
@@ -30,7 +30,8 @@ function App() {
           <Route exact path='/register' element={<Landing />}></Route>
           <Route exact path='/about' element={<About />}></Route>
           <Route
-            path='/searchdashboard/:id'
+            exact
+            path='/searchdashboard/:username'
             element={<SearchDashboard />}
           ></Route>
         </Routes>

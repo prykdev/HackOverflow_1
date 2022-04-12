@@ -1,6 +1,22 @@
-.p{
-    color: aliceblue;
+.p {
+  color: aliceblue;
 }
-*{
-    background-color: "#121217"
+* {
+  background-color: "#121217";
+}
+.active {
+  color: #000 !important ;
+}
+tr {
+  color: white;
+}
+.table {
+  color: #fff !important;
+  &:hover {
+    color: white !important;
+  }
+  --bs-table-active-bg: #fff;
+}
+td {
+  color: #fff;
 }

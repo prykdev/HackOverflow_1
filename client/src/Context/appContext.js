@@ -216,13 +216,16 @@ const AppProvider = ({ children }) => {
 
   const checkUsername = () => {}
 
-  const getGithub = async () => {
+  const getGithub = async (gusername) => {
     dispatch({
       type: GET_GITHUBDATA_BEGIN,
     })
 
     try {
-      let { data } = await authFetch("/github")
+      let { data } =
+        gusername.length == 0
+          ? await authFetch("/github")
+          : await authFetch(`/github/${gusername}`)
       console.log(data.data)
       let {
         graph,
@@ -263,13 +266,16 @@ const AppProvider = ({ children }) => {
     }
   }
 
-  const getHackerrank = async () => {
+  const getHackerrank = async (husername) => {
     dispatch({
       type: GET_HACKERRANKDATA_BEGIN,
     })
 
     try {
-      let { data } = await authFetch("/hackerrank")
+      let { data } =
+        husername.length == 0
+          ? await authFetch("/hackerrank")
+          : await authFetch(`/hackerrank/${husername}`)
       console.log(data.data)
       let {
         hackerrankUsername,
@@ -301,13 +307,16 @@ const AppProvider = ({ children }) => {
     }
   }
 
-  const getCodechef = async () => {
+  const getCodechef = async (cusername) => {
     dispatch({
       type: GET_CODECHEFDATA_BEGIN,
     })
 
     try {
-      let { data } = await authFetch("/codechef")
+      let { data } =
+        cusername.length == 0
+          ? await authFetch("/codechef")
+          : await authFetch(`/codechef/${cusername}`)
       console.log(data.data)
       let {
         codechefUsername,
