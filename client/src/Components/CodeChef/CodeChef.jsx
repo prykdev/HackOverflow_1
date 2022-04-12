@@ -5,25 +5,6 @@ import { Container, Row, Col, Card, Button, ListGroup } from "react-bootstrap"
 
 const CodeChef = () => {
   const {
-    getGithub,
-    graph,
-    stats,
-    mul,
-    contributions,
-    githubUsername,
-    public_repos,
-    public_gists,
-    followers,
-    following,
-    organizations,
-    github_created_at,
-    getHackerrank,
-    hackerrankUsername,
-    hackerrank_created_at,
-    level,
-    followers_count,
-    totalSubmissions,
-    totalBadges,
     getCodechef,
     codechefUsername,
     ratings,
@@ -34,8 +15,6 @@ const CodeChef = () => {
     country,
     badgeData,
     submissionStats,
-    isGithubError,
-    socials,
   } = useAppContext()
   return (
     <div className='codechef'>
@@ -48,7 +27,7 @@ const CodeChef = () => {
           </h6>
         </div>
         <Row>
-          <Col lg={6} className='githubStats'>
+          <Col lg={6} className='codechefStats'>
             <Card className='g-card'>
               <Card.Body>
                 <Card.Title>CodeChef Data</Card.Title>
@@ -69,7 +48,7 @@ const CodeChef = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col lg={6} className='githubStats'>
+          <Col lg={6} className='codechefStats'>
             <Card className='g-card'>
               <Card.Body>
                 <Card.Title>CodeChef Submission Stats</Card.Title>

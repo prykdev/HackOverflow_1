@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { Nav, NavDropdown, Container, Navbar } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { useAppContext } from "../../Context/appContext"
@@ -26,7 +26,7 @@ const NavbarComponent = ({ pathname }) => {
     navigate(`/searchdashboard/${username}`)
   }
   // console.log(socials + "fdewfewf")
-
+  const proRef = useRef()
   useEffect(() => {
     if (pathname === "/" || pathname === "/register") {
       setIsLogin(true)
@@ -92,9 +92,9 @@ const NavbarComponent = ({ pathname }) => {
                 About
               </Nav.Link>
               <NavDropdown
-                title='Profile▼'
+                ref={proRef}
+                title='Profile ▼'
                 id='collasible-nav-dropdown'
-                style={{ fontSize: "16px" }}
               >
                 <NavDropdown.Item as={Link} to='/settings'>
                   Settings
@@ -102,10 +102,11 @@ const NavbarComponent = ({ pathname }) => {
                 <NavDropdown.Item as={Link} to='/changepassword'>
                   Change Password
                 </NavDropdown.Item>
+                <NavDropdown.Item onClick={logoutUser}>Logout</NavDropdown.Item>
               </NavDropdown>
-              <Button className='logout-btn' onClick={logoutUser}>
+              {/* <Button className='logout-btn' onClick={logoutUser}>
                 Logout
-              </Button>
+              </Button> */}
             </Nav>
           ) : (
             <></>

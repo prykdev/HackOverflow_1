@@ -28,14 +28,14 @@ const SearchDashboard = () => {
   console.log(username)
 
   useEffect(async () => {
-    await searchUser(username)
+    if (!socials) await searchUser(username)
     await getGithub(socials.github)
     await getHackerrank(socials.hackerrank)
     await getCodechef(socials.codechef)
     if (isGithubError) {
       toast("Github API rate limit exceeded!!!")
     }
-  }, [])
+  }, [username])
 
   return (
     <div className='dashboardHome'>
