@@ -30,7 +30,7 @@ const validateUser = async (data) => {
 };
 
 const checkExist = async (entity, entityValue) => {
-  data = await userService.searchByEntity(entity, entityValue);
+  const data = await userService.searchByEntity(entity, entityValue);
   return data;
 };
 

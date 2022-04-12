@@ -52,20 +52,28 @@ module.exports = {
   check: (['/check', '/search'], controllerBoilerPlate(async (req) => {
     const { username, email } = req.body;
     let data;
-    if (username) {
-      entity = "username";
+    if (username)
       data = await checkExist('username', username);
-    } else if (email) {
-      entity = "username";
+    else if (email)
       data = await checkExist('email', email);
-    }
+    // else if (phone)
+    //   data = await checkExist('phone', phone);
+
     if (req.originalUrl === '/check') {
       if (data)
         throw new ControllerError(400, entity + ' already registered!');
       return controllerResponse(200, entity + ' available!');
     } else if (req.originalUrl === '/search') {
       if (data) {
-        const response = (({ name, username, email, votes, socials }) => ({ name, username, email, votes, socials }))(data);
+        if (data.friends[0]) {
+          const status = data.friends[0].status;
+          if (status === 3) data.status = 'friends';
+          else if (status === 2) data.status = 'requested';
+          else if (status === 1) data.status = 'pending';
+          else data.status = 'add';
+        }
+        else data.status = 'add';
+        const response = (({ name, username, status, votes, socials }) => ({ name, username, status, votes, socials }))(data);
         return controllerResponse(200, "Successful", response);
       }
       throw new ControllerError(404, "User not found!");

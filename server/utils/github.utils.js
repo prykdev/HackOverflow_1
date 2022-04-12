@@ -7,6 +7,7 @@ const getFollowers = async (username) => {
     return response.data;
   } catch (error) {
     console.log(error);
+    return error;
   }
 }
 
@@ -17,6 +18,7 @@ const getFollowing = async (username) => {
     return response.data;
   } catch (error) {
     console.log(error);
+    return error;
   }
 }
 
@@ -27,6 +29,7 @@ const getRepositories = async (username) => {
     return response.data;
   } catch (error) {
     console.log(error);
+    return error;
   }
 }
 
@@ -37,6 +40,7 @@ const getOrganizations = async (username) => {
     return response.data;
   } catch (error) {
     console.log(error);
+    return error;
   }
 }
 
@@ -47,6 +51,7 @@ const getCommits = async (username) => {
     return response.data;
   } catch (error) {
     console.log(error);
+    return error;
   }
 }
 

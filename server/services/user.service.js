@@ -15,19 +15,33 @@ module.exports = {
 
   // Searching for user in database
   searchByEntity: serviceBoilerPlate(async (entity, entityValue) => {
-    let data;
+    const query = {};
     if (entity === '_id') {
-      data = await user.findOne({ _id: entityValue }).exec();
+      query._id = entityValue;
+      const data = await user.findOne(query).exec();
+      return data;
     } else if (entity === 'username') {
-      data = await user.findOne({ username: entityValue }).exec();
+      query.username = entityValue;
       // } else if (entity === 'phone') {
-      //     data = await user.findOne({ phone: entityValue }).exec();
+      //     query.phone = entityValue;
     } else if (entity === 'email') {
-      data = await user.findOne({ email: entityValue }).exec();
+      query.email = entityValu;
     } else {
       throw new ServiceError(403, 'Invalid Search');
     }
-    return data;
+    const data = await user.aggregate([{
+      $lookup: {
+        from: friend.collection.name,
+        localField: "friends",
+        foreignField: "_id",
+        as: "friends",
+        let: { friends: "$friends" },
+        pipeline: [{ $project: { status: 1, _id: 0 } }]
+      },
+    }, {
+      $match: query
+    }]).exec();
+    return data[0];
   }),
 
   // Updating a user by its id in database
@@ -66,7 +80,7 @@ module.exports = {
         foreignField: "_id",
         as: "friends",
         let: { friends: "$friends" },
-        pipeline: [ {
+        pipeline: [{
           $project: { username: 1, _id: 0 }
         }],
       }
@@ -99,7 +113,7 @@ module.exports = {
         foreignField: "_id",
         as: "votes",
         let: { votes: "$votes" },
-        pipeline: [ {
+        pipeline: [{
           $project: { username: 1, _id: 0 }
         }],
       }
