@@ -38,8 +38,6 @@ module.exports = {
   // Viewing User Profile
   profile: ('/profile', controllerBoilerPlate(async (req) => {
     const data = await checkExist('_id', req.id);
-    data.votes
-
     let response = (({ name, username, email, socials }) => ({ name, username, email, socials }))(data);
     response.upvotes = (await userService.getVotesData(req.user._id, 1)).length;
     response.downvotes = (await userService.getVotesData(req.user._id, -1)).length;
