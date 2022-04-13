@@ -36,7 +36,8 @@ module.exports = {
         as: "friends",
         let: { friends: "$friends" },
         pipeline: [{ $project: { status: 1, _id: 0 } }]
-      },
+      }
+    }, {
       $lookup: {
         from: vote.collection.name,
         localField: "votes",
