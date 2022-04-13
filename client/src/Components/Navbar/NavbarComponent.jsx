@@ -3,12 +3,11 @@ import { Nav, NavDropdown, Container, Navbar } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { useAppContext } from "../../Context/appContext"
 import { useNavigate } from "react-router-dom"
-import Button from "@material-ui/core/Button"
 import "./NavbarComponent.scss"
 import "font-awesome/css/font-awesome.min.css"
 
 const NavbarComponent = ({ pathname }) => {
-  const { token, logoutUser, searchUser, socials } = useAppContext()
+  const { token, logoutUser, socials } = useAppContext()
   const navigate = useNavigate()
   const [username, setSearchUsername] = useState("")
 

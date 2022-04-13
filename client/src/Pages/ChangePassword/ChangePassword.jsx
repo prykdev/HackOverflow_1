@@ -14,7 +14,7 @@ const initialState = {
 
 const ChangePassword = () => {
   const [values, setValues] = useState(initialState)
-  const { token, logoutUser, changePassword, isError } = useAppContext()
+  const { token, changePassword, isError } = useAppContext()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -96,7 +96,6 @@ const ChangePassword = () => {
         </div>
       </div>
       <ToastContainer />
-
     </div>
   )
 }

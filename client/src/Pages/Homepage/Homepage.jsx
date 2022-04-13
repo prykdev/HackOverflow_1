@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React from "react"
 import "./Homepage.scss"
 import Button from "@material-ui/core/Button"
 import img1 from "./img-1.svg"
@@ -23,8 +23,8 @@ export const Homepage = () => {
             </div>
 
             <div className='home-text'>
-              <span>L</span>et's Compare and explore our ranking with the globe and 
-              with our friends
+              <span>L</span>et's Compare and explore our ranking with the globe
+              and with our friends
             </div>
 
             <Link to='/register' style={{ textDecoration: "none" }}>

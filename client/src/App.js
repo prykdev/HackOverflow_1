@@ -1,7 +1,6 @@
 import "./App.scss"
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import Landing from "./Pages/Landing/Landing"
-import Profile from "./Pages/Profile/Profile"
 import Leaderboard from "./Pages/Leaderboard/Leaderboard"
 import Setting from "./Pages/Settings/Setting"
 import ChangePassword from "./Pages/ChangePassword/ChangePassword"
@@ -17,7 +16,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/dashboard' element={<Dashboard />}></Route>
-          <Route path='/profile' element={<Profile />}></Route>
           <Route path='/leaderboard' element={<Leaderboard />}></Route>
           <Route exact path='/' element={<Homepage />}></Route>
           <Route path='/settings' element={<Setting />}></Route>

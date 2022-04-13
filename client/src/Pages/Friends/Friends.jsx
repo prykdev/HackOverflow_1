@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import NavbarComponent from "../../Components/Navbar/NavbarComponent"
 import { Footer } from "../../Components/Footer/Footer.jsx"
-import { Container, Row, Col, Card, Button, ListGroup } from "react-bootstrap"
+import { Container } from "react-bootstrap"
 import "./Friends.scss"
 import { Tabs, Tab } from "react-bootstrap"
 import { Link } from "react-router-dom"

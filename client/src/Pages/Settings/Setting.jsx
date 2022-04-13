@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import "./Setting.scss"
 import NavbarComponent from "../../Components/Navbar/NavbarComponent"
-import { Container, Row, Col, Card, Button, ListGroup } from "react-bootstrap"
+import { Container, Row, Col, Card, Button } from "react-bootstrap"
 import { useAppContext } from "../../Context/appContext"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"

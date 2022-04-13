@@ -4,7 +4,7 @@ import { useAppContext } from "../../Context/appContext"
 import { Container, Row, Col, Card } from "react-bootstrap"
 
 const CodeChef = (props) => {
-  const { username } = props;
+  const { username } = props
   const {
     getCodechef,
     codechefUsername,
@@ -18,13 +18,12 @@ const CodeChef = (props) => {
   } = useAppContext()
   useEffect(async () => {
     getCodechef(username)
-  }, [username]);
+  }, [username])
   return (
     <div className='codechef'>
       <Container>
         <div className='header'>
           <h3 className='heading'>Codechef</h3>
-          {/* <img src={require("../../assets/GitHub-Mark-Light-32px.png")}  alt="github" /> */}
           <h6>
             username: <span className='username'>{codechefUsername}</span>
           </h6>

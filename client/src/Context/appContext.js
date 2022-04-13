@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, useEffect } from "react"
+import React, { useReducer, useContext } from "react"
 import {
   REGISTER_USER_BEGIN,
   REGISTER_USER_SUCCESS,
@@ -235,7 +235,7 @@ const AppProvider = ({ children }) => {
 
     try {
       let { data } =
-        gusername.length == 0
+        gusername.length === 0
           ? await authFetch("/github")
           : await authFetch(`/github/${gusername}`)
       console.log(data.data)
@@ -285,7 +285,7 @@ const AppProvider = ({ children }) => {
 
     try {
       let { data } =
-        husername.length == 0
+        husername.length === 0
           ? await authFetch("/hackerrank")
           : await authFetch(`/hackerrank/${husername}`)
       console.log(data.data)
@@ -326,7 +326,7 @@ const AppProvider = ({ children }) => {
 
     try {
       let { data } =
-        cusername.length == 0
+        cusername.length === 0
           ? await authFetch("/codechef")
           : await authFetch(`/codechef/${cusername}`)
       console.log(data.data)

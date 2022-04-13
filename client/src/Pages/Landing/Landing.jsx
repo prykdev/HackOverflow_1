@@ -20,6 +20,7 @@ const Landing = () => {
               src='https://cdn1.iconfinder.com/data/icons/avatars-55/100/avatar_profile_user_music_headphones_shirt_cool-512.png'
               height='100px'
               width='100px'
+              alt='landing-image'
             />
             <h3> {!isSignUp ? "LOGIN" : "SIGN-UP"}</h3>
             {isSignUp ? <Signup /> : <Login />}

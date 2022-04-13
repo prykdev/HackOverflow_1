@@ -1,20 +1,17 @@
 import React, { useEffect } from "react"
 import "./SearchDashboard.scss"
 import NavbarComponent from "../../Components/Navbar/NavbarComponent"
-import { Outlet, useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { Footer } from "../../Components/Footer/Footer.jsx"
 import { useAppContext } from "../../Context/appContext"
-import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import Github from "../../Components/Github/Github"
 import Hackerrank from "../../Components/Hackerrank/Hackerrank"
 import CodeChef from "../../Components/CodeChef/CodeChef"
 import "font-awesome/css/font-awesome.min.css"
-import { AboutCard } from "../../Components/AboutCard/AboutCard"
 
 const SearchDashboard = () => {
-  const { isGithubError, socials, searchUser, addFriend, isAdd } =
-    useAppContext()
+  const { isGithubError, socials, searchUser, addFriend } = useAppContext()
 
   const location = useLocation()
   console.log(location)

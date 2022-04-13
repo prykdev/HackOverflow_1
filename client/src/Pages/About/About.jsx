@@ -1,7 +1,5 @@
 import React from "react"
 import NavbarComponent from "../../Components/Navbar/NavbarComponent"
-import { Footer } from "../../Components/Footer/Footer.jsx"
-import { Container, Row, Col, Card, Button, ListGroup } from "react-bootstrap"
 import "./About.scss"
 import { AboutCard } from "../../Components/AboutCard/AboutCard"
 const About = () => {

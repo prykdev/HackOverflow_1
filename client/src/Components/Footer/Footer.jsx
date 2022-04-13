@@ -15,19 +15,19 @@ export const Footer = () => {
         <ul>
           <li>
             {" "}
-            <a href='#'>Dashboard</a>{" "}
+            <a>Dashboard</a>{" "}
           </li>
           <li>
             {" "}
-            <a href='#'>About</a>{" "}
+            <a>About</a>{" "}
           </li>
           <li>
             {" "}
-            <a href='#'>Leaderboard </a>{" "}
+            <a>Leaderboard </a>{" "}
           </li>
           <li>
             {" "}
-            <a href='#'>Friends </a>{" "}
+            <a>Friends </a>{" "}
           </li>
           {/* <li>
             {" "}
