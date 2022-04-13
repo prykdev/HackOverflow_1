@@ -38,7 +38,11 @@ module.exports = {
   // Viewing User Profile
   profile: ('/profile', controllerBoilerPlate(async (req) => {
     const data = await checkExist('_id', req.id);
-    let response = (({ name, username, email, votes, socials }) => ({ name, username, email, votes, socials }))(data);
+    data.votes
+
+    let response = (({ name, username, email, socials }) => ({ name, username, email, socials }))(data);
+    response.upvotes = (await userService.getVotesData(req.user._id, 1)).length;
+    response.downvotes = (await userService.getVotesData(req.user._id, -1)).length;
     return controllerResponse(200, 'Successful', response);
   })),
 
@@ -73,7 +77,9 @@ module.exports = {
           else data.status = 'add';
         }
         else data.status = 'add';
-        const response = (({ name, username, status, votes, socials }) => ({ name, username, status, votes, socials }))(data);
+        const response = (({ name, username, status, socials }) => ({ name, username, status, socials }))(data);
+        response.upvotes = (await userService.getVotesData(data._id, 1)).length;
+        response.downvotes = (await userService.getVotesData(data._id, -1)).length;
         return controllerResponse(200, "Successful", response);
       }
       throw new ControllerError(404, "User not found!");
@@ -101,8 +107,8 @@ module.exports = {
     else if (type === "requests") status = 2;
     else if (type === "all") status = 3
     const data = await userService.getFriendsData(req.user._id, status);
-    data[0].friends = data[0].friends.map((friend) => friend.username);
-    return controllerResponse(200, 'Successful', data[0]);
+    data.friends = data.friends.map((friend) => friend.username);
+    return controllerResponse(200, 'Successful', data);
   })),
 
   getVotes: ('/votes/:type', controllerBoilerPlate(async (req) => {

@@ -16,7 +16,7 @@ module.exports = {
         await vote.findOneAndDelete(data).exec();
     }),
 
-    find: serviceBoilerPlate(async (data) => {
+    search: serviceBoilerPlate(async (data) => {
         const response = await vote.find(data).exec();
         return response;
     }),

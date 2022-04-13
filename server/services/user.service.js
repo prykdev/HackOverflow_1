@@ -4,6 +4,7 @@ const user = require('../models/user.model.js').model;
 const friend = require('../models/friend.model.js').model;
 const vote = require('../models/vote.model.js').model;
 const ServiceError = require('../errors/service.error.js');
+const { ObjectId } = require('mongoose').Types;
 
 module.exports = {
 
@@ -17,9 +18,7 @@ module.exports = {
   searchByEntity: serviceBoilerPlate(async (entity, entityValue) => {
     const query = {};
     if (entity === '_id') {
-      query._id = entityValue;
-      const data = await user.findOne(query).exec();
-      return data;
+      query._id = ObjectId(entityValue);
     } else if (entity === 'username') {
       query.username = entityValue;
       // } else if (entity === 'phone') {
@@ -38,6 +37,27 @@ module.exports = {
         let: { friends: "$friends" },
         pipeline: [{ $project: { status: 1, _id: 0 } }]
       },
+    //   $lookup: {
+    //     from: vote.collection.name,
+    //     localField: "votes",
+    //     foreignField: "_id",
+    //     as: "votes",
+    //     let: { votes: "$votes" },
+    //     pipeline: [{
+    //       $project: { status: 1, _id: 0, voter: 1 },
+    //     }]
+    //   },
+    // }, {
+    //   $lookup: {
+    //     from: user.collection.name,
+    //     localField: 'votes.voter',
+    //     foreignField: '_id',
+    //     as: 'voter',
+    //     let: { voter: "$voter" },
+    //     pipeline: [{
+    //       $project: { username: 1 }
+    //     }]
+    //   }
     }, {
       $match: query
     }]).exec();
@@ -85,7 +105,7 @@ module.exports = {
         }],
       }
     }]).exec();
-    return data;
+    return data[0];
   }),
 
   getVotesData: serviceBoilerPlate(async (_id, status) => {
@@ -97,9 +117,9 @@ module.exports = {
         as: "votes",
         let: { votes: "$votes" },
         pipeline: [{
-          $match: { status, voter: _id }
+          $match: { status, user: _id }
         }, {
-          $project: { user: 1, _id: 0 }
+          $project: { voter: 1, _id: 0 }
         }],
       }
     }, {
@@ -109,7 +129,7 @@ module.exports = {
     }, {
       $lookup: {
         from: user.collection.name,
-        localField: "votes.user",
+        localField: "votes.voter",
         foreignField: "_id",
         as: "votes",
         let: { votes: "$votes" },
@@ -118,6 +138,6 @@ module.exports = {
         }],
       }
     }]).exec();
-    return data;
+    return data[0].votes;
   })
 };

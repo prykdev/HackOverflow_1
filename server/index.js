@@ -5,6 +5,7 @@ const dbConn = require('./utils/db-conn.utils.js');
 const userRoutes = require('./routes/user.routes.js');
 const dataRoutes = require('./routes/data.routes.js');
 const friendRoutes = require('./routes/friend.routes.js');
+const voteRoutes = require('./routes/vote.routes.js');
 
 const app = express();
 const port = parseInt(process.env.APP_PORT, 10) || 8082;
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 app.use('/', userRoutes);
 app.use('/', dataRoutes);
 app.use('/', friendRoutes);
+app.use('/', voteRoutes);
 
 /**
  * To make sure, app start only if database is found

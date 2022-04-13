@@ -2,13 +2,13 @@ const { model, Schema } = require('mongoose');
 
 const user = new Schema({
   name: { type: String, required: true },
-  username: { type: String, required: true },
+  username: { type: String, required: true, unique: true },
   // phone: { type: Number, unique: true, required: true },
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
   friends: [{ type: Schema.Types.ObjectId, ref: 'friends' }],
   votes: [{ type: Schema.Types.ObjectId, ref: 'votes' }],
-  rating: { type: String, default: "100" },
+  rating: { type: Number, default: "100" },
   socials: {
     github: { type: String, default: "" },
     // codeforces: { type: String, default: "" },
