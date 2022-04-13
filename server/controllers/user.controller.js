@@ -53,7 +53,21 @@ module.exports = {
   })),
 
   // Checking if user exists
-  check: (['/check', '/search'], controllerBoilerPlate(async (req) => {
+  check: ('/check', controllerBoilerPlate(async (req) => {
+    const { username, email } = req.body;
+    let data;
+    if (username)
+      data = await checkExist('username', username);
+    else if (email)
+      data = await checkExist('email', email);
+    // else if (phone)
+    //   data = await checkExist('phone', phone);
+    if (data)
+      throw new ControllerError(400, entity + ' already registered!');
+    return controllerResponse(200, entity + ' available!');
+  })),
+
+  search: ('/search', controllerBoilerPlate(async (req) => {
     const { username, email } = req.body;
     let data;
     if (username)
@@ -63,27 +77,33 @@ module.exports = {
     // else if (phone)
     //   data = await checkExist('phone', phone);
 
-    if (req.originalUrl === '/check') {
-      if (data)
-        throw new ControllerError(400, entity + ' already registered!');
-      return controllerResponse(200, entity + ' available!');
-    } else if (req.originalUrl === '/search') {
-      if (data) {
-        if (data.friends[0]) {
-          const status = data.friends[0].status;
-          if (status === 3) data.status = 'friends';
-          else if (status === 2) data.status = 'requested';
-          else if (status === 1) data.status = 'pending';
-          else data.status = 'add';
-        }
+    if (data) {
+      if (data.friends[0]) {
+        const status = data.friends[0].status;
+        if (status === 3) data.status = 'friends';
+        else if (status === 2) data.status = 'requested';
+        else if (status === 1) data.status = 'pending';
         else data.status = 'add';
-        const response = (({ name, username, status, socials }) => ({ name, username, status, socials }))(data);
-        response.upvotes = (await userService.getVotesData(data._id, 1)).length;
-        response.downvotes = (await userService.getVotesData(data._id, -1)).length;
-        return controllerResponse(200, "Successful", response);
       }
-      throw new ControllerError(404, "User not found!");
+      else data.status = 'add';
+
+      const response = (({ name, username, status, socials }) => ({ name, username, status, socials }))(data);
+
+      response.upvotes = (await userService.getVotesData(data._id, 1)).length;
+      response.downvotes = (await userService.getVotesData(data._id, -1)).length;
+      response.voteStatus = "neutral";
+      data.votes.forEach(vote => {
+        if (vote.voter.toString() === req.user._id.toString()) {
+          if (vote.status === 1) {
+            response.voteStatus = "upvoted";
+          } else if (vote.status === -1) {
+            response.voteStatus = "downvoted";
+          }
+        }
+      })
+      return controllerResponse(200, "Successful", response);
     }
+    throw new ControllerError(404, "User not found!");
   })),
 
   // Changing User Password

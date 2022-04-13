@@ -6,6 +6,6 @@ const authMiddleware = require('../middlewares/auth.middleware');
 router.get('/upvote/:username', authMiddleware, vote.upvote);
 router.get('/downvote/:username', authMiddleware, vote.downvote);
 router.delete('/removevote/:username', authMiddleware, vote.remove);
-router.get('/voteLogs', authMiddleware, vote.getVoteLogs);
+// router.get('/voteLogs', authMiddleware, vote.getVoteLogs);
 
 module.exports = router;

@@ -37,27 +37,16 @@ module.exports = {
         let: { friends: "$friends" },
         pipeline: [{ $project: { status: 1, _id: 0 } }]
       },
-    //   $lookup: {
-    //     from: vote.collection.name,
-    //     localField: "votes",
-    //     foreignField: "_id",
-    //     as: "votes",
-    //     let: { votes: "$votes" },
-    //     pipeline: [{
-    //       $project: { status: 1, _id: 0, voter: 1 },
-    //     }]
-    //   },
-    // }, {
-    //   $lookup: {
-    //     from: user.collection.name,
-    //     localField: 'votes.voter',
-    //     foreignField: '_id',
-    //     as: 'voter',
-    //     let: { voter: "$voter" },
-    //     pipeline: [{
-    //       $project: { username: 1 }
-    //     }]
-    //   }
+      $lookup: {
+        from: vote.collection.name,
+        localField: "votes",
+        foreignField: "_id",
+        as: "votes",
+        let: { votes: "$votes" },
+        pipeline: [{
+          $project: { status: 1, _id: 0, voter: 1 },
+        }]
+      },
     }, {
       $match: query
     }]).exec();
