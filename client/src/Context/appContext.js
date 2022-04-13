@@ -40,6 +40,12 @@ import {
   ADD_FRIEND_ERROR,
   GET_ACCEPT_REQ_BEGIN,
   GET_ACCEPT_REQ_SUCCESS,
+  GET_UPVOTE_BEGIN,
+  GET_DOWNVOTE_BEGIN,
+  GET_DOWNVOTE_SUCCESS,
+  REMOVE_VOTE_BEGIN,
+  REMOVE_VOTE_SUCCESS,
+  GET_UPVOTE_SUCCESS,
 } from "./action"
 import axios from "axios"
 import reducer from "./reducer"
@@ -49,9 +55,15 @@ const BASE_URL = "http://localhost:8082"
 
 const initialState = {
   token: token,
-  data: "",
+  loginUsername: "",
   isGithubError: false,
   isAdd: false,
+  isRemoved: false,
+  isLogout: true,
+  isLogin: false,
+  isRegister: false,
+  isUpVote: false,
+  isDownVote: false,
 }
 
 const AppContext = React.createContext()
@@ -84,7 +96,7 @@ const AppProvider = ({ children }) => {
     (error) => {
       console.log(error.response)
       if (error.response.status === 401) {
-        logoutUser()
+        // logoutUser()
         console.log("AUTH ERROR")
       }
       return Promise.reject(error)
@@ -134,6 +146,7 @@ const AppProvider = ({ children }) => {
         type: LOGIN_USER_SUCCESS,
         payload: {
           token: data.data.token,
+          loginUsername: "user2",
         },
       })
       console.log(data.data.token)
@@ -160,7 +173,7 @@ const AppProvider = ({ children }) => {
 
     try {
       let { data } = await authFetch("/profile")
-      let { email, username, name, socials } = data.data
+      let { email, username, name, socials, upvotes, downvotes } = data.data
       let { github, hackerrank, codechef } = socials
       dispatch({
         type: GET_USER_SUCCESS,
@@ -171,6 +184,9 @@ const AppProvider = ({ children }) => {
           github,
           hackerrank,
           codechef,
+          upvotes,
+          downvotes,
+          loginUsername: username,
         },
       })
     } catch (error) {
@@ -372,19 +388,21 @@ const AppProvider = ({ children }) => {
     })
     try {
       let { data } = await authFetch.post(`${BASE_URL}/search`, { username })
-      let { name, socials, status, votes } = data.data
-      if (status === 'friends') status = 'Remove Friend';
-      else if (status === 'requested') status = 'Cancel Request';
-      else if (status === 'pending') status = 'Accept Request';
-      else status = 'Add Friend';
-      
+      let { name, socials, status, upvotes, downvotes, voteStatus } = data.data
+      if (status === "friends") status = "Remove Friend"
+      else if (status === "requested") status = "Cancel Request"
+      else if (status === "pending") status = "Accept Request"
+      else status = "Add Friend"
+
       dispatch({
         type: SEARCH_USER_SUCCESS,
         payload: {
           name,
           socials,
           status,
-          votes,
+          upvotes,
+          downvotes,
+          voteStatus,
         },
       })
     } catch (error) {
@@ -507,6 +525,57 @@ const AppProvider = ({ children }) => {
     }
   }
 
+  const getUpVote = async (username) => {
+    dispatch({
+      type: GET_UPVOTE_BEGIN,
+    })
+
+    try {
+      console.log(username)
+      let { data } = await authFetch.get(`${BASE_URL}/upvote/${username}`)
+
+      dispatch({
+        type: GET_UPVOTE_SUCCESS,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+
+  const getDownVote = async (username) => {
+    console.log("downnnnnn" + username)
+    dispatch({
+      type: GET_DOWNVOTE_BEGIN,
+    })
+
+    try {
+      let { data } = await authFetch.get(`${BASE_URL}/downvote/${username}`)
+      const { message } = data.data
+      console.log(message)
+      dispatch({
+        type: GET_DOWNVOTE_SUCCESS,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+
+  const removeVote = async (username) => {
+    dispatch({
+      type: REMOVE_VOTE_BEGIN,
+    })
+
+    try {
+      let { data } = await authFetch.get(`${BASE_URL}/removevote/${username}`)
+
+      dispatch({
+        type: REMOVE_VOTE_SUCCESS,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -528,6 +597,9 @@ const AppProvider = ({ children }) => {
         getFriendsReq,
         getRequestsReq,
         acceptReq,
+        getUpVote,
+        getDownVote,
+        removeVote,
       }}
     >
       {children}

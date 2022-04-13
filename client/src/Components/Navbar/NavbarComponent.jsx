@@ -1,17 +1,19 @@
 import React, { useEffect, useState, useRef } from "react"
-import { Nav, NavDropdown, Container, Navbar } from "react-bootstrap"
+import { Nav, NavDropdown, Container, Navbar, Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { useAppContext } from "../../Context/appContext"
 import { useNavigate } from "react-router-dom"
 import "./NavbarComponent.scss"
 import "font-awesome/css/font-awesome.min.css"
+import { ToastContainer, toast } from "react-toastify"
 
 const NavbarComponent = ({ pathname }) => {
-  const { token, logoutUser, socials } = useAppContext()
+  const { token, logoutUser, socials, loginUsername } = useAppContext()
   const navigate = useNavigate()
   const [username, setSearchUsername] = useState("")
 
   const [isLogin, setIsLogin] = useState(false)
+  const [isLogoutUser, setIsLogoutUser] = useState(false)
 
   const handleChange = (e) => {
     e.preventDefault()
@@ -22,7 +24,12 @@ const NavbarComponent = ({ pathname }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     // await searchUser(username)
-    navigate(`/searchdashboard/${username}`)
+    console.log(loginUsername === username)
+    if (username === loginUsername) {
+      navigate("/dashboard")
+    } else {
+      navigate(`/searchdashboard/${username}`)
+    }
   }
   // console.log(socials + "fdewfewf")
   const proRef = useRef()
@@ -32,7 +39,19 @@ const NavbarComponent = ({ pathname }) => {
     } else if (!token) {
       navigate("/")
     }
-  }, [token, socials])
+
+    if (isLogoutUser) {
+      toast("User Logout Successfully")
+    }
+  }, [token, socials, isLogoutUser])
+
+  const handleLogout = (e) => {
+    setIsLogoutUser(!isLogoutUser)
+    setTimeout(() => {
+      logoutUser()
+    }, 3000)
+  }
+
   return (
     <Navbar sticky='top' className='navheader' collapseOnSelect expand='lg'>
       <Container>
@@ -102,7 +121,9 @@ const NavbarComponent = ({ pathname }) => {
                 <NavDropdown.Item as={Link} to='/changepassword'>
                   Change Password
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={logoutUser}>Logout</NavDropdown.Item>
+                <NavDropdown.Item as={Button} onClick={handleLogout}>
+                  Logout
+                </NavDropdown.Item>
               </NavDropdown>
               {/* <Button className='logout-btn' onClick={logoutUser}>
                 Logout
@@ -113,6 +134,7 @@ const NavbarComponent = ({ pathname }) => {
           )}
         </Navbar.Collapse>
       </Container>
+      <ToastContainer />
     </Navbar>
   )
 }

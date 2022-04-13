@@ -8,27 +8,31 @@ const initialState = {
   password: "",
 }
 
-export const Login = () => {
+export const Login = (props) => {
   const [values, setValues] = useState(initialState)
   const navigate = useNavigate()
-  const { token, loginUser } = useAppContext()
+  const { token, loginUser, isLogin } = useAppContext()
   const handleChange = (e) => {
     console.log(e.target)
     setValues({ ...values, [e.target.name]: e.target.value })
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
     const { username, password } = values
     const currentUser = { username, password }
     console.log(currentUser)
-    loginUser(currentUser)
+    await loginUser(currentUser)
+    console.log(isLogin)
+    props.passLoginChildData(true)
   }
 
   useEffect(() => {
-    if (token) {
-      navigate("/dashboard")
-    }
+    setTimeout(() => {
+      if (token) {
+        navigate("/dashboard")
+      }
+    }, 2000)
   }, [token, navigate])
 
   return (

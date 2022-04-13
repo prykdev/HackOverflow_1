@@ -12,29 +12,33 @@ const initialState = {
   codechef: "",
 }
 
-export const Signup = () => {
+export const Signup = (props) => {
   const [values, setValues] = useState(initialState)
   const navigate = useNavigate()
-  const { token, registerUser } = useAppContext()
+  const { token, registerUser, isRegister } = useAppContext()
   const handleChange = (e) => {
     console.log(e.target)
     setValues({ ...values, [e.target.name]: e.target.value })
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
     const { username, name, email, password, github, hackerrank, codechef } =
       values
     const socials = { github, hackerrank, codechef }
     const currentUser = { username, name, email, password, socials }
     console.log(currentUser)
-    registerUser(currentUser)
+    await registerUser(currentUser)
+    console.log(isRegister)
+    props.passRegisterChildData(true)
   }
 
   useEffect(() => {
-    if (token) {
-      navigate("/dashboard")
-    }
+    setTimeout(() => {
+      if (token) {
+        navigate("/dashboard")
+      }
+    }, 2000)
   }, [token, navigate])
   return (
     <div className='loginBox text-center'>

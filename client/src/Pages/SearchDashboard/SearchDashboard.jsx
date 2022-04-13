@@ -9,10 +9,27 @@ import Github from "../../Components/Github/Github"
 import Hackerrank from "../../Components/Hackerrank/Hackerrank"
 import CodeChef from "../../Components/CodeChef/CodeChef"
 import "font-awesome/css/font-awesome.min.css"
-import { toast, ToastContainer } from 'react-toastify'
+import { toast, ToastContainer } from "react-toastify"
 
 const SearchDashboard = () => {
-  const { isGithubError, name, socials, votes, status, searchUser, addFriend, acceptReq, getCancelReq } = useAppContext()
+  const {
+    isGithubError,
+    name,
+    socials,
+    upvotes,
+    downvotes,
+    voteStatus,
+    status,
+    searchUser,
+    addFriend,
+    acceptReq,
+    getCancelReq,
+    getUpVote,
+    getDownVote,
+    removeVote,
+    isUpVote,
+    isDownVote,
+  } = useAppContext()
 
   const location = useLocation()
   console.log(location)
@@ -23,28 +40,40 @@ const SearchDashboard = () => {
   useEffect(async () => {
     console.log("useeffect")
     if (username) await searchUser(username)
-    if (isGithubError) {
-      toast("Github API rate limit exceeded!!!")
-    }
-  }, [username, status])
+  }, [username, status, isUpVote, isDownVote])
 
   function handleFriend(username) {
     if (status === "Add Friend") {
       addFriend(username)
-      toast('Friend request sent!')
-    }
-    else if (status === "Accept Request") {
+      toast("Friend request sent!")
+    } else if (status === "Accept Request") {
       acceptReq(username)
-      toast('You are now friends!')
-    }
-    else {
-      if (status === "Remove Friend")
-        toast('Friend Removed')
-      else
-        toast('Friend Request Removed!')
+      toast("You are now friends!")
+    } else {
+      if (status === "Remove Friend") toast("Friend Removed")
+      else toast("Friend Request Removed!")
       getCancelReq(username)
     }
+  }
 
+  const handleUpVote = async () => {
+    if (isUpVote) {
+      console.log("REMOVE")
+      await removeVote(username)
+    } else {
+      console.log("up")
+      await getUpVote(username)
+    }
+  }
+
+  const handleDownVote = async () => {
+    if (isDownVote) {
+      console.log("REMOVE")
+      await removeVote(username)
+    } else {
+      console.log("down")
+      await getDownVote(username)
+    }
   }
 
   return (
@@ -53,16 +82,32 @@ const SearchDashboard = () => {
         <NavbarComponent />
         <div className='container-fluid mt-5'>
           <div className='row'>
-            <div className='col-lg-12 col-sm-6 text-center justify-content-center' style={{ color: "white", paddingBottom: "1rem" }}>
+            <div
+              className='col-lg-12 col-sm-6 text-center justify-content-center'
+              style={{ color: "white", paddingBottom: "1rem" }}
+            >
               <h1>{name}</h1>({username})
             </div>
           </div>
           <div className='row'>
             <div className='col-lg-12 col-sm-6 text-center d-flex justify-content-center gap-4'>
-              <button className='btn btn-up p-3' title='Upvote'>
-                <i className='fa fa-thumbs-up fa-lg '></i>
+              <button
+                className='btn btn-up p-3'
+                title='Upvote'
+                onClick={handleUpVote}
+              >
+                <div className='d-flex justify-content-center p-0 m-0'>
+                  {" "}
+                  <p>{upvotes}</p>
+                  <i className='fa fa-thumbs-up fa-lg '></i>
+                </div>
               </button>
-              <button className='btn btn-down  p-3' title='Downvote'>
+              <button
+                className='btn btn-down  p-3'
+                title='Downvote'
+                onClick={handleDownVote}
+              >
+                <p>{downvotes}</p>
                 <i className='fa fa-thumbs-down fa-lg'></i>
               </button>
               <button
@@ -74,8 +119,9 @@ const SearchDashboard = () => {
                   handleFriend(username)
                 }}
               >
-                {(status === "Add Friend" || status === "Accept Request") ? (
-                  <i className='fa fa-user-plus fa-lg'></i>) : (
+                {status === "Add Friend" || status === "Accept Request" ? (
+                  <i className='fa fa-user-plus fa-lg'></i>
+                ) : (
                   <i className='fa fa-user-times fa-lg'></i>
                 )}
               </button>

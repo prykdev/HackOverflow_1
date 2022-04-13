@@ -39,6 +39,12 @@ import {
   GET_CANCEL_REQ_SUCCESS,
   GET_ACCEPT_REQ_BEGIN,
   GET_ACCEPT_REQ_SUCCESS,
+  GET_UPVOTE_BEGIN,
+  GET_UPVOTE_SUCCESS,
+  GET_DOWNVOTE_BEGIN,
+  GET_DOWNVOTE_SUCCESS,
+  REMOVE_VOTE_BEGIN,
+  REMOVE_VOTE_SUCCESS,
 } from "./action"
 import { initialState } from "./appContext"
 
@@ -52,6 +58,8 @@ const reducer = (state, action) => {
       ...state,
       token: action.payload.token,
       data: action.payload.data,
+      isLogin: false,
+      isRegister: true,
     }
   }
 
@@ -62,27 +70,30 @@ const reducer = (state, action) => {
   }
 
   if (action.type === LOGIN_USER_BEGIN) {
-    return { ...state }
+    return { ...state, isLogin: false }
   }
 
   if (action.type === LOGIN_USER_SUCCESS) {
     return {
       ...state,
       token: action.payload.token,
-      data: action.payload.data,
+      isLogout: false,
+      isLogin: true,
+      isRegister: false,
     }
   }
 
   if (action.type === LOGIN_USER_ERROR) {
     return {
-      ...state,
+      isLogin: false,
     }
   }
   if (action.type === LOGOUT_USER) {
     return {
       ...initialState,
-
       token: null,
+      isLogout: true,
+      isLogin: false,
     }
   }
 
@@ -98,6 +109,9 @@ const reducer = (state, action) => {
       github: action.payload.github,
       hackerrank: action.payload.hackerrank,
       codechef: action.payload.codechef,
+      loginUsername: action.payload.loginUsername,
+      upvotes: action.payload.upvotes,
+      downvotes: action.payload.downvotes,
     }
   }
 
@@ -192,7 +206,9 @@ const reducer = (state, action) => {
       socials: action.payload.socials,
       name: action.payload.name,
       status: action.payload.status,
-      votes: action.payload.votes,
+      upvotes: action.payload.upvotes,
+      downvotes: action.payload.downvotes,
+      voteStatus: action.payload.voteStatus,
     }
   }
   if (action.type === SEARCH_USER_ERROR) {
@@ -248,12 +264,31 @@ const reducer = (state, action) => {
     return { ...state }
   }
   if (action.type === GET_CANCEL_REQ_SUCCESS) {
-    return { ...state }
+    return { ...state, isRemove: true }
   }
   if (action.type === GET_ACCEPT_REQ_BEGIN) {
     return { ...state }
   }
   if (action.type === GET_ACCEPT_REQ_SUCCESS) {
+    return { ...state }
+  }
+
+  if (action.type === GET_UPVOTE_BEGIN) {
+    return { ...state }
+  }
+  if (action.type === GET_UPVOTE_SUCCESS) {
+    return { ...state, isUpVote: true }
+  }
+  if (action.type === GET_DOWNVOTE_BEGIN) {
+    return { ...state }
+  }
+  if (action.type === GET_DOWNVOTE_SUCCESS) {
+    return { ...state, isDownVote: true }
+  }
+  if (action.type === REMOVE_VOTE_BEGIN) {
+    return { ...state }
+  }
+  if (action.type === REMOVE_VOTE_SUCCESS) {
     return { ...state }
   }
 }

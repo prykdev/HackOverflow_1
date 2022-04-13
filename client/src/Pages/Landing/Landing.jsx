@@ -1,14 +1,29 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Login } from "../../Components/Login/Login"
 import { Signup } from "../../Components/Signup/Signup"
 import "./Landing.scss"
 import NavbarComponent from "../../Components/Navbar/NavbarComponent"
 import { useLocation } from "react-router-dom"
+import { toast, ToastContainer } from "react-toastify"
 
 const Landing = () => {
   const [isSignUp, setIsSignUp] = useState(true)
   const { pathname } = useLocation()
   console.log(pathname)
+
+  const [isLoginUser, setIsLoginUser] = useState(false)
+  const [isRegisterUser, setIsRegisterUser] = useState(false)
+
+  useEffect(() => {
+    console.log(isLoginUser)
+    if (isLoginUser) {
+      toast("User Login Successfully")
+    }
+    console.log(isRegisterUser)
+    if (isRegisterUser) {
+      toast("User Register Successfully")
+    }
+  }, [isLoginUser, isRegisterUser])
   return (
     <>
       <div className='landing-home'>
@@ -23,7 +38,11 @@ const Landing = () => {
               alt='landing-image'
             />
             <h3> {!isSignUp ? "LOGIN" : "SIGN-UP"}</h3>
-            {isSignUp ? <Signup /> : <Login />}
+            {isSignUp ? (
+              <Signup passRegisterChildData={setIsRegisterUser} />
+            ) : (
+              <Login passLoginChildData={setIsLoginUser} />
+            )}
             <div
               className='toggleText'
               onClick={() => setIsSignUp((cur) => !cur)}
@@ -35,6 +54,7 @@ const Landing = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   )
 }

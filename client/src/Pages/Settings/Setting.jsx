@@ -13,6 +13,8 @@ const Setting = () => {
     codechef: "",
   }
   const {
+    upvotes,
+    downvotes,
     getUser,
     email,
     username,
@@ -73,8 +75,10 @@ const Setting = () => {
                   />
                   <h2>{name}</h2>
                   <h6 className='data-text mb-1 p-2'>{username}</h6>
-                  <h6 className='data-text mb-1  p-1'>UpVotes : 78</h6>
-                  <h6 className='data-text mb-1  p-1'>DownVotes : 29</h6>
+                  <h6 className='data-text mb-1  p-1'>UpVotes : {upvotes}</h6>
+                  <h6 className='data-text mb-1  p-1'>
+                    DownVotes : {downvotes}
+                  </h6>
                 </Card>
               </Col>
               <Col md={8}>
