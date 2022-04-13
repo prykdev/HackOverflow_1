@@ -34,10 +34,11 @@ module.exports = {
     let rating = -1;
     const check = await voteService.search({ voter: req.user._id, user: data._id });
     if (check[0]) {
-      if (check[0].status === -1) throw new ControllerError(409, "Already upvoted!");
+      console.log(check)
+      if (check[0].status === -1) throw new ControllerError(409, "Already downvoted!");
       if (check[0].status === 1) rating = -2;
     }
-    const vote = await voteService.create({ voter: req.user._id, user: data._id }, { $set: { status: 1 } });
+    const vote = await voteService.create({ voter: req.user._id, user: data._id }, { $set: { status: -1 } });
     const updateUserA = await userService.updateById(data._id, { $addToSet: { votes: vote._id }, $inc: { rating } });
     return controllerResponse(201, 'Successful');
   })),
