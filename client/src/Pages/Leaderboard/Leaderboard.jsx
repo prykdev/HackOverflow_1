@@ -26,7 +26,7 @@ const Leaderboard = () => {
               Friends
             </Button>
           </Row>
-          <Table bordered style={{ color: "white" }}>
+          <Table bordered style={{ color: "white", "border-color": "#79828a" }}>
             <thead>
               <tr>
                 <th>#Rank</th>

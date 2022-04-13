@@ -12,8 +12,6 @@ router.post(['/check', '/search'], validate(checkSchema), user.check);
 router.get('/profile', authMiddleware, user.profile);
 router.patch('/password', authMiddleware, validate(changePasswordSchema), user.changePassword);
 router.get('/friends/:type', authMiddleware, user.getFriends);
-// router.get('/pending', authMiddleware, user.getPending);
-// router.get('/friendRequests', authMiddleware, user.getFriendRequests);
 
 // Validation Error Handling
 router.use((err, req, res, next) => {

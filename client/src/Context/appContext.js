@@ -38,6 +38,8 @@ import {
   GET_REQUESTS_REQ_SUCCESS,
   ADD_FRIEND_SUCCESS,
   ADD_FRIEND_ERROR,
+  GET_ACCEPT_REQ_BEGIN,
+  GET_ACCEPT_REQ_SUCCESS,
 } from "./action"
 import axios from "axios"
 import reducer from "./reducer"
@@ -370,12 +372,19 @@ const AppProvider = ({ children }) => {
     })
     try {
       let { data } = await authFetch.post(`${BASE_URL}/search`, { username })
-      const { socials } = data.data
-
+      let { name, socials, status, votes } = data.data
+      if (status === 'friends') status = 'Remove Friend';
+      else if (status === 'requested') status = 'Cancel Request';
+      else if (status === 'pending') status = 'Accept Request';
+      else status = 'Add Friend';
+      
       dispatch({
         type: SEARCH_USER_SUCCESS,
         payload: {
+          name,
           socials,
+          status,
+          votes,
         },
       })
     } catch (error) {
@@ -442,13 +451,29 @@ const AppProvider = ({ children }) => {
     }
   }
 
+  const acceptReq = async (username) => {
+    dispatch({
+      type: GET_ACCEPT_REQ_BEGIN,
+    })
+
+    try {
+      let { data } = await authFetch.get(`${BASE_URL}/acceptfriend/${username}`)
+
+      dispatch({
+        type: GET_ACCEPT_REQ_SUCCESS,
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
+
   const getFriendsReq = async () => {
     dispatch({
       type: GET_FRIENDS_REQ_BEGIN,
     })
 
     try {
-      let { data } = await authFetch.get(`${BASE_URL}/friends/friends`)
+      let { data } = await authFetch.get(`${BASE_URL}/friends/all`)
       let friends = data.data.friends
 
       dispatch({
@@ -502,6 +527,7 @@ const AppProvider = ({ children }) => {
         getCancelReq,
         getFriendsReq,
         getRequestsReq,
+        acceptReq,
       }}
     >
       {children}

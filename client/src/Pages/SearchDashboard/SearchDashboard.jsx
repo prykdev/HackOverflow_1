@@ -9,9 +9,10 @@ import Github from "../../Components/Github/Github"
 import Hackerrank from "../../Components/Hackerrank/Hackerrank"
 import CodeChef from "../../Components/CodeChef/CodeChef"
 import "font-awesome/css/font-awesome.min.css"
+import { toast, ToastContainer } from 'react-toastify'
 
 const SearchDashboard = () => {
-  const { isGithubError, socials, searchUser, addFriend } = useAppContext()
+  const { isGithubError, name, socials, votes, status, searchUser, addFriend, acceptReq, getCancelReq } = useAppContext()
 
   const location = useLocation()
   console.log(location)
@@ -25,10 +26,25 @@ const SearchDashboard = () => {
     if (isGithubError) {
       toast("Github API rate limit exceeded!!!")
     }
-  }, [username])
+  }, [username, status])
 
-  function handleAddFriend(username) {
-    addFriend(username)
+  function handleFriend(username) {
+    if (status === "Add Friend") {
+      addFriend(username)
+      toast('Friend request sent!')
+    }
+    else if (status === "Accept Request") {
+      acceptReq(username)
+      toast('You are now friends!')
+    }
+    else {
+      if (status === "Remove Friend")
+        toast('Friend Removed')
+      else
+        toast('Friend Request Removed!')
+      getCancelReq(username)
+    }
+
   }
 
   return (
@@ -36,24 +52,34 @@ const SearchDashboard = () => {
       <div className='dashboardHome'>
         <NavbarComponent />
         <div className='container-fluid mt-5'>
-          <div className='col-lg-12 col-sm-6 text-center d-flex justify-content-center gap-4'>
-            <button className='btn btn-up p-3' title='UpVote'>
-              <i className='fa fa-thumbs-up fa-lg '></i>
-            </button>
-            <button className='btn btn-down  p-3' title='DownVote'>
-              <i className='fa fa-thumbs-down fa-lg'></i>
-            </button>
-            <button
-              className='btn btn-add  p-3'
-              title='Add Friend'
-              type='button'
-              onClick={(event) => {
-                event.preventDefault()
-                handleAddFriend(friend)
-              }}
-            >
-              <i className='fa fa-user-plus fa-lg'></i>
-            </button>
+          <div className='row'>
+            <div className='col-lg-12 col-sm-6 text-center justify-content-center' style={{ color: "white", paddingBottom: "1rem" }}>
+              <h1>{name}</h1>({username})
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-lg-12 col-sm-6 text-center d-flex justify-content-center gap-4'>
+              <button className='btn btn-up p-3' title='Upvote'>
+                <i className='fa fa-thumbs-up fa-lg '></i>
+              </button>
+              <button className='btn btn-down  p-3' title='Downvote'>
+                <i className='fa fa-thumbs-down fa-lg'></i>
+              </button>
+              <button
+                className='btn btn-add  p-3'
+                title={status}
+                type='button'
+                onClick={(event) => {
+                  event.preventDefault()
+                  handleFriend(username)
+                }}
+              >
+                {(status === "Add Friend" || status === "Accept Request") ? (
+                  <i className='fa fa-user-plus fa-lg'></i>) : (
+                  <i className='fa fa-user-times fa-lg'></i>
+                )}
+              </button>
+            </div>
           </div>
         </div>
         <Github username={socials && socials.github} />
@@ -63,6 +89,7 @@ const SearchDashboard = () => {
         {/* {isGithubError ? <ToastContainer /> : <></>} */}
         <Footer />
       </div>
+      <ToastContainer />
     </>
   )
 }

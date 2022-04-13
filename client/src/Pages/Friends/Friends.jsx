@@ -15,6 +15,7 @@ const Friends = () => {
     getCancelReq,
     getFriendsReq,
     getRequestsReq,
+    acceptReq,
   } = useAppContext()
 
   const [isCancel, setisCancel] = useState(false)
@@ -29,6 +30,13 @@ const Friends = () => {
     console.log(friend)
 
     getCancelReq(friend)
+    setisCancel(!isCancel)
+  }
+
+  function handleAccept(friend) {
+    console.log(friend)
+
+    acceptReq(friend)
     setisCancel(!isCancel)
   }
 
@@ -69,6 +77,7 @@ const Friends = () => {
                           <td style={{ width: "30%" }}>
                             <button
                               type='button'
+                              className="btn"
                               onClick={(event) => {
                                 event.preventDefault()
                                 handleCancel(friend)
@@ -97,6 +106,7 @@ const Friends = () => {
                           <td style={{ width: "30%" }}>
                             <button
                               type='button'
+                              className="btn"
                               onClick={(event) => {
                                 event.preventDefault()
                                 handleCancel(friend)
@@ -115,15 +125,26 @@ const Friends = () => {
                   <tbody>
                     <tr>
                       <td>Name</td>
-                      <td style={{ width: "30%" }}> Reject Request </td>
+                      <td style={{ width: "30%" }}> Accept/Reject </td>
                     </tr>
                     {requests &&
                       requests.map((friend) => (
                         <tr>
                           <td> {friend}</td>
                           <td style={{ width: "30%" }}>
+                          <button
+                              type='button'
+                              className="btn"
+                              onClick={(event) => {
+                                event.preventDefault()
+                                handleAccept(friend)
+                              }}
+                            >
+                              ✔️
+                            </button>
                             <button
                               type='button'
+                              className="btn"
                               onClick={(event) => {
                                 event.preventDefault()
                                 handleCancel(friend)

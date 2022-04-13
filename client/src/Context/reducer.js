@@ -37,6 +37,8 @@ import {
   GET_REQUESTS_REQ_SUCCESS,
   GET_CANCEL_REQ_BEGIN,
   GET_CANCEL_REQ_SUCCESS,
+  GET_ACCEPT_REQ_BEGIN,
+  GET_ACCEPT_REQ_SUCCESS,
 } from "./action"
 import { initialState } from "./appContext"
 
@@ -188,6 +190,9 @@ const reducer = (state, action) => {
     return {
       ...state,
       socials: action.payload.socials,
+      name: action.payload.name,
+      status: action.payload.status,
+      votes: action.payload.votes,
     }
   }
   if (action.type === SEARCH_USER_ERROR) {
@@ -243,6 +248,12 @@ const reducer = (state, action) => {
     return { ...state }
   }
   if (action.type === GET_CANCEL_REQ_SUCCESS) {
+    return { ...state }
+  }
+  if (action.type === GET_ACCEPT_REQ_BEGIN) {
+    return { ...state }
+  }
+  if (action.type === GET_ACCEPT_REQ_SUCCESS) {
     return { ...state }
   }
 }

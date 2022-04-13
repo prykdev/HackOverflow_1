@@ -1,7 +1,6 @@
 // Importing File Dependencies
 const { controllerBoilerPlate, controllerResponse } = require('../utils/controller.utils.js');
 const { checkExist } = require('../utils/user.utils.js');
-const friendService = require('../services/friend.service.js');
 const userService = require('../services/user.service.js');
 const ControllerError = require('../errors/controller.error.js');
 
