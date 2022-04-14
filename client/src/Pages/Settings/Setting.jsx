@@ -183,14 +183,14 @@ const Setting = () => {
                           <div>
                             <Button
                               type='submit'
-                              className='btn btn-info ms-5 mb-3 ps-3'
+                              className='btn btn-edit ms-4 mb-3 ps-3'
                             >
-                              SAVE
+                              Save
                             </Button>
                             <Button
                               type='reset'
                               onClick={handleCancel}
-                              className='btn btn-danger ms-5 mb-3 ps-3'
+                              className='btn btn-cancel ms-4 mb-3 ps-3'
                             >
                               Cancel
                             </Button>
@@ -198,10 +198,10 @@ const Setting = () => {
                         ) : (
                           <Button
                             type='button'
-                            className='btn btn-info ms-5 mb-3 ps-3'
+                            className='btn btn-edit ms-4 mb-3 ps-3'
                             onClick={handleClick}
                           >
-                            EDIT
+                            Edit
                           </Button>
                         )}
                       </Col>

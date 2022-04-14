@@ -153,7 +153,6 @@ const AppProvider = ({ children }) => {
           loginUsername: "user2",
         },
       })
-      console.log(data.data.token)
       //local data storage
       addUserToLocalStorage({ token: data.data.token })
     } catch (error) {
@@ -259,7 +258,6 @@ const AppProvider = ({ children }) => {
         gusername.length === 0
           ? await authFetch("/github")
           : await authFetch(`/github/${gusername}`)
-      console.log(data.data)
       let {
         graph,
         stats,
@@ -309,7 +307,6 @@ const AppProvider = ({ children }) => {
         husername.length === 0
           ? await authFetch("/hackerrank")
           : await authFetch(`/hackerrank/${husername}`)
-      console.log(data.data)
       let {
         hackerrankUsername,
         hackerrank_created_at,
@@ -350,7 +347,6 @@ const AppProvider = ({ children }) => {
         cusername.length === 0
           ? await authFetch("/codechef")
           : await authFetch(`/codechef/${cusername}`)
-      console.log(data.data)
       let {
         codechefUsername,
         rankings,
@@ -543,7 +539,6 @@ const AppProvider = ({ children }) => {
   }
 
   const getDownVote = async (username) => {
-    console.log("downnnnnn" + username)
     dispatch({
       type: GET_DOWNVOTE_BEGIN,
     })
@@ -580,9 +575,7 @@ const AppProvider = ({ children }) => {
     })
     try {
       let { data } = await axios.get(`${BASE_URL}/leaderboard/global`)
-      console.log(data.data)
       let globaldata = data.data
-      console.log(globaldata)
       dispatch({
         type: GET_GLOBAL_LEADERBOARD_SUCCESS,
         payload: {
@@ -600,9 +593,7 @@ const AppProvider = ({ children }) => {
     })
     try {
       let { data } = await authFetch.get(`${BASE_URL}/leaderboard/friends`)
-      console.log(data.data)
       let friendsdata = data.data
-      console.log(friendsdata)
       dispatch({
         type: GET_FRIEND_LEADERBOARD_SUCCESS,
         payload: {

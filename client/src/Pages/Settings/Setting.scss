@@ -60,3 +60,16 @@ input:hover{
 input:focus{
   border-bottom: 2px solid #FF6666;
 }
+
+.btn-edit{
+  margin-left: 0px !important;
+  background-color:#FF6666  !important;
+  border: none !important;
+}
+
+.btn-cancel{
+  
+  background-color:#FFFFFF  !important;
+  border: none !important;
+  color:red !important
+}

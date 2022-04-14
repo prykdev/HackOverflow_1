@@ -20,7 +20,6 @@ const Leaderboard = () => {
   useEffect(async () => {
     await getGlobalLeaderboard()
     setIsGlobal(true)
-    console.log(globaldata)
   }, [])
 
   const handleGlobal = (e) => {
@@ -35,7 +34,6 @@ const Leaderboard = () => {
     getFriendsLeaderboard()
   }
 
-  console.log(globaldata && globaldata[0])
   let count = 1
 
   return (

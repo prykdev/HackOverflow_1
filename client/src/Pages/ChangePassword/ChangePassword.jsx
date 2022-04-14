@@ -26,7 +26,6 @@ const ChangePassword = () => {
   }, [token, navigate])
 
   const handleChange = (e) => {
-    console.log(e.target)
     setValues({ ...values, [e.target.name]: e.target.value })
   }
 
@@ -58,7 +57,7 @@ const ChangePassword = () => {
           height='100px'
           width='100px'
         />
-        <h3>Change Your Password</h3>
+        <h3 className='cp-heading'>Change Your Password</h3>
         <div className='loginBox-cp text-center'>
           <form onSubmit={onSubmit}>
             <div className='inputBox-cp'>
