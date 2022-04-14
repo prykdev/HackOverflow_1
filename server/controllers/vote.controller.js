@@ -13,6 +13,8 @@ module.exports = {
     const data = await checkExist("username", username);
     if (!data)
       throw new ControllerError(404, "User not found!");
+    if (req.params.username === req.user.username)
+      throw new ControllerError(400, "You can't upvote yourself!");
     let rating = 1;
     const check = await voteService.search({ voter: req.user._id, user: data._id });
     if (check[0]) {
@@ -30,11 +32,11 @@ module.exports = {
     const data = await checkExist("username", username);
     if (!data)
       throw new ControllerError(404, "User not found!");
-
+    if (req.params.username === req.user.username)
+      throw new ControllerError(400, "You can't downvote yourself!");
     let rating = -1;
     const check = await voteService.search({ voter: req.user._id, user: data._id });
     if (check[0]) {
-      console.log(check)
       if (check[0].status === -1) throw new ControllerError(409, "Already downvoted!");
       if (check[0].status === 1) rating = -2;
     }
@@ -48,13 +50,16 @@ module.exports = {
     const data = await checkExist("username", username);
     if (!data)
       throw new ControllerError(404, "User not found!");
+    if (req.params.username === req.user.username)
+      throw new ControllerError(400, "You can't vote yourself!");
 
-    const check = await voteService.search({ voter: req.user._id, user: data._id, status: 0 });
-    if (JSON.stringify(check) !== "[]") throw new ControllerError(409, "Vote already removed!");
-
+    const check = await voteService.search({ voter: req.user._id, user: data._id });
+    if (check[0] && check[0].status === 0) throw new ControllerError(400, "User not voted!");
     const vote = await voteService.delete({ voter: req.user._id, user: data._id });
+
     if (!vote)
       throw new ControllerError(404, "Not voted!");
+    vote.status = -1 * vote.status;
 
     const user = await userService.updateById(data._id, { $pull: { votes: vote._id }, $inc: { rating: vote.status } });
     return controllerResponse(201, 'Successful');

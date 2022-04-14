@@ -13,7 +13,8 @@ module.exports = {
 
     // Deleting a vote by its id from database
     delete: serviceBoilerPlate(async (data) => {
-        await vote.findOneAndDelete(data).exec();
+        const response = await vote.findOneAndDelete(data).exec();
+        return response;
     }),
 
     search: serviceBoilerPlate(async (data) => {

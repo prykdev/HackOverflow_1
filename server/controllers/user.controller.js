@@ -100,11 +100,11 @@ module.exports = {
       data.downvotes = (await userService.getVotesData(data._id, -1)).length;
 
       if (req.user.username === data.username) {
-        const response = (({ name, username, socials, upvotes, downvotes }) => ({ name, username, socials, upvotes, downvotes }))(data);
+        const response = (({ name, username, socials, rating, upvotes, downvotes }) => ({ name, username, socials, rating, upvotes, downvotes }))(data);
         return controllerResponse(200, "Successful", response);
       }
 
-      const response = (({ name, username, status, socials, upvotes, downvotes }) => ({ name, username, status, socials, upvotes, downvotes }))(data);
+      const response = (({ name, username, status, socials, rating, upvotes, downvotes }) => ({ name, username, status, socials, rating, upvotes, downvotes }))(data);
       response.voteStatus = "neutral";
       data.votes.forEach(vote => {
         if (vote.voter.toString() === req.user._id.toString()) {
