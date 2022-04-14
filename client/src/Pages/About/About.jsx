@@ -20,6 +20,7 @@ const About = () => {
             email='mailto:tgoyal63@duck.com'
             twitter='https://twitter.com/tgoyal63'
             img={eren}
+            portfolio='https://flowcv.me/tgoyal63'
           />
           <AboutCard
             name='Priyanka Prasad'
@@ -29,6 +30,7 @@ const About = () => {
             email='mailto:priyankaafssulur@gmail.com'
             twitter='https://twitter.com/prykdev'
             img={priyanka}
+            portfolio='https://priyankaprasad.vercel.app/'
           />
           <AboutCard
             name='Ayush Singla'
@@ -38,6 +40,7 @@ const About = () => {
             email='mailto:ayushsingla909@gmail.com'
             twitter='https://twitter.com/ayu913'
             img={ayush}
+            portfolio='https://ayudev.vercel.app/'
           />
         </div>
       </div>

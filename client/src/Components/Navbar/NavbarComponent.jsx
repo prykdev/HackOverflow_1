@@ -26,7 +26,7 @@ const NavbarComponent = ({ pathname }) => {
     if (username === loginUsername) {
       navigate("/dashboard")
     } else {
-      navigate(`/searchdashboard/${username}`)
+      navigate(`/search/${username}`)
     }
   }
 
@@ -53,7 +53,11 @@ const NavbarComponent = ({ pathname }) => {
   return (
     <Navbar sticky='top' className='navheader' collapseOnSelect expand='lg'>
       <Container>
-        <Navbar.Brand className='nav-logo' style={{ cursor: "pointer" }}>
+        <Navbar.Brand
+          href={!isLogin ? "" : "/"}
+          className='nav-logo'
+          style={{ cursor: "pointer" }}
+        >
           {" "}
           <span>Ha</span>ck<span>Ov</span>er<span>flow</span>
         </Navbar.Brand>
