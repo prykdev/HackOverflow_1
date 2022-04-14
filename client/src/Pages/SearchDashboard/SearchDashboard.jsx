@@ -33,7 +33,6 @@ const SearchDashboard = () => {
   const username = location.pathname.split("/")[2]
 
   useEffect(() => {
-    console.log(voteStatus)
     const user = async () => {
       if (username) await searchUser(username)
     }
@@ -56,20 +55,16 @@ const SearchDashboard = () => {
 
   const handleUpVote = async () => {
     if (voteStatus === "upvoted") {
-      console.log("REMOVE")
       await removeVote(username)
     } else {
-      console.log("up")
       await getUpVote(username)
     }
   }
 
   const handleDownVote = async () => {
     if (voteStatus === "downvoted") {
-      console.log("REMOVE")
       await removeVote(username)
     } else {
-      console.log("down")
       await getDownVote(username)
     }
   }

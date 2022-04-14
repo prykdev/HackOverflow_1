@@ -7,7 +7,6 @@ module.exports = {
   // Creating User
   global: ('/leaderboard/global', controllerBoilerPlate(async (req) => {
     const data = await leaderboardService.findGlobal();
-    console.log(data);
     const response = data.map((e) =>
       (({ name, username, rating }) => ({ name, username, rating }))(e)
     );
