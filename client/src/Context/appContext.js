@@ -550,13 +550,14 @@ const AppProvider = ({ children }) => {
 
     try {
       let { data } = await authFetch.get(`${BASE_URL}/downvote/${username}`)
+      console.log(data.data)
       const { message } = data.data
       console.log(message)
       dispatch({
         type: GET_DOWNVOTE_SUCCESS,
       })
     } catch (error) {
-      console.log(error.response)
+      console.log(error)
     }
   }
 

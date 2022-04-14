@@ -13,7 +13,6 @@ import { toast, ToastContainer } from "react-toastify"
 
 const SearchDashboard = () => {
   const {
-    isGithubError,
     name,
     socials,
     upvotes,
@@ -27,8 +26,6 @@ const SearchDashboard = () => {
     getUpVote,
     getDownVote,
     removeVote,
-    isUpVote,
-    isDownVote,
   } = useAppContext()
 
   const location = useLocation()
@@ -37,10 +34,13 @@ const SearchDashboard = () => {
   const username = location.pathname.split("/")[2]
   console.log(username)
 
-  useEffect(async () => {
-    console.log("useeffect")
-    if (username) await searchUser(username)
-  }, [username, status, isUpVote, isDownVote])
+  useEffect(() => {
+    console.log(voteStatus);
+    const user = async () => {
+      if (username) await searchUser(username)
+    }
+    user();
+  }, [username, status, voteStatus])
 
   function handleFriend(username) {
     if (status === "Add Friend") {
@@ -57,7 +57,7 @@ const SearchDashboard = () => {
   }
 
   const handleUpVote = async () => {
-    if (isUpVote) {
+    if (voteStatus === "upvoted") {
       console.log("REMOVE")
       await removeVote(username)
     } else {
@@ -67,7 +67,7 @@ const SearchDashboard = () => {
   }
 
   const handleDownVote = async () => {
-    if (isDownVote) {
+    if (voteStatus === "downvoted") {
       console.log("REMOVE")
       await removeVote(username)
     } else {
@@ -97,8 +97,7 @@ const SearchDashboard = () => {
                 onClick={handleUpVote}
               >
                 <div className='d-flex justify-content-center p-0 m-0'>
-                  {" "}
-                  <p>{upvotes}</p>
+                  {upvotes}
                   <i className='fa fa-thumbs-up fa-lg '></i>
                 </div>
               </button>
@@ -106,9 +105,10 @@ const SearchDashboard = () => {
                 className='btn btn-down  p-3'
                 title='Downvote'
                 onClick={handleDownVote}
-              >
-                <p>{downvotes}</p>
-                <i className='fa fa-thumbs-down fa-lg'></i>
+              ><div className='d-flex justify-content-center p-0 m-0'>
+                  {downvotes}
+                  <i className='fa fa-thumbs-down fa-lg'></i>
+                </div>
               </button>
               <button
                 className='btn btn-add  p-3'
