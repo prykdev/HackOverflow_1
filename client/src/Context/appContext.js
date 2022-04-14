@@ -55,7 +55,7 @@ import axios from "axios"
 import reducer from "./reducer"
 
 const token = localStorage.getItem("token")
-const BASE_URL = "http://localhost:8082"
+const BASE_URL = "http://52.172.255.213:8082/"
 
 const initialState = {
   token: token,
@@ -75,7 +75,7 @@ const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   const authFetch = axios.create({
-    baseURL: "http://localhost:8082",
+    baseURL: "http://52.172.255.213:8082/",
   })
   const config = {
     headers: { Authorization: `Bearer ${state.token}` },

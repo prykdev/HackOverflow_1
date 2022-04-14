@@ -30,6 +30,9 @@ export const AboutCard = (props) => {
             <a href={props.twitter} className='twitter'>
               <i className='fa fa-twitter'></i>
             </a>
+            <Link to={`/search/${props.dashboard}`} className='twitter'>
+              <i className='fa fa-dashboard'></i>
+            </Link>
           </div>
         </div>
       </div>

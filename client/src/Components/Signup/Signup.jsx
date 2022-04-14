@@ -35,7 +35,7 @@ export const Signup = (props) => {
       if (token) {
         navigate("/dashboard")
       }
-    }, 2000)
+    }, 1000)
   }, [token, navigate])
   return (
     <div className='loginBox text-center'>

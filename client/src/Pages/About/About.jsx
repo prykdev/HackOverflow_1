@@ -21,6 +21,7 @@ const About = () => {
             twitter='https://twitter.com/tgoyal63'
             img={eren}
             portfolio='https://flowcv.me/tgoyal63'
+            dashboard='tgoyal63'
           />
           <AboutCard
             name='Priyanka Prasad'
@@ -31,6 +32,7 @@ const About = () => {
             twitter='https://twitter.com/prykdev'
             img={priyanka}
             portfolio='https://priyankaprasad.vercel.app/'
+            dashboard='prykdev'
           />
           <AboutCard
             name='Ayush Singla'
@@ -41,6 +43,7 @@ const About = () => {
             twitter='https://twitter.com/ayu913'
             img={ayush}
             portfolio='https://ayudev.vercel.app/'
+            dashboard='ayu913'
           />
         </div>
       </div>
