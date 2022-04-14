@@ -26,10 +26,14 @@ module.exports = {
 
   // Editing User
   editUser: ('/edit', controllerBoilerPlate(async (req) => {
+    if (JSON.stringify(req.body.socials) === JSON.stringify(req.user.socials))
+      throw new ControllerError(304, 'No changes made!');
+
     // Checking if user social handles are valid or not
     const check = await checkAllSocials(req.body.socials);
     if (check.status === 404)
       throw new ControllerError(404, `${check.value} username incorrect!`);
+
     // Updating data in database
     const data = await userService.updateById(req.user._id, req.body);
     return controllerResponse(204, 'Successful');
@@ -92,11 +96,15 @@ module.exports = {
         else data.status = 'add';
       }
       else data.status = 'add';
+      data.upvotes = (await userService.getVotesData(data._id, 1)).length;
+      data.downvotes = (await userService.getVotesData(data._id, -1)).length;
 
-      const response = (({ name, username, status, socials }) => ({ name, username, status, socials }))(data);
+      if (req.user.username === data.username) {
+        const response = (({ name, username, socials, upvotes, downvotes }) => ({ name, username, socials, upvotes, downvotes }))(data);
+        return controllerResponse(200, "Successful", response);
+      }
 
-      response.upvotes = (await userService.getVotesData(data._id, 1)).length;
-      response.downvotes = (await userService.getVotesData(data._id, -1)).length;
+      const response = (({ name, username, status, socials, upvotes, downvotes }) => ({ name, username, status, socials, upvotes, downvotes }))(data);
       response.voteStatus = "neutral";
       data.votes.forEach(vote => {
         if (vote.voter.toString() === req.user._id.toString()) {
