@@ -13,7 +13,6 @@ export const Login = (props) => {
   const navigate = useNavigate()
   const { token, loginUser, isLogin } = useAppContext()
   const handleChange = (e) => {
-    console.log(e.target)
     setValues({ ...values, [e.target.name]: e.target.value })
   }
 
@@ -21,9 +20,7 @@ export const Login = (props) => {
     e.preventDefault()
     const { username, password } = values
     const currentUser = { username, password }
-    console.log(currentUser)
     await loginUser(currentUser)
-    console.log(isLogin)
     props.passLoginChildData(true)
   }
 

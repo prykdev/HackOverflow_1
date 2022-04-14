@@ -9,17 +9,14 @@ import { toast, ToastContainer } from "react-toastify"
 const Landing = () => {
   const [isSignUp, setIsSignUp] = useState(true)
   const { pathname } = useLocation()
-  console.log(pathname)
 
   const [isLoginUser, setIsLoginUser] = useState(false)
   const [isRegisterUser, setIsRegisterUser] = useState(false)
 
   useEffect(() => {
-    console.log(isLoginUser)
     if (isLoginUser) {
       toast("User Login Successfully")
     }
-    console.log(isRegisterUser)
     if (isRegisterUser) {
       toast("User Register Successfully")
     }

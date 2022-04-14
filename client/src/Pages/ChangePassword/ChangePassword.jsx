@@ -34,7 +34,6 @@ const ChangePassword = () => {
     e.preventDefault()
     const { currentPassword, newPassword, confirmPassword } = values
     const pwdata = { currentPassword, newPassword }
-    console.log(isError + "dncd cnd")
 
     if (newPassword !== confirmPassword) {
       toast("Password didn't matched")
@@ -44,7 +43,6 @@ const ChangePassword = () => {
         if (isError) {
           toast("Invalid Password")
         } else {
-          console.log("a")
           toast("Password Changed Successfully")
         }
       }, 600)

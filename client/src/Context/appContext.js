@@ -96,7 +96,7 @@ const AppProvider = ({ children }) => {
     (error) => {
       console.log(error.response)
       if (error.response.status === 401) {
-        // logoutUser()
+        logoutUser()
         console.log("AUTH ERROR")
       }
       return Promise.reject(error)
@@ -214,7 +214,6 @@ const AppProvider = ({ children }) => {
   }
 
   const changePassword = async (pwdetails) => {
-    console.log(pwdetails)
     dispatch({
       type: CHANGE_PW_BEGIN,
     })
@@ -358,7 +357,6 @@ const AppProvider = ({ children }) => {
         submissionStats,
       } = data.data
       let { global, country } = rankings
-      console.log(submissionStats)
 
       dispatch({
         type: GET_CODECHEFDATA_SUCCESS,
@@ -441,7 +439,6 @@ const AppProvider = ({ children }) => {
     try {
       let { data } = await authFetch.get(`${BASE_URL}/friends/pending`)
       let pending = data.data.friends
-      console.log({ pending })
       dispatch({
         type: GET_PENDING_REQ_SUCCESS,
         payload: {
@@ -531,7 +528,6 @@ const AppProvider = ({ children }) => {
     })
 
     try {
-      console.log(username)
       let { data } = await authFetch.get(`${BASE_URL}/upvote/${username}`)
 
       dispatch({
@@ -550,9 +546,7 @@ const AppProvider = ({ children }) => {
 
     try {
       let { data } = await authFetch.get(`${BASE_URL}/downvote/${username}`)
-      console.log(data.data)
       const { message } = data.data
-      console.log(message)
       dispatch({
         type: GET_DOWNVOTE_SUCCESS,
       })

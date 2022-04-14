@@ -27,15 +27,11 @@ const Friends = () => {
   }, [isCancel])
 
   function handleCancel(friend) {
-    console.log(friend)
-
     getCancelReq(friend)
     setisCancel(!isCancel)
   }
 
   function handleAccept(friend) {
-    console.log(friend)
-
     acceptReq(friend)
     setisCancel(!isCancel)
   }
@@ -64,7 +60,7 @@ const Friends = () => {
               className='mb-3 tabs'
             >
               <Tab eventKey='Friends' title='Friends'>
-                <table class='table  table-bordered text-center'>
+                <table className='table  table-bordered text-center'>
                   <tbody>
                     <tr>
                       <td>Name</td>
@@ -77,7 +73,7 @@ const Friends = () => {
                           <td style={{ width: "30%" }}>
                             <button
                               type='button'
-                              className="btn"
+                              className='btn'
                               onClick={(event) => {
                                 event.preventDefault()
                                 handleCancel(friend)
@@ -93,7 +89,7 @@ const Friends = () => {
               </Tab>
 
               <Tab eventKey='Pending' title='Pending'>
-                <table class='table table-bordered text-center'>
+                <table className='table table-bordered text-center'>
                   <tbody>
                     <tr>
                       <td>Name</td>
@@ -106,7 +102,7 @@ const Friends = () => {
                           <td style={{ width: "30%" }}>
                             <button
                               type='button'
-                              className="btn"
+                              className='btn'
                               onClick={(event) => {
                                 event.preventDefault()
                                 handleCancel(friend)
@@ -121,7 +117,7 @@ const Friends = () => {
                 </table>
               </Tab>
               <Tab eventKey='Requests' title='Requests'>
-                <table class='table  table-bordered text-center'>
+                <table className='table  table-bordered text-center'>
                   <tbody>
                     <tr>
                       <td>Name</td>
@@ -132,9 +128,9 @@ const Friends = () => {
                         <tr>
                           <td> {friend}</td>
                           <td style={{ width: "30%" }}>
-                          <button
+                            <button
                               type='button'
-                              className="btn"
+                              className='btn'
                               onClick={(event) => {
                                 event.preventDefault()
                                 handleAccept(friend)
@@ -144,7 +140,7 @@ const Friends = () => {
                             </button>
                             <button
                               type='button'
-                              className="btn"
+                              className='btn'
                               onClick={(event) => {
                                 event.preventDefault()
                                 handleCancel(friend)

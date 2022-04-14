@@ -29,17 +29,15 @@ const SearchDashboard = () => {
   } = useAppContext()
 
   const location = useLocation()
-  console.log(location)
 
   const username = location.pathname.split("/")[2]
-  console.log(username)
 
   useEffect(() => {
-    console.log(voteStatus);
+    console.log(voteStatus)
     const user = async () => {
       if (username) await searchUser(username)
     }
-    user();
+    user()
   }, [username, status, voteStatus])
 
   function handleFriend(username) {
@@ -105,7 +103,8 @@ const SearchDashboard = () => {
                 className='btn btn-down  p-3'
                 title='Downvote'
                 onClick={handleDownVote}
-              ><div className='d-flex justify-content-center p-0 m-0'>
+              >
+                <div className='d-flex justify-content-center p-0 m-0'>
                   {downvotes}
                   <i className='fa fa-thumbs-down fa-lg'></i>
                 </div>
