@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom"
 import { Table, Row, Button, Col } from "react-bootstrap"
 import { Footer } from "../../Components/Footer/Footer.jsx"
 import { useAppContext } from "../../Context/appContext"
+import { Link } from "react-router-dom"
 
 import "./Leaderboard.scss"
 
@@ -65,28 +66,28 @@ const Leaderboard = () => {
             <thead>
               <tr>
                 <th>#Rank</th>
-                <th width='60%'>Username</th>
+                <th width='60%'>Name</th>
                 <th>Rating </th>
               </tr>
             </thead>
             <tbody>
               {isGlobal
                 ? globaldata &&
-                  globaldata.map((global, index) => (
-                    <tr>
-                      <td>{count++}</td>
-                      <td>{global.name}</td>
-                      <td>{global.rating}</td>
-                    </tr>
-                  ))
+                globaldata.map((global, index) => (
+                  <tr>
+                    <td>{count++}</td>
+                    <Link to={`/search/${global.username}`}><td>{global.name}</td></Link>
+                    <td>{global.rating}</td>
+                  </tr>
+                ))
                 : friendsdata &&
-                  friendsdata.map((friend, index) => (
-                    <tr>
-                      <td>{count++}</td>
-                      <td>{friend.name}</td>
-                      <td>{friend.rating}</td>
-                    </tr>
-                  ))}
+                friendsdata.map((friend, index) => (
+                  <tr>
+                    <td>{count++}</td>
+                    <Link to={`/search/${friend.username}`}><td>{friend.name}</td></Link>
+                    <td>{friend.rating}</td>
+                  </tr>
+                ))}
             </tbody>
           </Table>
         </div>
