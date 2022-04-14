@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import "./SearchDashboard.scss"
 import NavbarComponent from "../../Components/Navbar/NavbarComponent"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { Footer } from "../../Components/Footer/Footer.jsx"
 import { useAppContext } from "../../Context/appContext"
 import "react-toastify/dist/ReactToastify.css"
@@ -26,14 +26,18 @@ const SearchDashboard = () => {
     getUpVote,
     getDownVote,
     removeVote,
+    loginUsername
   } = useAppContext()
 
   const location = useLocation()
+  const navigate = useNavigate();
 
   const username = location.pathname.split("/")[2]
-
   useEffect(() => {
     const user = async () => {
+      if (username.toString() === loginUsername.toString()) {
+        navigate("/dashboard")
+      }
       if (username) await searchUser(username)
     }
     user()

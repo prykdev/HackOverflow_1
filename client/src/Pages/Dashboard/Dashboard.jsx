@@ -8,6 +8,11 @@ import Hackerrank from "../../Components/Hackerrank/Hackerrank"
 import CodeChef from "../../Components/CodeChef/CodeChef"
 
 const Dashboard = () => {
+  const { getUser } = useAppContext()
+  useEffect(async () => {
+    await getUser();
+  }, []);
+
   return (
     <div className='dashboardHome'>
       <NavbarComponent />

@@ -55,11 +55,12 @@ import axios from "axios"
 import reducer from "./reducer"
 
 const token = localStorage.getItem("token")
+const loginUsername = localStorage.getItem("loginUsername")
 const BASE_URL = "http://52.172.255.213:8082"
 
 const initialState = {
   token: token,
-  loginUsername: "",
+  loginUsername: loginUsername,
   isGithubError: false,
   isAdd: false,
   isRemoved: false,
@@ -111,8 +112,13 @@ const AppProvider = ({ children }) => {
     localStorage.setItem("token", token)
   }
 
+  const addUserNameToLocalStorage = ({ loginUsername }) => {
+    localStorage.setItem("loginUsername", loginUsername)
+  }
+
   const removeUserFromLocalStorage = () => {
     localStorage.removeItem("token")
+    localStorage.clear()
   }
 
   const registerUser = async (currentUser) => {
@@ -150,7 +156,6 @@ const AppProvider = ({ children }) => {
         type: LOGIN_USER_SUCCESS,
         payload: {
           token: data.data.token,
-          loginUsername: "user2",
         },
       })
       //local data storage
@@ -192,6 +197,7 @@ const AppProvider = ({ children }) => {
           loginUsername: username,
         },
       })
+      addUserNameToLocalStorage({ loginUsername: username })
     } catch (error) {
       console.log(error.response)
     }
@@ -246,7 +252,7 @@ const AppProvider = ({ children }) => {
     }
   }
 
-  const checkUsername = () => {}
+  const checkUsername = () => { }
 
   const getGithub = async (gusername) => {
     dispatch({
