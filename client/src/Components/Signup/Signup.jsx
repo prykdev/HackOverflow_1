@@ -17,7 +17,6 @@ export const Signup = (props) => {
   const navigate = useNavigate()
   const { token, registerUser, isRegister } = useAppContext()
   const handleChange = (e) => {
-    console.log(e.target)
     setValues({ ...values, [e.target.name]: e.target.value })
   }
 
@@ -27,9 +26,7 @@ export const Signup = (props) => {
       values
     const socials = { github, hackerrank, codechef }
     const currentUser = { username, name, email, password, socials }
-    console.log(currentUser)
     await registerUser(currentUser)
-    console.log(isRegister)
     props.passRegisterChildData(true)
   }
 

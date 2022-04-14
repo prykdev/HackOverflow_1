@@ -17,21 +17,19 @@ const NavbarComponent = ({ pathname }) => {
 
   const handleChange = (e) => {
     e.preventDefault()
-    console.log(e.target)
     setSearchUsername(e.target.value)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // await searchUser(username)
-    console.log(loginUsername === username)
+
     if (username === loginUsername) {
       navigate("/dashboard")
     } else {
       navigate(`/searchdashboard/${username}`)
     }
   }
-  // console.log(socials + "fdewfewf")
+
   const proRef = useRef()
   useEffect(() => {
     if (pathname === "/" || pathname === "/register") {
