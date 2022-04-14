@@ -29,7 +29,7 @@ module.exports = async (req, res, next) => {
     }
   } catch (err) {
     if (!err.status)
-      return res.status(500).send({ message: err });
+      return res.status(401).send({ status: 401, message: "Invalid User Token" });
     return res.status(err.status).send({ status: err.status, message: err.message });
   }
 };

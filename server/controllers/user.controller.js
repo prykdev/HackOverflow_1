@@ -53,27 +53,35 @@ module.exports = {
   // Checking if user exists
   check: ('/check', controllerBoilerPlate(async (req) => {
     const { username, email } = req.body;
-    let data;
-    if (username)
+    let data, entity;
+    if (username) {
+      entity = 'username';
       data = await checkExist('username', username);
-    else if (email)
+    } else if (email) {
+      entity = 'email';
       data = await checkExist('email', email);
-    // else if (phone)
-    //   data = await checkExist('phone', phone);
+      // } else if (phone) {
+      //   entity = 'phone';
+      //   data = await checkExist('phone', phone);
+    }
     if (data)
-      throw new ControllerError(400, entity + ' already registered!');
+      throw new ControllerError(409, entity + ' already registered!');
     return controllerResponse(200, entity + ' available!');
   })),
 
   search: ('/search', controllerBoilerPlate(async (req) => {
     const { username, email } = req.body;
-    let data;
-    if (username)
+    let data, entity;
+    if (username) {
+      entity = 'username';
       data = await checkExist('username', username);
-    else if (email)
+    } else if (email) {
+      entity = 'email';
       data = await checkExist('email', email);
-    // else if (phone)
-    //   data = await checkExist('phone', phone);
+      // } else if (phone) {
+      //   entity = 'phone';
+      //   data = await checkExist('phone', phone);
+    }
 
     if (data) {
       if (data.friends[0]) {

@@ -24,7 +24,7 @@ module.exports = {
       // } else if (entity === 'phone') {
       //     query.phone = entityValue;
     } else if (entity === 'email') {
-      query.email = entityValu;
+      query.email = entityValue;
     } else {
       throw new ServiceError(403, 'Invalid Search');
     }
