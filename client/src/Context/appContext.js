@@ -46,6 +46,10 @@ import {
   REMOVE_VOTE_BEGIN,
   REMOVE_VOTE_SUCCESS,
   GET_UPVOTE_SUCCESS,
+  GET_GLOBAL_LEADERBOARD_SUCCESS,
+  GET_GLOBAL_LEADERBOARD_BEGIN,
+  GET_FRIEND_LEADERBOARD_SUCCESS,
+  GET_FRIEND_LEADERBOARD_BEGIN,
 } from "./action"
 import axios from "axios"
 import reducer from "./reducer"
@@ -570,7 +574,45 @@ const AppProvider = ({ children }) => {
       console.log(error.response)
     }
   }
+  const getGlobalLeaderboard = async () => {
+    dispatch({
+      type: GET_GLOBAL_LEADERBOARD_BEGIN,
+    })
+    try {
+      let { data } = await axios.get(`${BASE_URL}/leaderboard/global`)
+      console.log(data.data)
+      let globaldata = data.data
+      console.log(globaldata)
+      dispatch({
+        type: GET_GLOBAL_LEADERBOARD_SUCCESS,
+        payload: {
+          globaldata,
+        },
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
 
+  const getFriendsLeaderboard = async () => {
+    dispatch({
+      type: GET_FRIEND_LEADERBOARD_BEGIN,
+    })
+    try {
+      let { data } = await authFetch.get(`${BASE_URL}/leaderboard/friends`)
+      console.log(data.data)
+      let friendsdata = data.data
+      console.log(friendsdata)
+      dispatch({
+        type: GET_FRIEND_LEADERBOARD_SUCCESS,
+        payload: {
+          friendsdata,
+        },
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
   return (
     <AppContext.Provider
       value={{
@@ -595,6 +637,8 @@ const AppProvider = ({ children }) => {
         getUpVote,
         getDownVote,
         removeVote,
+        getGlobalLeaderboard,
+        getFriendsLeaderboard,
       }}
     >
       {children}

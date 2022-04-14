@@ -15,7 +15,7 @@ const About = () => {
           role='Backend Developer'
           linkedin='https://www.linkedin.com/in/tgoyal63'
           github='https://github.com/tgoyal63'
-          email=''
+          email='mailto:tgoyal63@duck.com'
           twitter='https://twitter.com/tgoyal63'
           img={eren}
         />
@@ -24,7 +24,7 @@ const About = () => {
           role='Web Designer'
           linkedin='https://www.linkedin.com/in/prykdev/'
           github='https://github.com/prykdev'
-          email='priyankaafssulur@gmail.com'
+          email='mailto:priyankaafssulur@gmail.com'
           twitter='https://twitter.com/prykdev'
           img={priyanka}
         />
@@ -33,7 +33,7 @@ const About = () => {
           role='Frontend Developer'
           linkedin='https://www.linkedin.com/in/ayu913'
           github='https://github.com/ayu913'
-          email=''
+          email='mailto:ayushsingla909@gmail.com'
           twitter='https://twitter.com/ayu913'
           img={ayush}
         />

@@ -45,6 +45,10 @@ import {
   GET_DOWNVOTE_SUCCESS,
   REMOVE_VOTE_BEGIN,
   REMOVE_VOTE_SUCCESS,
+  GET_GLOBAL_LEADERBOARD_BEGIN,
+  GET_GLOBAL_LEADERBOARD_SUCCESS,
+  GET_FRIEND_LEADERBOARD_BEGIN,
+  GET_FRIEND_LEADERBOARD_SUCCESS,
 } from "./action"
 import { initialState } from "./appContext"
 
@@ -290,6 +294,19 @@ const reducer = (state, action) => {
   }
   if (action.type === REMOVE_VOTE_SUCCESS) {
     return { ...state }
+  }
+  if (action.type === GET_GLOBAL_LEADERBOARD_BEGIN) {
+    return { ...state }
+  }
+  if (action.type === GET_GLOBAL_LEADERBOARD_SUCCESS) {
+    return { ...state, globaldata: action.payload.globaldata }
+  }
+
+  if (action.type === GET_FRIEND_LEADERBOARD_BEGIN) {
+    return { ...state }
+  }
+  if (action.type === GET_FRIEND_LEADERBOARD_SUCCESS) {
+    return { ...state, friendsdata: action.payload.friendsdata }
   }
 }
 
